@@ -51,7 +51,7 @@ TextureImporter:
       213: 7563500948916142408
     second: Camper_Animations_15
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -111,6 +111,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -126,6 +127,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -486,21 +499,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Camper_Animations_2: -8664294828191842724
-      Camper_Animations_14: 5176641041591266690
       Camper_Animations_0: -4298429540363616899
-      Camper_Animations_4: 2759848542606359015
-      Camper_Animations_11: -2558184307259830680
-      Camper_Animations_7: -2198003740350560993
-      Camper_Animations_12: 4153743765685209569
-      Camper_Animations_15: 7563500948916142408
-      Camper_Animations_13: 3271169220114592207
       Camper_Animations_1: -5709260606064180318
-      Camper_Animations_3: -7457529777060211406
-      Camper_Animations_5: -9018784578143319483
-      Camper_Animations_8: 5167821619747710634
       Camper_Animations_10: -7402946114066147669
+      Camper_Animations_11: -2558184307259830680
+      Camper_Animations_12: 4153743765685209569
+      Camper_Animations_13: 3271169220114592207
+      Camper_Animations_14: 5176641041591266690
+      Camper_Animations_15: 7563500948916142408
+      Camper_Animations_2: -8664294828191842724
+      Camper_Animations_3: -7457529777060211406
+      Camper_Animations_4: 2759848542606359015
+      Camper_Animations_5: -9018784578143319483
       Camper_Animations_6: -610410826933595719
+      Camper_Animations_7: -2198003740350560993
+      Camper_Animations_8: 5167821619747710634
       Camper_Animations_9: 5689917612701348511
   spritePackingTag: 
   pSDRemoveMatte: 0

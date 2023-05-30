@@ -41,3 +41,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Floor
+    uniqueID: 581166965
+    locked: 0
+  - name: Walls
+    uniqueID: 713534821
+    locked: 0
+  - name: Back Decor
+    uniqueID: 1466085291
+    locked: 0
+  - name: Projectiles
+    uniqueID: 1477882123
+    locked: 0
+  - name: Player
+    uniqueID: 1699844157
+    locked: 0
+  - name: Front Decor
+    uniqueID: 2647955287
+    locked: 0

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public GameObject player;
+    public GameObject Player;
+    public Camera Cam;
 
     [Header("Movement")]
     public float CamMovementSpeed = 5f;
@@ -14,7 +15,7 @@ public class CameraController : MonoBehaviour
     public float MouseOffsetFactorX = 5f;
     public float MouseOffsetFactorY = 2f;
     [Tooltip("fraction of each edge of screen which has no influence on camera movements")]
-    public float MaxMouseInfluenceFactor = 1/4f;
+    public float MouseInfluenceRange = 4f;
 
     // private variables
     private Vector2 _camSpeed = Vector2.zero;
@@ -23,19 +24,23 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cam = GetComponent<Camera>();
     }
 
     // using fixed update to prevent character jitter with camera movement smoothing
     void FixedUpdate()
     {
         // Calculate goal camera position (based on player and mouse positions)
-        _goalPosition = player.transform.position;
-        _goalPosition.x += InputHelper.MapRange(Mathf.Clamp(Input.mousePosition.x, MaxMouseInfluenceFactor * Screen.width, 
+        _goalPosition = Player.transform.position;
+        Vector2 difference = (Vector2)(Cam.ScreenToWorldPoint(Input.mousePosition) - Player.transform.position);
+        if(difference.magnitude > MouseInfluenceRange)
+            _goalPosition += new Vector2(difference.normalized.x * MouseOffsetFactorX, difference.normalized.y * MouseOffsetFactorY);
+       /* _goalPosition.x += InputHelper.MapRange(Mathf.Clamp(Input.mousePosition.x, MaxMouseInfluenceFactor * Screen.width, 
             (1 - MaxMouseInfluenceFactor) * Screen.width), MaxMouseInfluenceFactor * Screen.width, 
             (1 - MaxMouseInfluenceFactor) * Screen.width, -1, 1) * MouseOffsetFactorX;
         _goalPosition.y += InputHelper.MapRange(Mathf.Clamp(Input.mousePosition.y, MaxMouseInfluenceFactor * Screen.height, 
             (1 - MaxMouseInfluenceFactor) * Screen.height), MaxMouseInfluenceFactor * Screen.height, 
-            (1 - MaxMouseInfluenceFactor) * Screen.height, -1, 1) * MouseOffsetFactorY;
+            (1 - MaxMouseInfluenceFactor) * Screen.height, -1, 1) * MouseOffsetFactorY;*/
 
         // calculate speed from goal position (camera smoothing)
         Vector2 goalCamSpeed = (_goalPosition - new Vector2(transform.position.x, transform.position.y)) * CamMovementSpeed;

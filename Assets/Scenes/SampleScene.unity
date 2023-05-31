@@ -18136,12 +18136,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9765d4abe9ec91c4884654f52ed3a93b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 847306867}
-  CamMovementSpeed: 5
+  Player: {fileID: 847306867}
+  Cam: {fileID: 0}
+  CamMovementSpeed: 3
   CamMovementSharpness: 100
   MouseOffsetFactorX: 2
   MouseOffsetFactorY: 1.125
-  MaxMouseInfluenceFactor: 0.25
+  MouseInfluenceRange: 8
 --- !u!1 &847306867
 GameObject:
   m_ObjectHideFlags: 0

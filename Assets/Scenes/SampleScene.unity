@@ -18139,8 +18139,9 @@ MonoBehaviour:
   player: {fileID: 847306867}
   CamMovementSpeed: 5
   CamMovementSharpness: 100
-  MouseOffsetFactorX: 4
-  MouseOffsetFactorY: 2.25
+  MouseOffsetFactorX: 2
+  MouseOffsetFactorY: 1.125
+  MaxMouseInfluenceFactor: 0.25
 --- !u!1 &847306867
 GameObject:
   m_ObjectHideFlags: 0

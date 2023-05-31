@@ -56,7 +56,12 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
+        
+    }
+
+    private void FixedUpdate()
+    {
         // update velocity based on target and current velocities
-        rb.velocity = Vector2.Lerp(rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
+        rb.velocity = Vector2.Lerp(rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.fixedDeltaTime));
     }
 }

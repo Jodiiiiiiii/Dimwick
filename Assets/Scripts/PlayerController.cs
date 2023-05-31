@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Camera cam;
     [Header("Movement")]
     public float MaxWalkSpeed = 10f;
     [Tooltip("rate at which character reached max speed")]
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     // private variables
     private Vector2 _targetVelocity = Vector2.zero;
+    private Vector2 _facing = Vector2.right;
 
     // Start is called before the first frame update
     void Start()
@@ -63,5 +65,18 @@ public class PlayerController : MonoBehaviour
 
         // update animator variables
         animator.SetFloat("speed", rb.velocity.sqrMagnitude);
+
+        // update facing direction
+        _facing = ((Vector2) cam.ScreenToWorldPoint(Input.mousePosition) - rb.position).normalized;
+
+        // flip sprite based on mouse position
+        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("dimwick_sit")) // does not flip if sitting
+        {
+            if (_facing.x < 0)
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            else
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        
     }
 }

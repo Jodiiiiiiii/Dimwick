@@ -26,8 +26,8 @@ public class CameraController : MonoBehaviour
     {
         // Calculate goal camera position (based on player and mouse positions)
         _goalPosition = player.transform.position;
-        _goalPosition.x += MapRange(Mathf.Clamp(Input.mousePosition.x, 0, Screen.width), 0, Screen.width, -1, 1) * MouseOffsetFactorX;
-        _goalPosition.y += MapRange(Mathf.Clamp(Input.mousePosition.y, 0, Screen.height), 0, Screen.height, -1, 1) * MouseOffsetFactorY;
+        _goalPosition.x += InputHelper.MapRange(Mathf.Clamp(Input.mousePosition.x, 0, Screen.width), 0, Screen.width, -1, 1) * MouseOffsetFactorX;
+        _goalPosition.y += InputHelper.MapRange(Mathf.Clamp(Input.mousePosition.y, 0, Screen.height), 0, Screen.height, -1, 1) * MouseOffsetFactorY;
 
         // calculate speed from goal position (camera smoothing)
         Vector2 goalCamSpeed = (_goalPosition - new Vector2(transform.position.x, transform.position.y)) * CamMovementSpeed;
@@ -37,9 +37,6 @@ public class CameraController : MonoBehaviour
         transform.position += new Vector3(_camSpeed.x, _camSpeed.y, 0) * Time.deltaTime;
     }
 
-    private float MapRange(float s, float a1, float a2, float b1, float b2)
-    {
-        return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
-    }
+    
 }
 

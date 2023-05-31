@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     // components
     public Rigidbody2D rb;
+    public Animator animator;
 
     // private variables
     private Vector2 _targetVelocity = Vector2.zero;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -56,12 +58,10 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-        
-    }
-
-    private void FixedUpdate()
-    {
         // update velocity based on target and current velocities
-        rb.velocity = Vector2.Lerp(rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.fixedDeltaTime));
+        rb.velocity = Vector2.Lerp(rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
+
+        // update animator variables
+        animator.SetFloat("speed", rb.velocity.sqrMagnitude);
     }
 }

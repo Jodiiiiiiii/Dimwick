@@ -18138,8 +18138,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 847306867}
   CamMovementSpeed: 5
-  CamMovementSharpness: 10
-  MouseOffsetFactor: 5
+  CamMovementSharpness: 100
+  MouseOffsetFactorX: 4
+  MouseOffsetFactorY: 2.25
 --- !u!1 &847306867
 GameObject:
   m_ObjectHideFlags: 0
@@ -18153,6 +18154,7 @@ GameObject:
   - component: {fileID: 847306872}
   - component: {fileID: 847306868}
   - component: {fileID: 847306871}
+  - component: {fileID: 847306873}
   m_Layer: 0
   m_Name: Dimwick
   m_TagString: Untagged
@@ -18263,6 +18265,7 @@ MonoBehaviour:
   MaxWalkSpeed: 5
   MovementSharpness: 20
   rb: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!61 &847306872
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18289,6 +18292,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5625, y: 0.43972576}
   m_EdgeRadius: 0
+--- !u!95 &847306873
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847306867}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0022d25c4138a4e44a0817eb939db672, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1112908207
 GameObject:
   m_ObjectHideFlags: 0

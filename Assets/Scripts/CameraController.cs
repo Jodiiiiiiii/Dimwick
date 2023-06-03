@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     public float MouseOffsetFactorX = 5f;
     public float MouseOffsetFactorY = 2f;
     [Tooltip("fraction of each edge of screen which has no influence on camera movements")]
-    public float MouseInfluenceRange = 4f;
+    public float MouseInfluenceRange = 1f;
 
     // private variables
     private Vector2 _camSpeed = Vector2.zero;

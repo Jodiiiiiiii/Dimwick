@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // constants
+    private const int RIGHT_DIRECTION = 0;
+    private const int DOWN_DIRECTION = 1;
+    private const int LEFT_DIRECTION = 2;
+    private const int UP_DIRECTION = 3;
+    private const float SIT_SPEED_THRESHOLD = 0.5f;
+
     public Camera cam;
     [Header("Movement")]
     public float MaxWalkSpeed = 10f;
@@ -17,6 +24,7 @@ public class PlayerController : MonoBehaviour
     // private variables
     private Vector2 _targetVelocity = Vector2.zero;
     private Vector2 _facing = Vector2.right;
+    private bool isSitting = true;
 
     // Start is called before the first frame update
     void Start()
@@ -63,20 +71,25 @@ public class PlayerController : MonoBehaviour
         // update velocity based on target and current velocities
         rb.velocity = Vector2.Lerp(rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
 
-        // update animator variables
-        animator.SetFloat("speed", rb.velocity.sqrMagnitude);
+        // update sitting state
+        if (rb.velocity.magnitude < SIT_SPEED_THRESHOLD)
+            isSitting = true;
+        else
+            isSitting = false;
+        // sutting animator state
+        animator.SetBool("sit", isSitting);
 
         // update facing direction
         _facing = ((Vector2) cam.ScreenToWorldPoint(Input.mousePosition) - rb.position).normalized;
-
-        // flip sprite based on mouse position
-        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("dimwick_sit")) // does not flip if sitting
-        {
-            if (_facing.x < 0)
-                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            else
-                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-        }
-        
+        float facingAngle = Vector2.SignedAngle(Vector2.up, _facing);
+        // direction animator state
+        if (facingAngle >= 45f && facingAngle <= 135f)
+            animator.SetInteger("direction", LEFT_DIRECTION);
+        else if (facingAngle >= -45f && facingAngle <= 45f)
+            animator.SetInteger("direction", UP_DIRECTION);
+        else if (facingAngle >= -135f && facingAngle < -45f)
+            animator.SetInteger("direction", RIGHT_DIRECTION);
+        else
+            animator.SetInteger("direction", DOWN_DIRECTION);
     }
 }

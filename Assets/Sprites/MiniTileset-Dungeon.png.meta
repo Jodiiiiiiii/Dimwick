@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -676,7 +676,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 589
+        y: 570
         width: 32
         height: 32
       alignment: 0
@@ -697,7 +697,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 589
+        y: 570
         width: 32
         height: 32
       alignment: 0
@@ -718,7 +718,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 589
+        y: 570
         width: 32
         height: 32
       alignment: 0
@@ -739,7 +739,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 589
+        y: 570
         width: 32
         height: 32
       alignment: 0
@@ -760,7 +760,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 557
+        y: 541
         width: 32
         height: 32
       alignment: 0
@@ -781,7 +781,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 557
+        y: 541
         width: 32
         height: 32
       alignment: 0
@@ -804,9 +804,9 @@ TextureImporter:
         x: 64
         y: 557
         width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -825,9 +825,9 @@ TextureImporter:
         x: 96
         y: 557
         width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -840,53 +840,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MiniTileset-Dungeon_44
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 512
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 87de3f7badcd99c4490eee71c8ada7e9
-      internalID: -760213126
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MiniTileset-Dungeon_45
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 512
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f45d51e15d9b8546935c8d8c68930ce
-      internalID: 1952084756
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: MiniTileset-Dungeon_46
       rect:
         serializedVersion: 2
         x: 64
-        y: 512
+        y: 602
         width: 32
         height: 32
       alignment: 0
@@ -907,7 +865,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 512
+        y: 602
         width: 32
         height: 32
       alignment: 0
@@ -928,7 +886,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 480
+        y: 493
         width: 32
         height: 32
       alignment: 0
@@ -949,7 +907,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 480
+        y: 493
         width: 32
         height: 32
       alignment: 0
@@ -969,8 +927,8 @@ TextureImporter:
       name: MiniTileset-Dungeon_50
       rect:
         serializedVersion: 2
-        x: 64
-        y: 480
+        x: 32
+        y: 602
         width: 32
         height: 32
       alignment: 0
@@ -990,8 +948,8 @@ TextureImporter:
       name: MiniTileset-Dungeon_51
       rect:
         serializedVersion: 2
-        x: 96
-        y: 480
+        x: 0
+        y: 602
         width: 32
         height: 32
       alignment: 0
@@ -1012,7 +970,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 448
+        y: 461
         width: 32
         height: 32
       alignment: 0
@@ -1033,7 +991,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 448
+        y: 461
         width: 32
         height: 32
       alignment: 0

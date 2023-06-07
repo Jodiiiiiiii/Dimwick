@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private const int LEFT_DIRECTION = 2;
     private const int UP_DIRECTION = 3;
     private const float SIT_SPEED_THRESHOLD = 0.5f;
+    private const float MAX_FLAME = 1f;
 
     public Camera cam;
 
@@ -22,6 +23,11 @@ public class PlayerController : MonoBehaviour
     [Header("Lighting")]
     public Light2D CandleLight;
     public Light2D Flashlight;
+    public float MaxFlashlightIntensity = 1f;
+    public float MinFlashlightIntensity = 0f;
+    public float MaxCandlelightIntensity = 1f;
+    public float MinCandlelightIntensity = 0f;
+    public float FlameDecayRate = 0.1f;
 
     // components
     [HideInInspector] public Rigidbody2D rb;
@@ -31,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 _targetVelocity = Vector2.zero;
     private Vector2 _facing = Vector2.right;
     private bool _isSitting = true;
+    private float _flameIntensity = MAX_FLAME;
 
     // Start is called before the first frame update
     void Start()
@@ -100,5 +107,10 @@ public class PlayerController : MonoBehaviour
 
         // update flashlight rotation bassed on facing direction
         Flashlight.transform.rotation = Quaternion.Euler(Vector3.forward * facingAngle);
+
+        // update flame values
+        _flameIntensity -= FlameDecayRate * Time.deltaTime;
+        Flashlight.intensity = Mathf.Lerp(MinFlashlightIntensity, MaxFlashlightIntensity, _flameIntensity / MAX_FLAME);
+        CandleLight.intensity = Mathf.Lerp(MinCandlelightIntensity, MaxCandlelightIntensity, _flameIntensity / MAX_FLAME);
     }
 }

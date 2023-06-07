@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private const int LEFT_DIRECTION = 2;
     private const int UP_DIRECTION = 3;
     private const float SIT_SPEED_THRESHOLD = 0.5f;
-    private const float MAX_FLAME = 1f;
+    private const float MAX_FLAME = 100f;
 
     public Camera cam;
 
@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
     public float MaxCandlelightIntensity = 1f;
     public float MinCandlelightIntensity = 0f;
     public float FlameDecayRate = 0.1f;
+
+    [Header("UI")]
+    public UI_Meter FlameMeter;
 
     // components
     [HideInInspector] public Rigidbody2D rb;
@@ -112,5 +115,6 @@ public class PlayerController : MonoBehaviour
         _flameIntensity -= FlameDecayRate * Time.deltaTime;
         Flashlight.intensity = Mathf.Lerp(MinFlashlightIntensity, MaxFlashlightIntensity, _flameIntensity / MAX_FLAME);
         CandleLight.intensity = Mathf.Lerp(MinCandlelightIntensity, MaxCandlelightIntensity, _flameIntensity / MAX_FLAME);
+        FlameMeter.SetValue(_flameIntensity / MAX_FLAME);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,19 +13,24 @@ public class PlayerController : MonoBehaviour
     private const float SIT_SPEED_THRESHOLD = 0.5f;
 
     public Camera cam;
+
     [Header("Movement")]
     public float MaxWalkSpeed = 10f;
     [Tooltip("rate at which character reached max speed")]
     public float MovementSharpness = 10f;
 
+    [Header("Lighting")]
+    public Light2D CandleLight;
+    public Light2D Flashlight;
+
     // components
-    public Rigidbody2D rb;
-    public Animator animator;
+    [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public Animator animator;
 
     // private variables
     private Vector2 _targetVelocity = Vector2.zero;
     private Vector2 _facing = Vector2.right;
-    private bool isSitting = true;
+    private bool _isSitting = true;
 
     // Start is called before the first frame update
     void Start()
@@ -73,11 +79,11 @@ public class PlayerController : MonoBehaviour
 
         // update sitting state
         if (rb.velocity.magnitude < SIT_SPEED_THRESHOLD)
-            isSitting = true;
+            _isSitting = true;
         else
-            isSitting = false;
+            _isSitting = false;
         // sutting animator state
-        animator.SetBool("sit", isSitting);
+        animator.SetBool("sit", _isSitting);
 
         // update facing direction
         _facing = ((Vector2) cam.ScreenToWorldPoint(Input.mousePosition) - rb.position).normalized;
@@ -91,5 +97,8 @@ public class PlayerController : MonoBehaviour
             animator.SetInteger("direction", RIGHT_DIRECTION);
         else
             animator.SetInteger("direction", DOWN_DIRECTION);
+
+        // update flashlight rotation bassed on facing direction
+        Flashlight.transform.rotation = Quaternion.Euler(Vector3.forward * facingAngle);
     }
 }

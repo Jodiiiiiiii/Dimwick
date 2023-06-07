@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector2.Lerp(rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
 
         // update sitting state
-        if (rb.velocity.magnitude < SIT_SPEED_THRESHOLD)
+        if (rb.velocity.magnitude < SIT_SPEED_THRESHOLD && InputHelper.GetOctoDirectionHeld() == InputHelper.OctoDirection.None)
             _isSitting = true;
         else
             _isSitting = false;

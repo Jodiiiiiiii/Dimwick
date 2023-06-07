@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public float MaxCandlelightIntensity = 1f;
     public float MinCandlelightIntensity = 0f;
     public float FlameDecayRate = 0.1f;
+    public float FlameRegenRate = 1.0f;
 
     [Header("UI")]
     public UI_Meter FlameMeter;
@@ -116,5 +117,11 @@ public class PlayerController : MonoBehaviour
         Flashlight.intensity = Mathf.Lerp(MinFlashlightIntensity, MaxFlashlightIntensity, _flameIntensity / MAX_FLAME);
         CandleLight.intensity = Mathf.Lerp(MinCandlelightIntensity, MaxCandlelightIntensity, _flameIntensity / MAX_FLAME);
         FlameMeter.SetValue(_flameIntensity / MAX_FLAME);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Campfire"))
+            _flameIntensity += FlameRegenRate * Time.deltaTime;
     }
 }

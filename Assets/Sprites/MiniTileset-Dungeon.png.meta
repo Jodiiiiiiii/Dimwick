@@ -789,48 +789,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MiniTileset-Dungeon_42
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 557
-        width: 32
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a4587ef68975dda45b1a730e03e62205
-      internalID: -1381921717
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MiniTileset-Dungeon_43
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 557
-        width: 32
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8a39c4d9fed27d24dbaf4f83b34ed6fe
-      internalID: 957710453
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: MiniTileset-Dungeon_46
       rect:
         serializedVersion: 2
@@ -2195,7 +2153,7 @@ TextureImporter:
         x: 96
         y: 752
         width: 32
-        height: 31
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

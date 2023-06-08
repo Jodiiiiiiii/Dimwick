@@ -96,6 +96,7 @@ SpriteAtlas:
   - {fileID: 1659559274, guid: f3b24feb768016b489d83ced7f5b3f54, type: 3}
   - {fileID: -1864535494, guid: f3b24feb768016b489d83ced7f5b3f54, type: 3}
   - {fileID: 918958166, guid: f3b24feb768016b489d83ced7f5b3f54, type: 3}
+  - {fileID: -318533049, guid: f3b24feb768016b489d83ced7f5b3f54, type: 3}
   - {fileID: -450820236, guid: f3b24feb768016b489d83ced7f5b3f54, type: 3}
   - {fileID: -1241621857, guid: f3b24feb768016b489d83ced7f5b3f54, type: 3}
   - {fileID: 1332902166, guid: f3b24feb768016b489d83ced7f5b3f54, type: 3}
@@ -193,6 +194,7 @@ SpriteAtlas:
   - MiniTileset-Dungeon_8
   - MiniTileset-Dungeon_9
   - MiniTileset-Dungeon_20
+  - MiniTileset-Dungeon_21
   - MiniTileset-Dungeon_91
   - MiniTileset-Dungeon_22
   - MiniTileset-Dungeon_90

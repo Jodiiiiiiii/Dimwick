@@ -1770,10 +1770,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -11, y: 3}
+      - - {x: -11, y: 7}
         - {x: -11, y: -16}
         - {x: 13, y: -16}
-        - {x: 13, y: 3}
+        - {x: 13, y: 7}
       tessellationDetail: 0
       bones: []
       spriteID: 465bdc3c7490b064387ea2a60d971424
@@ -1894,7 +1894,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -4, y: -7}
+        - {x: 16, y: -7}
+        - {x: 16, y: 14}
+        - {x: -4, y: 14}
       tessellationDetail: 0
       bones: []
       spriteID: aeb6277701ba68b44bcc3ffebefbda23
@@ -1915,7 +1919,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -16, y: 14}
+        - {x: -16, y: -7}
+        - {x: 4, y: -7}
+        - {x: 4, y: 14}
       tessellationDetail: 0
       bones: []
       spriteID: b7a9da1fc6bdabd4fa9c226f0153da5e
@@ -1981,8 +1989,8 @@ TextureImporter:
       physicsShape:
       - - {x: -12, y: -16}
         - {x: 12, y: -16}
-        - {x: 12, y: -4}
-        - {x: -12, y: -4}
+        - {x: 12, y: 1}
+        - {x: -12, y: 1}
       tessellationDetail: 0
       bones: []
       spriteID: 764ddbd5763d23c4e9a5877c645991b9
@@ -2188,6 +2196,27 @@ TextureImporter:
       bones: []
       spriteID: 37640ea42c2b3c4469d3d7791d63f473
       internalID: -478824303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniTileset-Dungeon_21
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 512
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 329db1a959e72a34a862472931bbddc3
+      internalID: -318533049
       vertices: []
       indices: 
       edges: []

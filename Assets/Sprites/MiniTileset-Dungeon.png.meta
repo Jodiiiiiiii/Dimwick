@@ -108,8 +108,8 @@ TextureImporter:
       name: MiniTileset-Dungeon_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 846
+        x: 1
+        y: 845
         width: 32
         height: 32
       alignment: 0
@@ -130,7 +130,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 846
+        y: 845
         width: 32
         height: 32
       alignment: 0
@@ -151,7 +151,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 846
+        y: 845
         width: 32
         height: 32
       alignment: 0
@@ -171,8 +171,8 @@ TextureImporter:
       name: MiniTileset-Dungeon_3
       rect:
         serializedVersion: 2
-        x: 96
-        y: 846
+        x: 95
+        y: 845
         width: 32
         height: 32
       alignment: 0
@@ -192,7 +192,7 @@ TextureImporter:
       name: MiniTileset-Dungeon_4
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 814
         width: 32
         height: 32
@@ -255,7 +255,7 @@ TextureImporter:
       name: MiniTileset-Dungeon_7
       rect:
         serializedVersion: 2
-        x: 96
+        x: 95
         y: 814
         width: 32
         height: 32
@@ -276,8 +276,8 @@ TextureImporter:
       name: MiniTileset-Dungeon_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 782
+        x: 1
+        y: 783
         width: 32
         height: 32
       alignment: 0
@@ -298,7 +298,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 782
+        y: 783
         width: 32
         height: 32
       alignment: 0
@@ -319,7 +319,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 782
+        y: 783
         width: 32
         height: 32
       alignment: 0
@@ -339,8 +339,8 @@ TextureImporter:
       name: MiniTileset-Dungeon_11
       rect:
         serializedVersion: 2
-        x: 96
-        y: 782
+        x: 95
+        y: 783
         width: 32
         height: 32
       alignment: 0
@@ -363,12 +363,16 @@ TextureImporter:
         x: 0
         y: 752
         width: 32
-        height: 30
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: 16}
       tessellationDetail: 0
       bones: []
       spriteID: b11084cfd22fadd409057e156f89f449
@@ -384,12 +388,16 @@ TextureImporter:
         x: 32
         y: 752
         width: 32
-        height: 30
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: 16}
       tessellationDetail: 0
       bones: []
       spriteID: 0d01831861f223649860410f9f102709
@@ -405,37 +413,20 @@ TextureImporter:
         x: 64
         y: 752
         width: 32
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 02ed0045dfd92424f9e856fc7d3bb96a
-      internalID: -1176207687
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MiniTileset-Dungeon_15
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 750
-        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: 16}
       tessellationDetail: 0
       bones: []
-      spriteID: 9ffbf97ac62e8b6448d44bf64f1db12c
-      internalID: -632963447
+      spriteID: 02ed0045dfd92424f9e856fc7d3bb96a
+      internalID: -1176207687
       vertices: []
       indices: 
       edges: []
@@ -1264,7 +1255,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 352
+        y: 337
         width: 32
         height: 32
       alignment: 0
@@ -1285,7 +1276,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 352
+        y: 337
         width: 32
         height: 32
       alignment: 0
@@ -1348,7 +1339,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 320
+        y: 293
         width: 32
         height: 32
       alignment: 0
@@ -1369,7 +1360,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 320
+        y: 293
         width: 32
         height: 32
       alignment: 0
@@ -1432,7 +1423,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 288
+        y: 325
         width: 32
         height: 32
       alignment: 0
@@ -1453,7 +1444,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 288
+        y: 325
         width: 32
         height: 32
       alignment: 0
@@ -2142,11 +2133,36 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MiniTileset-Dungeon_108
+      name: MiniTileset-Dungeon_15
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
+        x: 96
+        y: 752
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16, y: 15.5}
+        - {x: -16, y: -15.5}
+        - {x: 16, y: -15.5}
+        - {x: 16, y: 15.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05d942a2f694f3a47a0e2c84109f98a6
+      internalID: -632963447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniTileset-Dungeon_19
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 704
         width: 32
         height: 32
       alignment: 0
@@ -2156,8 +2172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30124a17f6e5e7f40a58e930dbb7a319
-      internalID: -1995733675
+      spriteID: 37640ea42c2b3c4469d3d7791d63f473
+      internalID: -478824303
       vertices: []
       indices: 
       edges: []

@@ -45,6 +45,9 @@ TagManager:
   - name: Floor
     uniqueID: 581166965
     locked: 0
+  - name: Way Back Decor
+    uniqueID: 2803796245
+    locked: 0
   - name: Walls
     uniqueID: 713534821
     locked: 0

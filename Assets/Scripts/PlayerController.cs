@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private const int UP_DIRECTION = 3;
     private const float SIT_SPEED_THRESHOLD = 0.5f;
     private const float MAX_FLAME = 100f;
+    private const int MAX_HP = 8;
 
     public Camera cam;
 
@@ -42,12 +44,16 @@ public class PlayerController : MonoBehaviour
     private Vector2 _facing = Vector2.right;
     private bool _isSitting = true;
     private float _flameIntensity = MAX_FLAME;
+    private int _hp = MAX_HP;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        if(SceneManager.GetActiveScene().name == "Tutorial")
+            _hp--;
     }
 
     // Update is called once per frame
@@ -124,4 +130,6 @@ public class PlayerController : MonoBehaviour
         if(collision.CompareTag("Campfire"))
             _flameIntensity += FlameRegenRate * Time.deltaTime;
     }
+
+    public int getHP() { return _hp; }
 }

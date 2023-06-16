@@ -24,7 +24,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("Lighting")]
     public Light2D CandleLight;
-    public Light2D Flashlight;
+    public Light2D FlashlightStandard;
+    public Light2D FlashlightUp;
+    [Tooltip("offset of light transform from center when looking left or right")]
+    public float SideLightOffset = 1f;
     public float MaxFlashlightIntensity = 1f;
     public float MinFlashlightIntensity = 0f;
     public float MaxCandlelightIntensity = 1f;
@@ -49,15 +52,20 @@ public class PlayerController : MonoBehaviour
     private bool _isSitting = true;
     private float _flameIntensity = MAX_FLAME;
     private int _hp = MAX_HP;
+    private Vector3 _flashlightNaturalPos;
 
     // Start is called before the first frame update
     void Start()
     {
+        // componesnts
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
+        // decrement health for tutorial only
         if(SceneManager.GetActiveScene().name == "Tutorial")
             _hp--;
+
+        _flashlightNaturalPos = FlashlightStandard.transform.localPosition;
     }
 
     // Update is called once per frame
@@ -119,16 +127,46 @@ public class PlayerController : MonoBehaviour
         else
             animator.SetInteger("direction", DOWN_DIRECTION);
 
-        // update flashlight rotation bassed on facing direction
-        Flashlight.transform.rotation = Quaternion.Euler(Vector3.forward * facingAngle);
-
         // update flame values
         _flameIntensity -= FlameDecayRate * Time.deltaTime;
-        Flashlight.intensity = Mathf.Lerp(MinFlashlightIntensity, MaxFlashlightIntensity, _flameIntensity / MAX_FLAME);
-        CandleLight.intensity = Mathf.Lerp(MinCandlelightIntensity, MaxCandlelightIntensity, _flameIntensity / MAX_FLAME);
-        Flashlight.pointLightOuterRadius = Mathf.Lerp(MinFlashlightRange, MaxFlashlightRange, _flameIntensity / MAX_FLAME);
-        CandleLight.pointLightOuterRadius = Mathf.Lerp(MinCandlelightRange, MaxCandlelightRange, _flameIntensity / MAX_FLAME);
+        _flameIntensity = Mathf.Clamp(_flameIntensity, 0, MAX_FLAME); // clamp within range
         FlameMeter.SetValue(_flameIntensity / MAX_FLAME);
+
+        // Update candle light
+        CandleLight.pointLightOuterRadius = Mathf.Lerp(MinCandlelightRange, MaxCandlelightRange, _flameIntensity / MAX_FLAME);
+        CandleLight.intensity = Mathf.Lerp(MinCandlelightIntensity, MaxCandlelightIntensity, _flameIntensity / MAX_FLAME);
+
+        // update flashlight
+        
+        // enable proper light depending on facing direction
+        if (facingAngle >= -45f && facingAngle <= 45f) // if facing up
+        {
+            // light values
+            FlashlightUp.intensity = Mathf.Lerp(MinFlashlightIntensity, MaxFlashlightIntensity, _flameIntensity / MAX_FLAME);
+            FlashlightUp.pointLightOuterRadius = Mathf.Lerp(MinFlashlightRange, MaxFlashlightRange, _flameIntensity / MAX_FLAME);
+            // flashlight positions
+            FlashlightUp.transform.rotation = Quaternion.Euler(Vector3.forward * facingAngle);
+
+            FlashlightUp.gameObject.SetActive(true);
+            FlashlightStandard.gameObject.SetActive(false);
+        }
+        else
+        {
+            // light values
+            FlashlightStandard.intensity = Mathf.Lerp(MinFlashlightIntensity, MaxFlashlightIntensity, _flameIntensity / MAX_FLAME);
+            FlashlightStandard.pointLightOuterRadius = Mathf.Lerp(MinFlashlightRange, MaxFlashlightRange, _flameIntensity / MAX_FLAME);
+            // flashlight positions
+            FlashlightStandard.transform.rotation = Quaternion.Euler(Vector3.forward * facingAngle);
+            if (facingAngle >= 45f && facingAngle <= 135f) // facing left
+                FlashlightStandard.transform.localPosition = _flashlightNaturalPos + Vector3.left * SideLightOffset;
+            else if (facingAngle >= -135f && facingAngle < -45f) // facing right
+                FlashlightStandard.transform.localPosition = _flashlightNaturalPos + Vector3.right * SideLightOffset;
+            else // facing down
+                FlashlightStandard.transform.localPosition = _flashlightNaturalPos;
+
+            FlashlightStandard.gameObject.SetActive(true);
+            FlashlightUp.gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)

@@ -29,6 +29,10 @@ public class PlayerController : MonoBehaviour
     public float MinFlashlightIntensity = 0f;
     public float MaxCandlelightIntensity = 1f;
     public float MinCandlelightIntensity = 0f;
+    public float MaxFlashlightRange = 10f;
+    public float MinFlashlightRange = 1f;
+    public float MaxCandlelightRange = 5f;
+    public float MinCandlelightRange = 1f;
     public float FlameDecayRate = 0.1f;
     public float FlameRegenRate = 1.0f;
 
@@ -122,6 +126,8 @@ public class PlayerController : MonoBehaviour
         _flameIntensity -= FlameDecayRate * Time.deltaTime;
         Flashlight.intensity = Mathf.Lerp(MinFlashlightIntensity, MaxFlashlightIntensity, _flameIntensity / MAX_FLAME);
         CandleLight.intensity = Mathf.Lerp(MinCandlelightIntensity, MaxCandlelightIntensity, _flameIntensity / MAX_FLAME);
+        Flashlight.pointLightOuterRadius = Mathf.Lerp(MinFlashlightRange, MaxFlashlightRange, _flameIntensity / MAX_FLAME);
+        CandleLight.pointLightOuterRadius = Mathf.Lerp(MinCandlelightRange, MaxCandlelightRange, _flameIntensity / MAX_FLAME);
         FlameMeter.SetValue(_flameIntensity / MAX_FLAME);
     }
 

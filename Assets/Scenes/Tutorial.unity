@@ -31353,7 +31353,7 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0.7817
+  m_PointLightInnerRadius: 0
   m_PointLightOuterRadius: 4
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
@@ -31763,6 +31763,8 @@ MonoBehaviour:
   MinFlashlightIntensity: 0.01
   MaxCandlelightIntensity: 1
   MinCandlelightIntensity: 0.01
+  MaxFlashlightRange: 10
+  MinFlashlightRange: 5
   FlameDecayRate: 2
   FlameRegenRate: 10
   FlameMeter: {fileID: 1521113187}

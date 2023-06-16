@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class HealthIndicators : MonoBehaviour
 {
-    // cosntants
-    private const float OFFSET = 1f;
-
     public GameObject[] hearts;
     [HideInInspector] public PlayerController player;
 

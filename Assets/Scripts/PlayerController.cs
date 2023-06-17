@@ -42,6 +42,10 @@ public class PlayerController : MonoBehaviour
     [Header("UI")]
     public UI_Meter FlameMeter;
 
+    [Header("Aiming")]
+    public GameObject AimPivot;
+    public SpriteRenderer WeaponSprite;
+
     // components
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;
@@ -115,8 +119,12 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("sit", _isSitting);
 
         // update facing direction
-        _facing = ((Vector2) cam.ScreenToWorldPoint(Input.mousePosition) - rb.position).normalized;
+        _facing = ((Vector2) cam.ScreenToWorldPoint(Input.mousePosition) - (Vector2) AimPivot.transform.position).normalized;
         float facingAngle = Vector2.SignedAngle(Vector2.up, _facing);
+
+        // Weapon rotation
+        AimPivot.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, facingAngle + 90);
+
         // direction animator state
         if (facingAngle >= 45f && facingAngle <= 135f)
             animator.SetInteger("direction", LEFT_DIRECTION);
@@ -144,11 +152,12 @@ public class PlayerController : MonoBehaviour
             // light values
             FlashlightUp.intensity = Mathf.Lerp(MinFlashlightIntensity, MaxFlashlightIntensity, _flameIntensity / MAX_FLAME);
             FlashlightUp.pointLightOuterRadius = Mathf.Lerp(MinFlashlightRange, MaxFlashlightRange, _flameIntensity / MAX_FLAME);
-            // flashlight positions
-            FlashlightUp.transform.rotation = Quaternion.Euler(Vector3.forward * facingAngle);
 
             FlashlightUp.gameObject.SetActive(true);
             FlashlightStandard.gameObject.SetActive(false);
+
+            // hidden behind player
+            WeaponSprite.sortingOrder = -1;
         }
         else
         {
@@ -156,7 +165,6 @@ public class PlayerController : MonoBehaviour
             FlashlightStandard.intensity = Mathf.Lerp(MinFlashlightIntensity, MaxFlashlightIntensity, _flameIntensity / MAX_FLAME);
             FlashlightStandard.pointLightOuterRadius = Mathf.Lerp(MinFlashlightRange, MaxFlashlightRange, _flameIntensity / MAX_FLAME);
             // flashlight positions
-            FlashlightStandard.transform.rotation = Quaternion.Euler(Vector3.forward * facingAngle);
             if (facingAngle >= 45f && facingAngle <= 135f) // facing left
                 FlashlightStandard.transform.localPosition = _flashlightNaturalPos + Vector3.left * SideLightOffset;
             else if (facingAngle >= -135f && facingAngle < -45f) // facing right
@@ -166,6 +174,9 @@ public class PlayerController : MonoBehaviour
 
             FlashlightStandard.gameObject.SetActive(true);
             FlashlightUp.gameObject.SetActive(false);
+
+            // visible in front of player
+            WeaponSprite.sortingOrder = 1;
         }
     }
 

@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 11590351}
   - component: {fileID: 11590350}
   - component: {fileID: 11590352}
+  - component: {fileID: 11590353}
   m_Layer: 5
   m_Name: Ability - Utility
   m_TagString: Untagged
@@ -254,6 +255,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &11590353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11590348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e9170b69950424f8fd8b92ac5d9545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _value: 1
 --- !u!1001 &17023595
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32662,13 +32676,22 @@ MonoBehaviour:
   FlameDecayRate: 2
   FlameRegenRate: 10
   FlameMeter: {fileID: 1521113187}
+  BigOverheatMeter: {fileID: 1897829493}
+  SmallOverheatMeter: {fileID: 1603848142}
+  UtilityOverheatMeter: {fileID: 11590353}
   AimPivot: {fileID: 1573312390}
   WeaponSprite: {fileID: 126564847}
   primary: 1
   secondary: 0
   utility: 0
+  PrimaryOverheatDuration: 5
+  SecondaryOverheatDuration: 5
+  UtilityOverheatDuration: 5
+  HeatDecayRate: 0.25
+  OverheatFlashRate: 0.15
   Bullet_RapidFlare: {fileID: 9221771718114101272, guid: 324f1b2dc10fae9439c8e23db3fb1f7e, type: 3}
   Cooldown_RapidFlare: 0.15
+  HeatPer_RapidFlare: 0.075
   rb: {fileID: 0}
   animator: {fileID: 0}
 --- !u!95 &847306873
@@ -39101,6 +39124,7 @@ GameObject:
   - component: {fileID: 1603848140}
   - component: {fileID: 1603848139}
   - component: {fileID: 1603848141}
+  - component: {fileID: 1603848142}
   m_Layer: 5
   m_Name: Ability - Small
   m_TagString: Untagged
@@ -39220,6 +39244,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1603848142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603848137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e9170b69950424f8fd8b92ac5d9545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _value: 1
 --- !u!1001 &1608135772
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39693,6 +39730,7 @@ GameObject:
   - component: {fileID: 1897829491}
   - component: {fileID: 1897829490}
   - component: {fileID: 1897829492}
+  - component: {fileID: 1897829493}
   m_Layer: 5
   m_Name: Ability - Big
   m_TagString: Untagged
@@ -39812,6 +39850,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1897829493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897829488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e9170b69950424f8fd8b92ac5d9545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _value: 1
 --- !u!1 &1907245024
 GameObject:
   m_ObjectHideFlags: 0

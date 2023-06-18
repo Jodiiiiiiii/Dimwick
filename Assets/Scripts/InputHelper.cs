@@ -123,6 +123,11 @@ public static class InputHelper
         return Input.GetMouseButton(0);
     }
 
+    public static bool GetRightClickDown()
+    {
+        return Input.GetMouseButtonDown(1);
+    }
+
     /// <summary>
     /// Enumeration including eight directions and "None"
     /// </summary>

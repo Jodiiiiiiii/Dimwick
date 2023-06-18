@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("UI")]
     public UI_Meter FlameMeter;
+    public UI_Meter BigOverheatMeter;
+    public UI_Meter SmallOverheatMeter;
+    public UI_Meter UtilityOverheatMeter;
 
     [Header("Aiming")]
     public GameObject AimPivot;
@@ -51,9 +54,17 @@ public class PlayerController : MonoBehaviour
     public Secondary secondary = Secondary.None;
     public Utility utility = Utility.None;
 
+    [Header("Overheat")]
+    public float PrimaryOverheatDuration = 5f;
+    public float SecondaryOverheatDuration = 5f;
+    public float UtilityOverheatDuration = 5f;
+    public float HeatDecayRate = 0.1f;
+    public float OverheatFlashRate = 0.2f;
+
     [Header("Primary - RapidFlare")] // also add damage here
     public GameObject Bullet_RapidFlare;
     public float Cooldown_RapidFlare = 0.1f;
+    public float HeatPer_RapidFlare = 0.05f;
 
     // components
     [HideInInspector] public Rigidbody2D rb;
@@ -66,9 +77,16 @@ public class PlayerController : MonoBehaviour
     private float _flameIntensity = MAX_FLAME;
     private int _hp = MAX_HP;
     private Vector3 _flashlightNaturalPos;
-    private bool _primaryEquipped = true;
+    // Weapons
+    private bool _isprimaryEquipped = true;
     private float _primaryCooldown = 0f;
+    private float _primaryHeat = 0f;
+    private bool _isPrimaryOverheat = false;
+    private float _primaryOverheatTimer = 0f;
     private float _secondaryCooldown = 0f;
+    private float _secondaryHeat = 0f;
+    private bool _isSecondaryOverheat = false;
+    private float _secondaryOverheatTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -123,16 +141,25 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
+        // Primary Ability Handling
         switch(primary)
         {
             case Primary.RapidFlare:
                 _primaryCooldown += Time.deltaTime;
-                // HANDLE OVERHEAT HERE
 
-                // attack
-                if(InputHelper.GetLeftClick() && _primaryEquipped && _primaryCooldown > Cooldown_RapidFlare)
+                // attack possible -> COULD EXTRACT THIS TO ONE SPOT AND HAVE SWITCH JUST FOR INTANTIATE LINE
+                if(InputHelper.GetLeftClick() && _isprimaryEquipped && _primaryCooldown > Cooldown_RapidFlare && !_isPrimaryOverheat)
                 {
                     _primaryCooldown = 0;
+
+                    _primaryHeat += HeatPer_RapidFlare;
+                    if(_primaryHeat > 1) // enter overheat state
+                    {
+                        _primaryHeat = 1;
+                        _isPrimaryOverheat = true;
+                        _primaryOverheatTimer = 0f;
+                    }
+
                     Instantiate(Bullet_RapidFlare, WeaponSprite.transform.position, Quaternion.Euler(0, 0, facingAngle + 90));
                 }
                 break;
@@ -142,6 +169,22 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
+        // handle primary overheat state
+        if(_isPrimaryOverheat)
+        {
+            if (_primaryOverheatTimer > PrimaryOverheatDuration)
+            {
+                _isPrimaryOverheat = false;
+                _primaryHeat = 0;
+            }
+            else
+                _primaryOverheatTimer += Time.deltaTime;
+        }
+
+        // heat decay over time
+        _primaryHeat = Mathf.Clamp(_primaryHeat - HeatDecayRate * Time.deltaTime, 0, 1);
+
+        // Secondary Ability Handling
         switch (secondary)
         {
             case Secondary.FlameGun:
@@ -151,6 +194,39 @@ public class PlayerController : MonoBehaviour
             case Secondary.None:
                 break;
         }
+
+        // Utility Ability Handling (nothing for now)
+
+        // Overheat Meters
+        if (_isprimaryEquipped)
+        {
+            if (_isPrimaryOverheat)
+                BigOverheatMeter.SetValue((int) (Time.time / OverheatFlashRate) % 2 == 0 ? 0 : 1);
+            else
+                BigOverheatMeter.SetValue(_primaryHeat);
+
+            if (_isSecondaryOverheat)
+                SmallOverheatMeter.SetValue((int)(Time.time / OverheatFlashRate) % 2 == 0 ? 0 : 1);
+            else
+                SmallOverheatMeter.SetValue(_secondaryHeat);
+        }
+        else
+        {
+            if (_isSecondaryOverheat)
+                BigOverheatMeter.SetValue((int)(Time.time / OverheatFlashRate) % 2 == 0 ? 0 : 1);
+            else
+                BigOverheatMeter.SetValue(_secondaryHeat);
+
+            if (_isPrimaryOverheat)
+                SmallOverheatMeter.SetValue((int)(Time.time / OverheatFlashRate) % 2 == 0 ? 0 : 1);
+            else
+                SmallOverheatMeter.SetValue(_primaryHeat);
+        }
+        UtilityOverheatMeter.SetValue(0);
+
+        // Primary/secondary swap
+        if (InputHelper.GetRightClickDown())
+            _isprimaryEquipped = !_isprimaryEquipped;
 
         // update velocity based on target and current velocities
         rb.velocity = Vector2.Lerp(rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
@@ -162,8 +238,6 @@ public class PlayerController : MonoBehaviour
             _isSitting = false;
         // sutting animator state
         animator.SetBool("sit", _isSitting);
-
-        
 
         // Weapon rotation
         AimPivot.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, facingAngle + 90);

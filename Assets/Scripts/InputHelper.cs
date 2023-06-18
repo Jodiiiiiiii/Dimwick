@@ -118,6 +118,11 @@ public static class InputHelper
             return OctoDirection.None;
     }
 
+    public static bool GetLeftClick()
+    {
+        return Input.GetMouseButton(0);
+    }
+
     /// <summary>
     /// Enumeration including eight directions and "None"
     /// </summary>

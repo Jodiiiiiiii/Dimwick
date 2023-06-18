@@ -46,6 +46,15 @@ public class PlayerController : MonoBehaviour
     public GameObject AimPivot;
     public SpriteRenderer WeaponSprite;
 
+    [Header("Weapons")]
+    public Primary primary = Primary.None;
+    public Secondary secondary = Secondary.None;
+    public Utility utility = Utility.None;
+
+    [Header("Primary - RapidFlare")] // also add damage here
+    public GameObject Bullet_RapidFlare;
+    public float Cooldown_RapidFlare = 0.1f;
+
     // components
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;
@@ -57,6 +66,9 @@ public class PlayerController : MonoBehaviour
     private float _flameIntensity = MAX_FLAME;
     private int _hp = MAX_HP;
     private Vector3 _flashlightNaturalPos;
+    private bool _primaryEquipped = true;
+    private float _primaryCooldown = 0f;
+    private float _secondaryCooldown = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -75,8 +87,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // update facing direction (mouse inputs)
+        _facing = ((Vector2)cam.ScreenToWorldPoint(Input.mousePosition) - (Vector2)AimPivot.transform.position).normalized;
+        float facingAngle = Vector2.SignedAngle(Vector2.up, _facing);
+
         // Handle movement direction input
-        switch(InputHelper.GetOctoDirectionHeld())
+        switch (InputHelper.GetOctoDirectionHeld())
         {
             case InputHelper.OctoDirection.Up:
                 _targetVelocity = Vector2.up * MaxWalkSpeed;
@@ -107,6 +123,35 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
+        switch(primary)
+        {
+            case Primary.RapidFlare:
+                _primaryCooldown += Time.deltaTime;
+                // HANDLE OVERHEAT HERE
+
+                // attack
+                if(InputHelper.GetLeftClick() && _primaryEquipped && _primaryCooldown > Cooldown_RapidFlare)
+                {
+                    _primaryCooldown = 0;
+                    Instantiate(Bullet_RapidFlare, WeaponSprite.transform.position, Quaternion.Euler(0, 0, facingAngle + 90));
+                }
+                break;
+            case Primary.FlareBurst:
+                break;
+            case Primary.None:
+                break;
+        }
+
+        switch (secondary)
+        {
+            case Secondary.FlameGun:
+                break;
+            case Secondary.FlameSlash:
+                break;
+            case Secondary.None:
+                break;
+        }
+
         // update velocity based on target and current velocities
         rb.velocity = Vector2.Lerp(rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
 
@@ -118,9 +163,7 @@ public class PlayerController : MonoBehaviour
         // sutting animator state
         animator.SetBool("sit", _isSitting);
 
-        // update facing direction
-        _facing = ((Vector2) cam.ScreenToWorldPoint(Input.mousePosition) - (Vector2) AimPivot.transform.position).normalized;
-        float facingAngle = Vector2.SignedAngle(Vector2.up, _facing);
+        
 
         // Weapon rotation
         AimPivot.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, facingAngle + 90);
@@ -187,4 +230,19 @@ public class PlayerController : MonoBehaviour
     }
 
     public int getHP() { return _hp; }
+
+    public enum Primary
+    {
+        None, RapidFlare, FlareBurst
+    }
+
+    public enum Secondary
+    {
+        None, FlameGun, FlameSlash
+    }
+
+    public enum Utility
+    {
+        None, LightBlast, LightBlink
+    }
 }

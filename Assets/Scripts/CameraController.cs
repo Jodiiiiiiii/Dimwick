@@ -35,12 +35,6 @@ public class CameraController : MonoBehaviour
         Vector2 difference = (Vector2)(Cam.ScreenToWorldPoint(Input.mousePosition) - Player.transform.position);
         if(difference.magnitude > MouseInfluenceRange)
             _goalPosition += new Vector2(difference.normalized.x * MouseOffsetFactorX, difference.normalized.y * MouseOffsetFactorY);
-       /* _goalPosition.x += InputHelper.MapRange(Mathf.Clamp(Input.mousePosition.x, MaxMouseInfluenceFactor * Screen.width, 
-            (1 - MaxMouseInfluenceFactor) * Screen.width), MaxMouseInfluenceFactor * Screen.width, 
-            (1 - MaxMouseInfluenceFactor) * Screen.width, -1, 1) * MouseOffsetFactorX;
-        _goalPosition.y += InputHelper.MapRange(Mathf.Clamp(Input.mousePosition.y, MaxMouseInfluenceFactor * Screen.height, 
-            (1 - MaxMouseInfluenceFactor) * Screen.height), MaxMouseInfluenceFactor * Screen.height, 
-            (1 - MaxMouseInfluenceFactor) * Screen.height, -1, 1) * MouseOffsetFactorY;*/
 
         // calculate speed from goal position (camera smoothing)
         Vector2 goalCamSpeed = (_goalPosition - new Vector2(transform.position.x, transform.position.y)) * CamMovementSpeed;

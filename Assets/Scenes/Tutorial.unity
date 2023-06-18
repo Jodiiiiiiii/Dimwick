@@ -28952,7 +28952,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.6
-  m_Color: {r: 1, g: 0.93625176, b: 0.8537736, a: 1}
+  m_Color: {r: 1, g: 0.73333335, b: 0.57254905, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
@@ -31906,7 +31906,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.7
-  m_Color: {r: 1, g: 0.8192331, b: 0.5330188, a: 1}
+  m_Color: {r: 1, g: 0.67091936, b: 0.4198113, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
@@ -32535,6 +32535,11 @@ MonoBehaviour:
   FlameMeter: {fileID: 1521113187}
   AimPivot: {fileID: 1573312390}
   WeaponSprite: {fileID: 126564847}
+  primary: 1
+  secondary: 0
+  utility: 0
+  Bullet_RapidFlare: {fileID: 9221771718114101272, guid: 324f1b2dc10fae9439c8e23db3fb1f7e, type: 3}
+  Cooldown_RapidFlare: 0.15
   rb: {fileID: 0}
   animator: {fileID: 0}
 --- !u!95 &847306873
@@ -33876,7 +33881,7 @@ GameObject:
   - component: {fileID: 1199138730}
   - component: {fileID: 1199138729}
   - component: {fileID: 1199138728}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Walls Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38858,7 +38863,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.6
-  m_Color: {r: 1, g: 0.93625176, b: 0.8537736, a: 1}
+  m_Color: {r: 1, g: 0.73119134, b: 0.5707547, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0

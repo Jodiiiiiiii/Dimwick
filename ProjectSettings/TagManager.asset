@@ -57,8 +57,14 @@ TagManager:
   - name: Projectiles
     uniqueID: 1477882123
     locked: 0
+  - name: Player_Behind
+    uniqueID: 3288967523
+    locked: 0
   - name: Player
     uniqueID: 1699844157
+    locked: 0
+  - name: Player_InFront
+    uniqueID: 222964497
     locked: 0
   - name: Front Decor
     uniqueID: 2647955287

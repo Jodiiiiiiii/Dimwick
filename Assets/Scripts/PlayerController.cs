@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
     public Light2D FlashlightStandard;
     public Light2D FlashlightUp;
     [Tooltip("offset of light transform from center when looking left or right")]
-    public float SideLightOffset = 1f;
     public float MaxFlashlightIntensity = 1f;
     public float MinFlashlightIntensity = 0f;
     public float MaxCandlelightIntensity = 1f;
@@ -48,6 +47,9 @@ public class PlayerController : MonoBehaviour
     [Header("Aiming")]
     public GameObject AimPivot;
     public SpriteRenderer WeaponSprite;
+    public Animator WeaponAnimator;
+    public RuntimeAnimatorController PrimaryAnimator;
+    public RuntimeAnimatorController SecondaryAnimator;
 
     [Header("Weapons")]
     public Primary primary = Primary.None;
@@ -76,7 +78,6 @@ public class PlayerController : MonoBehaviour
     private bool _isSitting = true;
     private float _flameIntensity = MAX_FLAME;
     private int _hp = MAX_HP;
-    private Vector3 _flashlightNaturalPos;
     // Weapons
     private bool _isprimaryEquipped = true;
     private float _primaryCooldown = 0f;
@@ -99,7 +100,8 @@ public class PlayerController : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "Tutorial")
             _hp--;
 
-        _flashlightNaturalPos = FlashlightStandard.transform.localPosition;
+        // default weapon animator to primary
+        WeaponAnimator.runtimeAnimatorController = PrimaryAnimator;
     }
 
     // Update is called once per frame
@@ -224,6 +226,9 @@ public class PlayerController : MonoBehaviour
         }
         UtilityOverheatMeter.SetValue(0);
 
+        // set proper weapon sprite animation
+        WeaponAnimator.runtimeAnimatorController = _isprimaryEquipped ? PrimaryAnimator : SecondaryAnimator;
+
         // Primary/secondary swap
         if (InputHelper.GetRightClickDown())
             _isprimaryEquipped = !_isprimaryEquipped;
@@ -274,26 +279,19 @@ public class PlayerController : MonoBehaviour
             FlashlightStandard.gameObject.SetActive(false);
 
             // hidden behind player
-            WeaponSprite.sortingOrder = -1;
+            WeaponSprite.sortingLayerName = "Player_Behind";
         }
         else
         {
             // light values
             FlashlightStandard.intensity = Mathf.Lerp(MinFlashlightIntensity, MaxFlashlightIntensity, _flameIntensity / MAX_FLAME);
             FlashlightStandard.pointLightOuterRadius = Mathf.Lerp(MinFlashlightRange, MaxFlashlightRange, _flameIntensity / MAX_FLAME);
-            // flashlight positions
-            if (facingAngle >= 45f && facingAngle <= 135f) // facing left
-                FlashlightStandard.transform.localPosition = _flashlightNaturalPos + Vector3.left * SideLightOffset;
-            else if (facingAngle >= -135f && facingAngle < -45f) // facing right
-                FlashlightStandard.transform.localPosition = _flashlightNaturalPos + Vector3.right * SideLightOffset;
-            else // facing down
-                FlashlightStandard.transform.localPosition = _flashlightNaturalPos;
 
             FlashlightStandard.gameObject.SetActive(true);
             FlashlightUp.gameObject.SetActive(false);
 
             // visible in front of player
-            WeaponSprite.sortingOrder = 1;
+            WeaponSprite.sortingLayerName = "Player_InFront";
         }
     }
 

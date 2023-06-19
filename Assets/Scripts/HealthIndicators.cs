@@ -16,7 +16,7 @@ public class HealthIndicators : MonoBehaviour
     {
         player = GameObject.Find("Dimwick").GetComponent<PlayerController>();
 
-        _currentHP = player.getHP();
+        _currentHP = player.GetHP();
          
         // instantiate new hearts
         while(_currentHearts < _currentHP)
@@ -29,7 +29,7 @@ public class HealthIndicators : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _currentHP = player.getHP();
+        _currentHP = player.GetHP();
         if (_currentHP < 0) _currentHP = 0;
         if (_currentHP > hearts.Length) _currentHP = hearts.Length;
 

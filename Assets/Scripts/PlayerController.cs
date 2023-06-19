@@ -57,16 +57,21 @@ public class PlayerController : MonoBehaviour
     public Utility utility = Utility.None;
 
     [Header("Overheat")]
-    public float PrimaryOverheatDuration = 5f;
-    public float SecondaryOverheatDuration = 5f;
-    public float UtilityOverheatDuration = 5f;
+    public float OverheatDuration = 5f;
     public float HeatDecayRate = 0.1f;
     public float OverheatFlashRate = 0.2f;
 
-    [Header("Primary - RapidFlare")] // also add damage here
+    [Header("Primary - RapidFlare")]
     public GameObject Bullet_RapidFlare;
     public float Cooldown_RapidFlare = 0.1f;
     public float HeatPer_RapidFlare = 0.05f;
+    public float SpreadAngle_RapidFlare = 15f;
+
+    [Header("Secondary - FlameGun")]
+    public GameObject Bullet_FlameGun;
+    public float Cooldown_FlameGun = 0.5f;
+    public float HeatPer_FlameGun = 0.2f;
+    public float SpreadAngle_FlameGun = 5f;
 
     // components
     [HideInInspector] public Rigidbody2D rb;
@@ -78,14 +83,19 @@ public class PlayerController : MonoBehaviour
     private bool _isSitting = true;
     private float _flameIntensity = MAX_FLAME;
     private int _hp = MAX_HP;
-    // Weapons
+    // Primary weapons
     private bool _isprimaryEquipped = true;
-    private float _primaryCooldown = 0f;
+    private float _primaryCooldownTimer = 0f;
+    private float _primaryCooldown = 1f;
     private float _primaryHeat = 0f;
+    private float _primaryHeatPer = 0.1f;
     private bool _isPrimaryOverheat = false;
     private float _primaryOverheatTimer = 0f;
-    private float _secondaryCooldown = 0f;
+    // secondary weapons
+    private float _secondaryCooldownTimer = 0f;
+    private float _secondaryCooldown = 1f;
     private float _secondaryHeat = 0f;
+    private float _secondaryHeatPer = 0.1f;
     private bool _isSecondaryOverheat = false;
     private float _secondaryOverheatTimer = 0f;
 
@@ -107,6 +117,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        #region MOVEMENT_INPUTS
         // update facing direction (mouse inputs)
         _facing = ((Vector2)cam.ScreenToWorldPoint(Input.mousePosition) - (Vector2)AimPivot.transform.position).normalized;
         float facingAngle = Vector2.SignedAngle(Vector2.up, _facing);
@@ -142,39 +153,101 @@ public class PlayerController : MonoBehaviour
                 _targetVelocity = Vector2.zero;
                 break;
         }
+        #endregion
 
-        // Primary Ability Handling
-        switch(primary)
+        #region ATTACKING
+        // update attack cooldown timers
+        _primaryCooldownTimer += Time.deltaTime;
+        _secondaryCooldownTimer += Time.deltaTime;
+
+        // heat decay over time
+        _primaryHeat = Mathf.Clamp(_primaryHeat - HeatDecayRate * Time.deltaTime, 0, 1);
+        _secondaryHeat = Mathf.Clamp(_secondaryHeat - HeatDecayRate * Time.deltaTime, 0, 1);
+
+        // Check for attack input
+        bool isFireReady = false;
+        if (InputHelper.GetLeftClick())
         {
-            case Primary.RapidFlare:
-                _primaryCooldown += Time.deltaTime;
-
-                // attack possible -> COULD EXTRACT THIS TO ONE SPOT AND HAVE SWITCH JUST FOR INTANTIATE LINE
-                if(InputHelper.GetLeftClick() && _isprimaryEquipped && _primaryCooldown > Cooldown_RapidFlare && !_isPrimaryOverheat)
+            if(_isprimaryEquipped && _primaryCooldownTimer > _primaryCooldown && !_isPrimaryOverheat)
+            {
+                // restart cooldown for next shot
+                _primaryCooldownTimer = 0;
+                // increment heat
+                _primaryHeat += _primaryHeatPer;
+                if (_primaryHeat > 1) // enter overheat state
                 {
-                    _primaryCooldown = 0;
-
-                    _primaryHeat += HeatPer_RapidFlare;
-                    if(_primaryHeat > 1) // enter overheat state
-                    {
-                        _primaryHeat = 1;
-                        _isPrimaryOverheat = true;
-                        _primaryOverheatTimer = 0f;
-                    }
-
-                    Instantiate(Bullet_RapidFlare, WeaponSprite.transform.position, Quaternion.Euler(0, 0, facingAngle + 90));
+                    _primaryHeat = 1;
+                    _isPrimaryOverheat = true;
+                    // start overheat timer
+                    _primaryOverheatTimer = 0f;
                 }
-                break;
-            case Primary.FlareBurst:
-                break;
-            case Primary.None:
-                break;
+
+                isFireReady = true;
+            }
+            else if (!_isprimaryEquipped && _secondaryCooldownTimer > _secondaryCooldown && !_isSecondaryOverheat)
+            {
+                // restart cooldown for next shot
+                _secondaryCooldownTimer = 0;
+                // increment heat
+                _secondaryHeat += _secondaryHeatPer;
+                if (_secondaryHeat > 1) // enter overheat state
+                {
+                    _secondaryHeat = 1;
+                    _isSecondaryOverheat = true;
+                    // start overheat timer
+                    _secondaryOverheatTimer = 0f;
+                }
+
+                isFireReady = true;
+            }
+        }
+
+        // Create projectiles and sets weapon cooldown/heatPer stats
+        if(_isprimaryEquipped)
+        {
+            switch (primary)
+            {
+                case Primary.RapidFlare:
+                    _primaryCooldown = Cooldown_RapidFlare;
+                    _primaryHeatPer = HeatPer_RapidFlare;
+
+                    if (isFireReady)
+                    {
+                        Instantiate(Bullet_RapidFlare, WeaponSprite.transform.position,
+                            Quaternion.Euler(0, 0, facingAngle + 90 + Random.Range(-SpreadAngle_RapidFlare, SpreadAngle_RapidFlare)));
+                    }
+                    break;
+                case Primary.FlareBurst:
+                    break;
+                case Primary.None:
+                    break;
+            }
+        }
+        else // secondary
+        {
+            switch (secondary)
+            {
+                case Secondary.FlameGun:
+                    _secondaryCooldown = Cooldown_FlameGun;
+                    _secondaryHeatPer = HeatPer_FlameGun;
+
+                    if(isFireReady)
+                    {
+                        Instantiate(Bullet_FlameGun, WeaponSprite.transform.position,
+                            Quaternion.Euler(0, 0, facingAngle + 90 + Random.Range(-SpreadAngle_FlameGun, SpreadAngle_FlameGun)));
+                    }
+                    break;
+                case Secondary.FlameSlash:
+                    break;
+                case Secondary.None:
+                    break;
+            }
         }
 
         // handle primary overheat state
         if(_isPrimaryOverheat)
         {
-            if (_primaryOverheatTimer > PrimaryOverheatDuration)
+            if (_primaryOverheatTimer > OverheatDuration)
             {
                 _isPrimaryOverheat = false;
                 _primaryHeat = 0;
@@ -182,22 +255,20 @@ public class PlayerController : MonoBehaviour
             else
                 _primaryOverheatTimer += Time.deltaTime;
         }
-
-        // heat decay over time
-        _primaryHeat = Mathf.Clamp(_primaryHeat - HeatDecayRate * Time.deltaTime, 0, 1);
-
-        // Secondary Ability Handling
-        switch (secondary)
+        // handle secondary overheat state
+        if(_isSecondaryOverheat)
         {
-            case Secondary.FlameGun:
-                break;
-            case Secondary.FlameSlash:
-                break;
-            case Secondary.None:
-                break;
+            if (_secondaryOverheatTimer > OverheatDuration)
+            {
+                _isSecondaryOverheat = false;
+                _secondaryHeat = 0;
+            }
+            else
+                _secondaryOverheatTimer += Time.deltaTime;
         }
 
         // Utility Ability Handling (nothing for now)
+        #endregion
 
         // Overheat Meters
         if (_isprimaryEquipped)
@@ -301,7 +372,7 @@ public class PlayerController : MonoBehaviour
             _flameIntensity += FlameRegenRate * Time.deltaTime;
     }
 
-    public int getHP() { return _hp; }
+    public int GetHP() { return _hp; }
 
     public enum Primary
     {

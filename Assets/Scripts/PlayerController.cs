@@ -38,12 +38,6 @@ public class PlayerController : MonoBehaviour
     public float FlameDecayRate = 0.1f;
     public float FlameRegenRate = 1.0f;
 
-    [Header("UI")]
-    public UI_Meter FlameMeter;
-    public UI_Meter BigOverheatMeter;
-    public UI_Meter SmallOverheatMeter;
-    public UI_Meter UtilityOverheatMeter;
-
     [Header("Aiming")]
     public GameObject AimPivot;
     public SpriteRenderer WeaponSprite;
@@ -270,33 +264,6 @@ public class PlayerController : MonoBehaviour
         // Utility Ability Handling (nothing for now)
         #endregion
 
-        // Overheat Meters
-        if (_isprimaryEquipped)
-        {
-            if (_isPrimaryOverheat)
-                BigOverheatMeter.SetValue((int) (Time.time / OverheatFlashRate) % 2 == 0 ? 0 : 1);
-            else
-                BigOverheatMeter.SetValue(_primaryHeat);
-
-            if (_isSecondaryOverheat)
-                SmallOverheatMeter.SetValue((int)(Time.time / OverheatFlashRate) % 2 == 0 ? 0 : 1);
-            else
-                SmallOverheatMeter.SetValue(_secondaryHeat);
-        }
-        else
-        {
-            if (_isSecondaryOverheat)
-                BigOverheatMeter.SetValue((int)(Time.time / OverheatFlashRate) % 2 == 0 ? 0 : 1);
-            else
-                BigOverheatMeter.SetValue(_secondaryHeat);
-
-            if (_isPrimaryOverheat)
-                SmallOverheatMeter.SetValue((int)(Time.time / OverheatFlashRate) % 2 == 0 ? 0 : 1);
-            else
-                SmallOverheatMeter.SetValue(_primaryHeat);
-        }
-        UtilityOverheatMeter.SetValue(0);
-
         // set proper weapon sprite animation
         WeaponAnimator.runtimeAnimatorController = _isprimaryEquipped ? PrimaryAnimator : SecondaryAnimator;
 
@@ -331,7 +298,6 @@ public class PlayerController : MonoBehaviour
         // update flame values
         _flameIntensity -= FlameDecayRate * Time.deltaTime;
         _flameIntensity = Mathf.Clamp(_flameIntensity, 0, MAX_FLAME); // clamp within range
-        FlameMeter.SetValue(_flameIntensity / MAX_FLAME);
 
         // Update candle light
         CandleLight.pointLightOuterRadius = Mathf.Lerp(MinCandlelightRange, MaxCandlelightRange, _flameIntensity / MAX_FLAME);
@@ -373,6 +339,53 @@ public class PlayerController : MonoBehaviour
     }
 
     public int GetHP() { return _hp; }
+
+    /// <summary>
+    /// returns 0 (min) to 1 (max)
+    /// </summary>
+    public float GetFlame() { return Mathf.Clamp(_flameIntensity / MAX_FLAME, 0, 1); }
+
+    /// <summary>
+    /// returns 0 (min) to 1 (max)
+    /// </summary>
+    public float GetEquippedOverheat()
+    {
+        if (_isprimaryEquipped)
+        {
+            if (_isPrimaryOverheat)
+                return (int)(Time.time / OverheatFlashRate) % 2 == 0 ? 0f : 1f;
+            else
+                return Mathf.Clamp(_primaryHeat, 0, 1);
+        }
+        else
+        {
+            if (_isSecondaryOverheat)
+                return (int)(Time.time / OverheatFlashRate) % 2 == 0 ? 0f : 1f;
+            else
+                return Mathf.Clamp(_secondaryHeat, 0, 1);
+        }
+    }
+
+    /// <summary>
+    /// returns 0 (min) to 1 (max)
+    /// </summary>
+    public float GetUnequippedOverheat()
+    {
+        if (_isprimaryEquipped)
+        {
+            if (_isSecondaryOverheat)
+                return (int)(Time.time / OverheatFlashRate) % 2 == 0 ? 0f : 1f;
+            else
+                return Mathf.Clamp(_secondaryHeat, 0, 1);
+        }
+        else
+        {
+            if (_isPrimaryOverheat)
+                return (int)(Time.time / OverheatFlashRate) % 2 == 0 ? 0f : 1f;
+            else
+                return Mathf.Clamp(_primaryHeat, 0, 1);
+        }
+    }
 
     public enum Primary
     {

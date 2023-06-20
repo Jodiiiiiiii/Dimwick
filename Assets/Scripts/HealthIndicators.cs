@@ -43,7 +43,5 @@ public class HealthIndicators : MonoBehaviour
             _currentHearts--;
             hearts[_currentHearts].SetActive(false);
         }
-
-        
     }
 }

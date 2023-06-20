@@ -61,6 +61,13 @@ public class PlayerController : MonoBehaviour
     public float HeatPer_RapidFlare = 0.05f;
     public float SpreadAngle_RapidFlare = 15f;
 
+    [Header("Primary - FlareBurst")]
+    public GameObject Bullet_FlareBurst;
+    public float Cooldown_FlareBurst = 0.5f;
+    public float HeatPer_FlareBurst = 0.4f;
+    public float SpreadAngle_FlareBurst = 15f;
+    public int BulletCount_FlareBurst = 10;
+
     [Header("Secondary - FlameGun")]
     public GameObject Bullet_FlameGun;
     public float Cooldown_FlameGun = 0.5f;
@@ -217,6 +224,15 @@ public class PlayerController : MonoBehaviour
                     }
                     break;
                 case Primary.FlareBurst:
+                    _primaryCooldown = Cooldown_FlareBurst;
+                    _primaryHeatPer = HeatPer_FlareBurst;
+
+                    if(isFireReady)
+                    {
+                        for(int i = 0; i < BulletCount_FlareBurst; i++)
+                            Instantiate(Bullet_FlareBurst, WeaponSprite.transform.position,
+                                Quaternion.Euler(0, 0, facingAngle + 90 + Random.Range(-SpreadAngle_FlareBurst, SpreadAngle_FlareBurst)));
+                    }
                     break;
                 case Primary.None:
                     break;
@@ -405,5 +421,11 @@ public class PlayerController : MonoBehaviour
                 return Mathf.Clamp(_primaryHeat, 0, 1);
         }
     }
+
+    public bool IsPrimaryEquipped() { return _isprimaryEquipped; }
+
+    public Primary GetPrimary() { return primary; }
+
+    public Secondary GetSecondary() { return secondary; }
     #endregion
 }

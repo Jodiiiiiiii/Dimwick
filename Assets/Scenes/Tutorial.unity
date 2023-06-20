@@ -32676,8 +32676,13 @@ MonoBehaviour:
   Cooldown_RapidFlare: 0.15
   HeatPer_RapidFlare: 0.075
   SpreadAngle_RapidFlare: 14
+  Bullet_FlareBurst: {fileID: 9221771718114101272, guid: c0df8cedb21d93748aecf5eecf6a44a9, type: 3}
+  Cooldown_FlareBurst: 0.6
+  HeatPer_FlareBurst: 0.35
+  SpreadAngle_FlareBurst: 10
+  BulletCount_FlareBurst: 10
   Bullet_FlameGun: {fileID: 9221771718114101272, guid: 6819c162b8feb8a4eb7c1f11984bfc11, type: 3}
-  Cooldown_FlameGun: 0.5
+  Cooldown_FlameGun: 0.4
   HeatPer_FlameGun: 0.2
   SpreadAngle_FlameGun: 3
   rb: {fileID: 0}

@@ -115,6 +115,8 @@ public class PlayerController : MonoBehaviour
         // update facing direction (mouse inputs)
         _facing = ((Vector2)cam.ScreenToWorldPoint(Input.mousePosition) - (Vector2)AimPivot.transform.position).normalized;
         float facingAngle = Vector2.SignedAngle(Vector2.up, _facing);
+        // Set weapon rotation
+        AimPivot.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, facingAngle + 90);
 
         // Handle movement direction input
         switch (InputHelper.GetOctoDirectionHeld())
@@ -147,6 +149,9 @@ public class PlayerController : MonoBehaviour
                 _targetVelocity = Vector2.zero;
                 break;
         }
+
+        // update velocity based on target and current velocities
+        rb.velocity = Vector2.Lerp(rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
         #endregion
 
         #region ATTACKING
@@ -262,39 +267,13 @@ public class PlayerController : MonoBehaviour
         }
 
         // Utility Ability Handling (nothing for now)
-        #endregion
 
-        // set proper weapon sprite animation
-        WeaponAnimator.runtimeAnimatorController = _isprimaryEquipped ? PrimaryAnimator : SecondaryAnimator;
-
-        // Primary/secondary swap
+        // Primary/secondary equipped swap
         if (InputHelper.GetRightClickDown())
             _isprimaryEquipped = !_isprimaryEquipped;
+        #endregion
 
-        // update velocity based on target and current velocities
-        rb.velocity = Vector2.Lerp(rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
-
-        // update sitting state
-        if (rb.velocity.magnitude < SIT_SPEED_THRESHOLD && InputHelper.GetOctoDirectionHeld() == InputHelper.OctoDirection.None)
-            _isSitting = true;
-        else
-            _isSitting = false;
-        // sutting animator state
-        animator.SetBool("sit", _isSitting);
-
-        // Weapon rotation
-        AimPivot.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, facingAngle + 90);
-
-        // direction animator state
-        if (facingAngle >= 45f && facingAngle <= 135f)
-            animator.SetInteger("direction", LEFT_DIRECTION);
-        else if (facingAngle >= -45f && facingAngle <= 45f)
-            animator.SetInteger("direction", UP_DIRECTION);
-        else if (facingAngle >= -135f && facingAngle < -45f)
-            animator.SetInteger("direction", RIGHT_DIRECTION);
-        else
-            animator.SetInteger("direction", DOWN_DIRECTION);
-
+        #region LIGHTING
         // update flame values
         _flameIntensity -= FlameDecayRate * Time.deltaTime;
         _flameIntensity = Mathf.Clamp(_flameIntensity, 0, MAX_FLAME); // clamp within range
@@ -330,6 +309,30 @@ public class PlayerController : MonoBehaviour
             // visible in front of player
             WeaponSprite.sortingLayerName = "Player_InFront";
         }
+        #endregion
+
+        #region ANIMATION
+        // set proper weapon sprite animation
+        WeaponAnimator.runtimeAnimatorController = _isprimaryEquipped ? PrimaryAnimator : SecondaryAnimator;
+
+        // update sitting state
+        if (rb.velocity.magnitude < SIT_SPEED_THRESHOLD && InputHelper.GetOctoDirectionHeld() == InputHelper.OctoDirection.None)
+            _isSitting = true;
+        else
+            _isSitting = false;
+        // sutting animator state
+        animator.SetBool("sit", _isSitting);
+
+        // direction animator state
+        if (facingAngle >= 45f && facingAngle <= 135f)
+            animator.SetInteger("direction", LEFT_DIRECTION);
+        else if (facingAngle >= -45f && facingAngle <= 45f)
+            animator.SetInteger("direction", UP_DIRECTION);
+        else if (facingAngle >= -135f && facingAngle < -45f)
+            animator.SetInteger("direction", RIGHT_DIRECTION);
+        else
+            animator.SetInteger("direction", DOWN_DIRECTION);
+        #endregion
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -338,6 +341,22 @@ public class PlayerController : MonoBehaviour
             _flameIntensity += FlameRegenRate * Time.deltaTime;
     }
 
+    public enum Primary
+    {
+        None, RapidFlare, FlareBurst
+    }
+
+    public enum Secondary
+    {
+        None, FlameGun, FlameSlash
+    }
+
+    public enum Utility
+    {
+        None, LightBlast, LightBlink
+    }
+
+    #region PUBLIC_GETTERS
     public int GetHP() { return _hp; }
 
     /// <summary>
@@ -386,19 +405,5 @@ public class PlayerController : MonoBehaviour
                 return Mathf.Clamp(_primaryHeat, 0, 1);
         }
     }
-
-    public enum Primary
-    {
-        None, RapidFlare, FlareBurst
-    }
-
-    public enum Secondary
-    {
-        None, FlameGun, FlameSlash
-    }
-
-    public enum Utility
-    {
-        None, LightBlast, LightBlink
-    }
+    #endregion
 }

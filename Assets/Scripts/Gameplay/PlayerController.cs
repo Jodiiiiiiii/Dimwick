@@ -74,6 +74,15 @@ public class PlayerController : MonoBehaviour
     public float HeatPer_FlameGun = 0.2f;
     public float SpreadAngle_FlameGun = 5f;
 
+    [Header("Secondary - FlameSlash")]
+    public GameObject Bullet_FlameSlash;
+    public float Cooldown_FlameSlash = 0.5f;
+    public float HeatPer_FlameSlash = 0.4f;
+    [Tooltip("distance from player origin that flame slash originates")]
+    public float Displacement_FlameSlash = 1.0f;
+    [Tooltip("additional angle to rotate slash by relative to player origin")]
+    public float AngleOffset_FlameSlash = 10f;
+
     // components
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;
@@ -253,6 +262,14 @@ public class PlayerController : MonoBehaviour
                     }
                     break;
                 case Secondary.FlameSlash:
+                    _secondaryCooldown = Cooldown_FlameSlash;
+                    _secondaryHeatPer = HeatPer_FlameSlash;
+
+                    if(isFireReady)
+                    {
+                        Instantiate(Bullet_FlameSlash, WeaponSprite.transform.position + Displacement_FlameSlash * new Vector3(_facing.x, _facing.y, 0),
+                            Quaternion.Euler(0, 0, facingAngle + 90 + AngleOffset_FlameSlash));
+                    }
                     break;
                 case Secondary.None:
                     break;

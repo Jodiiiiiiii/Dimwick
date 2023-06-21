@@ -32667,7 +32667,7 @@ MonoBehaviour:
   PrimaryAnimator: {fileID: 9100000, guid: 8fe968775dbd39246afc96e912aebbd0, type: 2}
   SecondaryAnimator: {fileID: 9100000, guid: d5cd67b2b7455b9419e5988bd53596c0, type: 2}
   primary: 2
-  secondary: 1
+  secondary: 2
   utility: 0
   OverheatDuration: 5
   HeatDecayRate: 0.25
@@ -32685,6 +32685,11 @@ MonoBehaviour:
   Cooldown_FlameGun: 0.4
   HeatPer_FlameGun: 0.2
   SpreadAngle_FlameGun: 3
+  Bullet_FlameSlash: {fileID: 9221771718114101272, guid: 80bd479c93b8f1c4e9bc20179a8babce, type: 3}
+  Cooldown_FlameSlash: 1
+  HeatPer_FlameSlash: 0.6
+  Displacement_FlameSlash: 1.3
+  AngleOffset_FlameSlash: -10
   rb: {fileID: 0}
   animator: {fileID: 0}
 --- !u!95 &847306873

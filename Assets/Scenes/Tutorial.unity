@@ -39252,7 +39252,7 @@ MonoBehaviour:
   RapidFlare: {fileID: 21300000, guid: 5ab6007f1de65e54a846d850cc4c51f5, type: 3}
   FlareBurst: {fileID: 21300000, guid: 1165581ba64e99e46a6b1ada7c2209f4, type: 3}
   FlameGun: {fileID: 21300000, guid: af6201c72c40d444e8f7e09985bb248b, type: 3}
-  FlameSlash: {fileID: 21300000, guid: 70c2488e69077e24fbb92cb98ab29c9d, type: 3}
+  FlameSlash: {fileID: 21300000, guid: 11d3f97593fc04c4c84ea71eea12959f, type: 3}
 --- !u!1001 &1608135772
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39973,7 +39973,7 @@ MonoBehaviour:
   RapidFlare: {fileID: 21300000, guid: 5f3761a7638dde043bf677865a5501b4, type: 3}
   FlareBurst: {fileID: 21300000, guid: 0efed6b1781f53c4bbb0a38ab89e9393, type: 3}
   FlameGun: {fileID: 21300000, guid: 8783c68b48d31f344bc5a8c8d439db49, type: 3}
-  FlameSlash: {fileID: 21300000, guid: 95b2497ca8f74414abe44671b6b4655e, type: 3}
+  FlameSlash: {fileID: 21300000, guid: 1ee53a0fc7ad6e747a4ec019bba70973, type: 3}
 --- !u!1 &1907245024
 GameObject:
   m_ObjectHideFlags: 0

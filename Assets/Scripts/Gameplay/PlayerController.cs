@@ -366,6 +366,24 @@ public class PlayerController : MonoBehaviour
         else
             animator.SetInteger("direction", DOWN_DIRECTION);
         #endregion
+
+        #region DEBUG_CONTROLS
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (primary == Primary.FlareBurst)
+                primary = Primary.RapidFlare;
+            else
+                primary = Primary.FlareBurst;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (secondary == Secondary.FlameGun)
+                secondary = Secondary.FlameSlash;
+            else
+                secondary = Secondary.FlameGun;
+        }    
+        #endregion
     }
 
     private void OnTriggerStay2D(Collider2D collision)

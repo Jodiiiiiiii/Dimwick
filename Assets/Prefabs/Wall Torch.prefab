@@ -49,7 +49,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 1
   m_Color: {r: 0.8301887, g: 0.4922357, b: 0.254539, a: 1}
-  m_Intensity: 0.3
+  m_Intensity: 0.5
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 0000000075e7a32215891ea765ad872aabaf62570bb116583d9051655797d49d112b4a0d63a909c4
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 10
+  m_PointLightOuterRadius: 15
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -121,6 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6140520521655104399}
   - component: {fileID: 4459160022757743620}
+  - component: {fileID: 8268736603772655361}
   m_Layer: 0
   m_Name: Wall Torch
   m_TagString: Untagged
@@ -137,7 +138,7 @@ Transform:
   m_GameObject: {fileID: 7072434203628208720}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -23.028, y: 5.978, z: 0}
-  m_LocalScale: {x: 0.253681, y: 0.5684728, z: 0.5684728}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1576149001922632873}
@@ -185,8 +186,8 @@ SpriteRenderer:
   m_SortingLayerID: 1466085291
   m_SortingLayer: 4
   m_SortingOrder: 5
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.95709896, b: 0, a: 1}
+  m_Sprite: {fileID: -1072634416, guid: 68a3dcfbd18785b4db3636b7776b2bbd, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -196,3 +197,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8268736603772655361
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7072434203628208720}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0c93167074577b14c89c3e91aa718ba9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

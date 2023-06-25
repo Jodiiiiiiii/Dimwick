@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4818026726441247469
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1576149001922632873, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.114
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459160022757743620, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1536535922, guid: 5536e6ee17f0fe84387205e5ec17ef5d, type: 3}
+    - target: {fileID: 6140520521655104399, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140520521655104399, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140520521655104399, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140520521655104399, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -742.5517
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140520521655104399, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140520521655104399, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140520521655104399, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140520521655104399, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140520521655104399, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140520521655104399, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140520521655104399, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072434203628208720, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_Name
+      value: Floor Torch Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8268736603772655361, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5dcb9becdccaebc428722d2c2dd04b4f, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}

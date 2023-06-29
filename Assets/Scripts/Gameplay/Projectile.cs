@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class PlayerProjectile : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     [Header("Motion")]
     public float MaxSpeed = 1f;
@@ -18,6 +18,9 @@ public class PlayerProjectile : MonoBehaviour
 
     [Header("Misc")]
     public float Lifespan = 5f;
+    public bool DestroyOnCollision = false;
+    public float HitstunTime = 2f;
+    public float KnockbackSpeed = 1f;
 
     // private variables
     private Rigidbody2D _rb;
@@ -52,5 +55,10 @@ public class PlayerProjectile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         _stopped = true;
+
+        // if destroy on collision or opposite projectiles collided
+        if (DestroyOnCollision || ((gameObject.CompareTag("PlayerBullet") && collision.collider.CompareTag("EnemyBullet")) 
+            || (gameObject.CompareTag("EnemyBullet") && collision.collider.CompareTag("PlayerBullet"))))
+            Destroy(gameObject);
     }
 }

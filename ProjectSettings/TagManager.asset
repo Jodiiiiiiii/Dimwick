@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Campfire
+  - EnemyBullet
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX
@@ -13,11 +15,11 @@ TagManager:
   - Water
   - UI
   - Walls
-  - Bullets
-  - 
-  - 
-  - 
-  - 
+  - PlayerBullet
+  - Player
+  - Edges
+  - EnemyBullet
+  - Enemy
   - 
   - 
   - 
@@ -56,6 +58,9 @@ TagManager:
     locked: 0
   - name: Projectiles
     uniqueID: 1477882123
+    locked: 0
+  - name: Dark Projectiles
+    uniqueID: 4059062755
     locked: 0
   - name: Player_Behind
     uniqueID: 3288967523

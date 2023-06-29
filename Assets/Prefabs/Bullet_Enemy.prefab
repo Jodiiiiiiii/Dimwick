@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9221771717792645840}
   - component: {fileID: 9221771717792645841}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,9 +125,9 @@ GameObject:
   - component: {fileID: 9221771718114101277}
   - component: {fileID: 9221771718114101276}
   - component: {fileID: -4305271094723904223}
-  m_Layer: 7
-  m_Name: Bullet_FlameGun
-  m_TagString: PlayerBullet
+  m_Layer: 10
+  m_Name: Bullet_Enemy
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,7 +141,7 @@ Transform:
   m_GameObject: {fileID: 9221771718114101272}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.009, y: 0.009, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_LocalScale: {x: 0.46, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9221771717792645840}
@@ -186,10 +186,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1477882123
-  m_SortingLayer: 5
+  m_SortingLayerID: -235904541
+  m_SortingLayer: 6
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1937558837, guid: 9a8a0dfeb0d4962459488e21daa7d57d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 510196ca4316b7c4e9301294ca37263c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -210,7 +210,7 @@ Animator:
   m_GameObject: {fileID: 9221771718114101272}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d5cd67b2b7455b9419e5988bd53596c0, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -254,17 +254,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4c5cfe8efa6bd4f9a0187b807903c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxSpeed: 15
+  MaxSpeed: 5
   MinSpeed: 5
   Light: {fileID: 9221771717792645841}
-  MaxLightIntensity: 0.5
-  MinLightIntensity: 0
-  MaxLightRange: 10
-  MinLightRange: 0
+  MaxLightIntensity: -5
+  MinLightIntensity: -5
+  MaxLightRange: 1.5
+  MinLightRange: 1.5
   Lifespan: 10
-  DestroyOnCollision: 0
-  HitstunTime: 2
-  KnockbackSpeed: 1
+  DestroyOnCollision: 1
+  HitstunTime: 0.4
+  KnockbackSpeed: 6
 --- !u!61 &-4305271094723904223
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -278,16 +278,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.014242604, y: -0.014689624}
+  m_Offset: {x: 0.00059098005, y: 0.00728935}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7237724, y: 0.46913737}
+  m_Size: {x: 2.0070171, y: 1.4424924}
   m_EdgeRadius: 0

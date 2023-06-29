@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
+public enum CharacterState
+{
+    Default,
+    Hitstun
+}
+
 public class PlayerController : MonoBehaviour
 {
     // constants
@@ -87,12 +93,18 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;
 
+    public CharacterState CurrentCharacterState { get; private set; } = CharacterState.Default;
+
     // private variables
     private Vector2 _targetVelocity = Vector2.zero;
     private Vector2 _facing = Vector2.right;
+    private float _facingAngle = 0;
     private bool _isSitting = true;
     private float _flameIntensity = MAX_FLAME;
     private int _hp = MAX_HP;
+    // Hitstun
+    private bool _isHitStunned = false;
+    private float _hitStunTimer = 0f;
     // Primary weapons
     private bool _isprimaryEquipped = true;
     private float _primaryCooldownTimer = 0f;
@@ -124,187 +136,241 @@ public class PlayerController : MonoBehaviour
         WeaponAnimator.runtimeAnimatorController = PrimaryAnimator;
     }
 
+    #region CHARACTER STATES
+    public void TransitionToState(CharacterState newState)
+    {
+        CharacterState tmpInitialState = CurrentCharacterState;
+        OnStateExit(tmpInitialState, newState);
+        CurrentCharacterState = newState;
+        OnStateEnter(newState, tmpInitialState);
+    }
+
+    public void OnStateEnter(CharacterState state, CharacterState fromState)
+    {
+        switch(state)
+        {
+            case CharacterState.Default:
+                break;
+            case CharacterState.Hitstun:
+                _isHitStunned = true;
+                break;
+        }
+    }
+
+    public void OnStateExit(CharacterState state, CharacterState toState)
+    {
+        switch(state)
+        {
+            case CharacterState.Default:
+                break;
+            case CharacterState.Hitstun:
+                _isHitStunned = false;
+                break;
+        }
+    }
+    #endregion
+
     // Update is called once per frame
     void Update()
     {
-        #region MOVEMENT_INPUTS
-        // update facing direction (mouse inputs)
-        _facing = ((Vector2)cam.ScreenToWorldPoint(Input.mousePosition) - (Vector2)AimPivot.transform.position).normalized;
-        float facingAngle = Vector2.SignedAngle(Vector2.up, _facing);
-        // Set weapon rotation
-        AimPivot.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, facingAngle + 90);
-
-        // Handle movement direction input
-        switch (InputHelper.GetOctoDirectionHeld())
+        switch (CurrentCharacterState)
         {
-            case InputHelper.OctoDirection.Up:
-                _targetVelocity = Vector2.up * MaxWalkSpeed;
-                break;
-            case InputHelper.OctoDirection.Right:
-                _targetVelocity = Vector2.right * MaxWalkSpeed;
-                break;
-            case InputHelper.OctoDirection.Down:
-                _targetVelocity = Vector2.down * MaxWalkSpeed;
-                break;
-            case InputHelper.OctoDirection.Left:
-                _targetVelocity = Vector2.left * MaxWalkSpeed;
-                break;
-            case InputHelper.OctoDirection.UpRight:
-                _targetVelocity = (Vector2.up + Vector2.right).normalized * MaxWalkSpeed;
-                break;
-            case InputHelper.OctoDirection.DownRight:
-                _targetVelocity = (Vector2.down + Vector2.right).normalized * MaxWalkSpeed;
-                break;
-            case InputHelper.OctoDirection.DownLeft:
-                _targetVelocity = (Vector2.down + Vector2.left).normalized * MaxWalkSpeed;
-                break;
-            case InputHelper.OctoDirection.UpLeft:
-                _targetVelocity = (Vector2.up + Vector2.left).normalized * MaxWalkSpeed;
-                break;
-            case InputHelper.OctoDirection.None:
-                _targetVelocity = Vector2.zero;
-                break;
-        }
+            case CharacterState.Default:
 
-        // update velocity based on target and current velocities
-        rb.velocity = Vector2.Lerp(rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
-        #endregion
+                #region MOVEMENT_INPUTS
+                // update facing direction (mouse inputs)
+                _facing = ((Vector2)cam.ScreenToWorldPoint(Input.mousePosition) - (Vector2)AimPivot.transform.position).normalized;
+                _facingAngle = Vector2.SignedAngle(Vector2.up, _facing);
+                // Set weapon rotation
+                AimPivot.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, _facingAngle + 90);
 
-        #region ATTACKING
-        // update attack cooldown timers
-        _primaryCooldownTimer += Time.deltaTime;
-        _secondaryCooldownTimer += Time.deltaTime;
-
-        // heat decay over time
-        _primaryHeat = Mathf.Clamp(_primaryHeat - HeatDecayRate * Time.deltaTime, 0, 1);
-        _secondaryHeat = Mathf.Clamp(_secondaryHeat - HeatDecayRate * Time.deltaTime, 0, 1);
-
-        // Check for attack input
-        bool isFireReady = false;
-        if (InputHelper.GetLeftClick())
-        {
-            if(_isprimaryEquipped && _primaryCooldownTimer > _primaryCooldown && !_isPrimaryOverheat)
-            {
-                // restart cooldown for next shot
-                _primaryCooldownTimer = 0;
-                // increment heat
-                _primaryHeat += _primaryHeatPer;
-                if (_primaryHeat > 1) // enter overheat state
+                // Handle movement direction input
+                switch (InputHelper.GetOctoDirectionHeld())
                 {
-                    _primaryHeat = 1;
-                    _isPrimaryOverheat = true;
-                    // start overheat timer
-                    _primaryOverheatTimer = 0f;
+                    case InputHelper.OctoDirection.Up:
+                        _targetVelocity = Vector2.up * MaxWalkSpeed;
+                        break;
+                    case InputHelper.OctoDirection.Right:
+                        _targetVelocity = Vector2.right * MaxWalkSpeed;
+                        break;
+                    case InputHelper.OctoDirection.Down:
+                        _targetVelocity = Vector2.down * MaxWalkSpeed;
+                        break;
+                    case InputHelper.OctoDirection.Left:
+                        _targetVelocity = Vector2.left * MaxWalkSpeed;
+                        break;
+                    case InputHelper.OctoDirection.UpRight:
+                        _targetVelocity = (Vector2.up + Vector2.right).normalized * MaxWalkSpeed;
+                        break;
+                    case InputHelper.OctoDirection.DownRight:
+                        _targetVelocity = (Vector2.down + Vector2.right).normalized * MaxWalkSpeed;
+                        break;
+                    case InputHelper.OctoDirection.DownLeft:
+                        _targetVelocity = (Vector2.down + Vector2.left).normalized * MaxWalkSpeed;
+                        break;
+                    case InputHelper.OctoDirection.UpLeft:
+                        _targetVelocity = (Vector2.up + Vector2.left).normalized * MaxWalkSpeed;
+                        break;
+                    case InputHelper.OctoDirection.None:
+                        _targetVelocity = Vector2.zero;
+                        break;
                 }
 
-                isFireReady = true;
-            }
-            else if (!_isprimaryEquipped && _secondaryCooldownTimer > _secondaryCooldown && !_isSecondaryOverheat)
-            {
-                // restart cooldown for next shot
-                _secondaryCooldownTimer = 0;
-                // increment heat
-                _secondaryHeat += _secondaryHeatPer;
-                if (_secondaryHeat > 1) // enter overheat state
+                // update velocity based on target and current velocities
+                rb.velocity = Vector2.Lerp(rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
+                #endregion
+
+                #region ATTACKING
+                // update attack cooldown timers
+                _primaryCooldownTimer += Time.deltaTime;
+                _secondaryCooldownTimer += Time.deltaTime;
+
+                // heat decay over time
+                _primaryHeat = Mathf.Clamp(_primaryHeat - HeatDecayRate * Time.deltaTime, 0, 1);
+                _secondaryHeat = Mathf.Clamp(_secondaryHeat - HeatDecayRate * Time.deltaTime, 0, 1);
+
+                // Check for attack input
+                bool isFireReady = false;
+                if (InputHelper.GetLeftClick())
                 {
-                    _secondaryHeat = 1;
-                    _isSecondaryOverheat = true;
-                    // start overheat timer
-                    _secondaryOverheatTimer = 0f;
+                    if (_isprimaryEquipped && _primaryCooldownTimer > _primaryCooldown && !_isPrimaryOverheat)
+                    {
+                        // restart cooldown for next shot
+                        _primaryCooldownTimer = 0;
+                        // increment heat
+                        _primaryHeat += _primaryHeatPer;
+                        if (_primaryHeat > 1) // enter overheat state
+                        {
+                            _primaryHeat = 1;
+                            _isPrimaryOverheat = true;
+                            // start overheat timer
+                            _primaryOverheatTimer = 0f;
+                        }
+
+                        isFireReady = true;
+                    }
+                    else if (!_isprimaryEquipped && _secondaryCooldownTimer > _secondaryCooldown && !_isSecondaryOverheat)
+                    {
+                        // restart cooldown for next shot
+                        _secondaryCooldownTimer = 0;
+                        // increment heat
+                        _secondaryHeat += _secondaryHeatPer;
+                        if (_secondaryHeat > 1) // enter overheat state
+                        {
+                            _secondaryHeat = 1;
+                            _isSecondaryOverheat = true;
+                            // start overheat timer
+                            _secondaryOverheatTimer = 0f;
+                        }
+
+                        isFireReady = true;
+                    }
                 }
 
-                isFireReady = true;
-            }
-        }
-
-        // Create projectiles and sets weapon cooldown/heatPer stats
-        if(_isprimaryEquipped)
-        {
-            switch (primary)
-            {
-                case Primary.RapidFlare:
-                    _primaryCooldown = Cooldown_RapidFlare;
-                    _primaryHeatPer = HeatPer_RapidFlare;
-
-                    if (isFireReady)
+                // Create projectiles and sets weapon cooldown/heatPer stats
+                if (_isprimaryEquipped)
+                {
+                    switch (primary)
                     {
-                        Instantiate(Bullet_RapidFlare, WeaponSprite.transform.position,
-                            Quaternion.Euler(0, 0, facingAngle + 90 + Random.Range(-SpreadAngle_RapidFlare, SpreadAngle_RapidFlare)));
-                    }
-                    break;
-                case Primary.FlareBurst:
-                    _primaryCooldown = Cooldown_FlareBurst;
-                    _primaryHeatPer = HeatPer_FlareBurst;
+                        case Primary.RapidFlare:
+                            _primaryCooldown = Cooldown_RapidFlare;
+                            _primaryHeatPer = HeatPer_RapidFlare;
 
-                    if(isFireReady)
+                            if (isFireReady)
+                            {
+                                Instantiate(Bullet_RapidFlare, WeaponSprite.transform.position,
+                                    Quaternion.Euler(0, 0, _facingAngle + 90 + Random.Range(-SpreadAngle_RapidFlare, SpreadAngle_RapidFlare)));
+                            }
+                            break;
+                        case Primary.FlareBurst:
+                            _primaryCooldown = Cooldown_FlareBurst;
+                            _primaryHeatPer = HeatPer_FlareBurst;
+
+                            if (isFireReady)
+                            {
+                                for (int i = 0; i < BulletCount_FlareBurst; i++)
+                                    Instantiate(Bullet_FlareBurst, WeaponSprite.transform.position,
+                                        Quaternion.Euler(0, 0, _facingAngle + 90 + Random.Range(-SpreadAngle_FlareBurst, SpreadAngle_FlareBurst)));
+                            }
+                            break;
+                        case Primary.None:
+                            break;
+                    }
+                }
+                else // secondary
+                {
+                    switch (secondary)
                     {
-                        for(int i = 0; i < BulletCount_FlareBurst; i++)
-                            Instantiate(Bullet_FlareBurst, WeaponSprite.transform.position,
-                                Quaternion.Euler(0, 0, facingAngle + 90 + Random.Range(-SpreadAngle_FlareBurst, SpreadAngle_FlareBurst)));
-                    }
-                    break;
-                case Primary.None:
-                    break;
-            }
-        }
-        else // secondary
-        {
-            switch (secondary)
-            {
-                case Secondary.FlameGun:
-                    _secondaryCooldown = Cooldown_FlameGun;
-                    _secondaryHeatPer = HeatPer_FlameGun;
+                        case Secondary.FlameGun:
+                            _secondaryCooldown = Cooldown_FlameGun;
+                            _secondaryHeatPer = HeatPer_FlameGun;
 
-                    if(isFireReady)
+                            if (isFireReady)
+                            {
+                                Instantiate(Bullet_FlameGun, WeaponSprite.transform.position,
+                                    Quaternion.Euler(0, 0, _facingAngle + 90 + Random.Range(-SpreadAngle_FlameGun, SpreadAngle_FlameGun)));
+                            }
+                            break;
+                        case Secondary.FlameSlash:
+                            _secondaryCooldown = Cooldown_FlameSlash;
+                            _secondaryHeatPer = HeatPer_FlameSlash;
+
+                            if (isFireReady)
+                            {
+                                Instantiate(Bullet_FlameSlash, WeaponSprite.transform.position + Displacement_FlameSlash * new Vector3(_facing.x, _facing.y, 0),
+                                    Quaternion.Euler(0, 0, _facingAngle + 90 + AngleOffset_FlameSlash));
+                            }
+                            break;
+                        case Secondary.None:
+                            break;
+                    }
+                }
+
+                // handle primary overheat state
+                if (_isPrimaryOverheat)
+                {
+                    if (_primaryOverheatTimer > OverheatDuration)
                     {
-                        Instantiate(Bullet_FlameGun, WeaponSprite.transform.position,
-                            Quaternion.Euler(0, 0, facingAngle + 90 + Random.Range(-SpreadAngle_FlameGun, SpreadAngle_FlameGun)));
+                        _isPrimaryOverheat = false;
+                        _primaryHeat = 0;
                     }
-                    break;
-                case Secondary.FlameSlash:
-                    _secondaryCooldown = Cooldown_FlameSlash;
-                    _secondaryHeatPer = HeatPer_FlameSlash;
-
-                    if(isFireReady)
+                    else
+                        _primaryOverheatTimer += Time.deltaTime;
+                }
+                // handle secondary overheat state
+                if (_isSecondaryOverheat)
+                {
+                    if (_secondaryOverheatTimer > OverheatDuration)
                     {
-                        Instantiate(Bullet_FlameSlash, WeaponSprite.transform.position + Displacement_FlameSlash * new Vector3(_facing.x, _facing.y, 0),
-                            Quaternion.Euler(0, 0, facingAngle + 90 + AngleOffset_FlameSlash));
+                        _isSecondaryOverheat = false;
+                        _secondaryHeat = 0;
                     }
-                    break;
-                case Secondary.None:
-                    break;
-            }
-        }
+                    else
+                        _secondaryOverheatTimer += Time.deltaTime;
+                }
 
-        // handle primary overheat state
-        if(_isPrimaryOverheat)
-        {
-            if (_primaryOverheatTimer > OverheatDuration)
-            {
-                _isPrimaryOverheat = false;
-                _primaryHeat = 0;
-            }
-            else
-                _primaryOverheatTimer += Time.deltaTime;
-        }
-        // handle secondary overheat state
-        if(_isSecondaryOverheat)
-        {
-            if (_secondaryOverheatTimer > OverheatDuration)
-            {
-                _isSecondaryOverheat = false;
-                _secondaryHeat = 0;
-            }
-            else
-                _secondaryOverheatTimer += Time.deltaTime;
-        }
+                // Utility Ability Handling (nothing for now)
 
-        // Utility Ability Handling (nothing for now)
+                // Primary/secondary equipped swap
+                if (InputHelper.GetRightClickDown())
+                    _isprimaryEquipped = !_isprimaryEquipped;
+                #endregion
 
-        // Primary/secondary equipped swap
-        if (InputHelper.GetRightClickDown())
-            _isprimaryEquipped = !_isprimaryEquipped;
-        #endregion
+                break;
+            case CharacterState.Hitstun:
+                if (_hitStunTimer < 0f) // ends hitstun
+                    TransitionToState(CharacterState.Default);
+                else
+                {
+                    // no controls for movement or attacking
+
+                    // update velocity based on target and current velocities
+                    rb.velocity = Vector2.Lerp(rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
+
+                    _hitStunTimer -= Time.deltaTime;
+                }
+                break;
+        }
 
         #region LIGHTING
         // update flame values
@@ -318,7 +384,7 @@ public class PlayerController : MonoBehaviour
         // update flashlight
         
         // enable proper light depending on facing direction
-        if (facingAngle >= -45f && facingAngle <= 45f) // if facing up
+        if (_facingAngle >= -45f && _facingAngle <= 45f) // if facing up
         {
             // light values
             FlashlightUp.intensity = Mathf.Lerp(MinFlashlightIntensity, MaxFlashlightIntensity, _flameIntensity / MAX_FLAME);
@@ -357,18 +423,21 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("sit", _isSitting);
 
         // direction animator state
-        if (facingAngle >= 45f && facingAngle <= 135f)
+        if (_facingAngle >= 45f && _facingAngle <= 135f)
             animator.SetInteger("direction", LEFT_DIRECTION);
-        else if (facingAngle >= -45f && facingAngle <= 45f)
+        else if (_facingAngle >= -45f && _facingAngle <= 45f)
             animator.SetInteger("direction", UP_DIRECTION);
-        else if (facingAngle >= -135f && facingAngle < -45f)
+        else if (_facingAngle >= -135f && _facingAngle < -45f)
             animator.SetInteger("direction", RIGHT_DIRECTION);
         else
             animator.SetInteger("direction", DOWN_DIRECTION);
+
+        // isStunned state
+        animator.SetBool("isStunned", _isHitStunned);
         #endregion
 
         #region DEBUG_CONTROLS
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (primary == Primary.FlareBurst)
                 primary = Primary.RapidFlare;
@@ -390,6 +459,27 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.CompareTag("Campfire"))
             _flameIntensity += FlameRegenRate * Time.deltaTime;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("EnemyBullet")) // apply damage and hitstun
+        {
+            TransitionToState(CharacterState.Hitstun);
+
+            // decrement health
+            _hp--;
+           
+            collision.gameObject.TryGetComponent<Projectile>(out Projectile projectile);
+            if (projectile != null)
+            {
+                // start hitstun timer
+                _hitStunTimer = projectile.HitstunTime;
+                // set knockback based on bullet rotation and knockback stats
+                _targetVelocity = Quaternion.Euler(0, 0, collision.transform.rotation.eulerAngles.z) * Vector2.right * projectile.KnockbackSpeed;
+            }
+            else
+                Debug.LogError("Invalid enemy projectile collison");
+        }
     }
 
     public enum Primary

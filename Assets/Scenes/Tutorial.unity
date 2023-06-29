@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 126564848}
   - component: {fileID: 126564847}
   - component: {fileID: 126564846}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28828,7 +28828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 285682655}
   - component: {fileID: 285682656}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flashlight (standard)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31787,7 +31787,7 @@ GameObject:
   m_Component:
   - component: {fileID: 585542796}
   - component: {fileID: 585542797}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Candle Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31898,7 +31898,8 @@ GameObject:
   m_Component:
   - component: {fileID: 628268095}
   - component: {fileID: 628268094}
-  m_Layer: 0
+  - component: {fileID: 628268096}
+  m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31965,13 +31966,31 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 628268093}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -35.741917, y: -2.1304922, z: -742.5517}
+  m_LocalPosition: {x: -11.49, y: -3.2, z: -742.5517}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1701455762}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &628268096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628268093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25dcf07649c8ea44499069f55b018a4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProjectilePrefab: {fileID: 9221771718114101272, guid: 536901bb865cf0540891b0de093f1403, type: 3}
+  raycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 320
+  FireRange: 15
+  AttackCooldown: 5
 --- !u!1 &634564111
 GameObject:
   m_ObjectHideFlags: 0
@@ -32322,9 +32341,9 @@ GameObject:
   - component: {fileID: 847306868}
   - component: {fileID: 847306871}
   - component: {fileID: 847306873}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dimwick
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32737,7 +32756,7 @@ GameObject:
   - component: {fileID: 1112908213}
   - component: {fileID: 1112908212}
   - component: {fileID: 1112908211}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Edges Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34000,25 +34019,25 @@ CompositeCollider2D:
       - X: -340000000
         Y: -50000000
     - - X: -400937504
-        Y: 105937504
+        Y: 107187504
       - X: -408437504
-        Y: 105937504
+        Y: 107187504
       - X: -408437504
         Y: 92812496
       - X: -400937504
         Y: 92812496
     - - X: -180937504
-        Y: 95937504
+        Y: 97187504
       - X: -188437504
-        Y: 95937504
+        Y: 97187504
       - X: -188437504
         Y: 82812496
       - X: -180937504
         Y: 82812496
     - - X: -111250000
-        Y: 93750000
+        Y: 95312496
       - X: -118750000
-        Y: 93750000
+        Y: 95312496
       - X: -118750000
         Y: 85000000
       - X: -111250000
@@ -34138,16 +34157,16 @@ CompositeCollider2D:
       - {x: -48, y: 16.468721}
       - {x: -47.999973, y: -5}
     - - {x: -40.09378, y: 9.28125}
-      - {x: -40.09378, y: 10.593751}
-      - {x: -40.84375, y: 10.593721}
+      - {x: -40.09378, y: 10.718751}
+      - {x: -40.84375, y: 10.718721}
       - {x: -40.843723, y: 9.28125}
     - - {x: -18.093779, y: 8.28125}
-      - {x: -18.093779, y: 9.593751}
-      - {x: -18.84375, y: 9.59372}
+      - {x: -18.093779, y: 9.718751}
+      - {x: -18.84375, y: 9.718721}
       - {x: -18.843721, y: 8.28125}
     - - {x: -11.12503, y: 8.5}
-      - {x: -11.12503, y: 9.375}
-      - {x: -11.875, y: 9.37497}
+      - {x: -11.12503, y: 9.53125}
+      - {x: -11.875, y: 9.53122}
       - {x: -11.87497, y: 8.5}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
@@ -38597,7 +38616,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1566718438}
   - component: {fileID: 1566718439}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flashlight (up)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38707,7 +38726,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1573312391}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Aim Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39186,7 +39205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1745757195}
   - component: {fileID: 1745757196}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40059,7 +40078,7 @@ GameObject:
   - component: {fileID: 2068018671}
   - component: {fileID: 2068018670}
   m_Layer: 0
-  m_Name: Enemy (1)
+  m_Name: Enemy (OUTDATED)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: -4305271094723904223}
   m_Layer: 7
   m_Name: Bullet_RapidFlare
-  m_TagString: Untagged
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,6 +262,9 @@ MonoBehaviour:
   MaxLightRange: 5
   MinLightRange: 0
   Lifespan: 5
+  DestroyOnCollision: 0
+  HitstunTime: 2
+  KnockbackSpeed: 1
 --- !u!61 &-4305271094723904223
 BoxCollider2D:
   m_ObjectHideFlags: 0

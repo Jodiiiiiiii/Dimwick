@@ -408,7 +408,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 222964497
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 1038145359, guid: f3275382ae35bb844bf5607434275460, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -31991,6 +31991,7 @@ MonoBehaviour:
     m_Bits: 320
   FireRange: 15
   AttackCooldown: 5
+  SpreadAngle: 5
 --- !u!1 &634564111
 GameObject:
   m_ObjectHideFlags: 0
@@ -32408,7 +32409,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1699844157
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: -817005639, guid: a5565bdf7af4f7e45bc2061ddded933f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -37600,7 +37601,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1647012009
-  m_SortingLayer: 9
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

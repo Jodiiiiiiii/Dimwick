@@ -9,7 +9,6 @@ public class HealthIndicators : MonoBehaviour
 
     // private variables
     private int _currentHP;
-    private int _currentHearts = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -17,13 +16,6 @@ public class HealthIndicators : MonoBehaviour
         player = GameObject.Find("Dimwick").GetComponent<PlayerController>();
 
         _currentHP = player.GetHP();
-         
-        // instantiate new hearts
-        while(_currentHearts < _currentHP)
-        {
-            hearts[_currentHearts].SetActive(true);
-            _currentHearts++;
-        }
     }
 
     // Update is called once per frame
@@ -33,15 +25,11 @@ public class HealthIndicators : MonoBehaviour
         if (_currentHP < 0) _currentHP = 0;
         if (_currentHP > hearts.Length) _currentHP = hearts.Length;
 
-        if (_currentHearts < _currentHP)
+        // iterate through all and set proper ones to active or inactive
+        for(int i = 0; i < hearts.Length; i++)
         {
-            hearts[_currentHearts].SetActive(true);
-            _currentHearts++;
-        }
-        else if (_currentHearts > _currentHP)
-        {
-            _currentHearts--;
-            hearts[_currentHearts].SetActive(false);
+            if (_currentHP > i) hearts[_currentHP].SetActive(true);
+            else hearts[_currentHP].SetActive(false);
         }
     }
 }

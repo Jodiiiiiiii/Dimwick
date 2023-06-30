@@ -16,11 +16,16 @@ public class Projectile : MonoBehaviour
     public float MaxLightRange = 1.0f;
     public float MinLightRange = 0f;
 
-    [Header("Misc")]
-    public float Lifespan = 5f;
+    [Header("Hit Stats")]
     public bool DestroyOnCollision = false;
     public float HitstunTime = 2f;
     public float KnockbackSpeed = 1f;
+    [Tooltip("only matters for player projectiles (since player has discrete health)")]
+    public float Damage = 1f;
+
+    [Header("Misc")]
+    public float Lifespan = 5f;
+    
 
     // private variables
     private Rigidbody2D _rb;

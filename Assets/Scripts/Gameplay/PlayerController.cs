@@ -358,6 +358,8 @@ public class PlayerController : MonoBehaviour
 
                 break;
             case CharacterState.Hitstun:
+
+                #region HITSTUN HANDLING
                 if (_hitStunTimer < 0f) // ends hitstun
                     TransitionToState(CharacterState.Default);
                 else
@@ -369,6 +371,8 @@ public class PlayerController : MonoBehaviour
 
                     _hitStunTimer -= Time.deltaTime;
                 }
+                #endregion
+
                 break;
         }
 
@@ -464,14 +468,13 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("EnemyBullet")) // apply damage and hitstun
         {
-            TransitionToState(CharacterState.Hitstun);
-
-            // decrement health
-            _hp--;
-           
             collision.gameObject.TryGetComponent<Projectile>(out Projectile projectile);
             if (projectile != null)
             {
+                TransitionToState(CharacterState.Hitstun);
+
+                // decrement health
+                _hp--;
                 // start hitstun timer
                 _hitStunTimer = projectile.HitstunTime;
                 // set knockback based on bullet rotation and knockback stats

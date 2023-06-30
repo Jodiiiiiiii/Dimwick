@@ -8,11 +8,13 @@ public enum RangeEnemyState
     Hitstun
 }
 
-public class RangedEnemyController : MonoBehaviour
+public class TurretEnemyController : MonoBehaviour
 {
     [Header("Movement")]
     [Tooltip("rate at which enemy reaches max speed")]
     public float MovementSharpness = 10f;
+    [Tooltip("percentage of knockback that is ignored for turret enemy type")]
+    public float KnockbackReductionFactor = 0.75f;
 
     [Header("Attacking")]
     public GameObject ProjectilePrefab;
@@ -92,7 +94,7 @@ public class RangedEnemyController : MonoBehaviour
             case RangeEnemyState.Default:
 
                 #region MOVEMENT
-                // temp - no movement controls yet
+                // turret enemy does not move freely on its own
                 _targetVelocity = Vector2.zero;
 
                 // update velocity based on target and current velocities
@@ -160,14 +162,18 @@ public class RangedEnemyController : MonoBehaviour
             {
                 TransitionToState(RangeEnemyState.Hitstun);
 
+                // decrement hp
                 _hp -= projectile.Damage;
                 // start hitstun timer
                 _hitStunTimer = projectile.HitstunTime;
+
                 // set knockback based on bullet rotation and knockback stats
-                _targetVelocity = Quaternion.Euler(0, 0, collision.transform.rotation.eulerAngles.z) * Vector2.right * projectile.KnockbackSpeed;
+                Vector2 knockback = Quaternion.Euler(0, 0, collision.transform.rotation.eulerAngles.z) 
+                    * Vector2.right * projectile.KnockbackSpeed * (1 - KnockbackReductionFactor);
+                _targetVelocity += knockback;
             }
             else
-                Debug.LogError("Invalid enemy projectile collison");
+                Debug.LogError("Invalid player projectile collison");
         }
     }
 }

@@ -62,8 +62,9 @@ public class Projectile : MonoBehaviour
         _stopped = true;
 
         // if destroy on collision or opposite projectiles collided
-        if (DestroyOnCollision || ((gameObject.CompareTag("PlayerBullet") && collision.collider.CompareTag("EnemyBullet")) 
-            || (gameObject.CompareTag("EnemyBullet") && collision.collider.CompareTag("PlayerBullet"))))
+        if (DestroyOnCollision 
+            || (gameObject.CompareTag("PlayerBullet") && (collision.collider.CompareTag("EnemyBullet") || collision.collider.CompareTag("Enemy"))) 
+            || (gameObject.CompareTag("EnemyBullet") && collision.collider.CompareTag("PlayerBullet")))
             Destroy(gameObject);
     }
 }

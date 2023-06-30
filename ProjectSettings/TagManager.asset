@@ -7,6 +7,7 @@ TagManager:
   - Campfire
   - EnemyBullet
   - PlayerBullet
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -2963,6 +2963,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Black Fade In
       objectReference: {fileID: 0}
+    - target: {fileID: 3850502111356899646, guid: ad535b6a0e0d3544f841bb3978ae236c, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3850502111356899647, guid: ad535b6a0e0d3544f841bb3978ae236c, type: 3}
       propertyPath: m_RootOrder
       value: 4

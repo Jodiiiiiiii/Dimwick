@@ -35,16 +35,16 @@ public class BigAbility : MonoBehaviour
         // update icon sprite
         if(_player.IsPrimaryEquipped())
         {
-            if (_player.GetPrimary() == PlayerController.Primary.RapidFlare)
+            if (_player.GetPrimary() == Primary.RapidFlare)
                 Icon.sprite = RapidFlare;
-            else if (_player.GetPrimary() == PlayerController.Primary.FlareBurst)
+            else if (_player.GetPrimary() == Primary.FlareBurst)
                 Icon.sprite = FlareBurst;
         }
         else
         {
-            if (_player.GetSecondary() == PlayerController.Secondary.FlameGun)
+            if (_player.GetSecondary() == Secondary.FlameGun)
                 Icon.sprite = FlameGun;
-            else if (_player.GetSecondary() == PlayerController.Secondary.FlameSlash)
+            else if (_player.GetSecondary() == Secondary.FlameSlash)
                 Icon.sprite = FlameSlash;
         }
     }

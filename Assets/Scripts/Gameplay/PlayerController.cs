@@ -10,6 +10,21 @@ public enum CharacterState
     Hitstun
 }
 
+public enum Primary
+{
+    None, RapidFlare, FlareBurst
+}
+
+public enum Secondary
+{
+    None, FlameGun, FlameSlash
+}
+
+public enum Utility
+{
+    None, LightBlast, LightBlink
+}
+
 public class PlayerController : MonoBehaviour
 {
     // constants
@@ -488,21 +503,6 @@ public class PlayerController : MonoBehaviour
             else
                 Debug.LogError("Invalid enemy projectile collison");
         }
-    }
-
-    public enum Primary
-    {
-        None, RapidFlare, FlareBurst
-    }
-
-    public enum Secondary
-    {
-        None, FlameGun, FlameSlash
-    }
-
-    public enum Utility
-    {
-        None, LightBlast, LightBlink
     }
 
     #region PUBLIC_GETTERS

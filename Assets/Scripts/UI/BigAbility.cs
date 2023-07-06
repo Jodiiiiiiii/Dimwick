@@ -12,6 +12,7 @@ public class BigAbility : MonoBehaviour
     [SerializeField] private Sprite FlareBurst;
     [SerializeField] private Sprite FlameGun;
     [SerializeField] private Sprite FlameSlash;
+    [SerializeField] private Sprite None;
 
     private PlayerController _player;
 
@@ -39,6 +40,8 @@ public class BigAbility : MonoBehaviour
                 Icon.sprite = RapidFlare;
             else if (_player.GetPrimary() == Primary.FlareBurst)
                 Icon.sprite = FlareBurst;
+            else
+                Icon.sprite = None;
         }
         else
         {
@@ -46,6 +49,8 @@ public class BigAbility : MonoBehaviour
                 Icon.sprite = FlameGun;
             else if (_player.GetSecondary() == Secondary.FlameSlash)
                 Icon.sprite = FlameSlash;
+            else
+                Icon.sprite = None;
         }
     }
 }

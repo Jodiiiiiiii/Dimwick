@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
+#region PUBLIC ENUMERATIONS
 public enum CharacterState
 {
     Default,
@@ -24,6 +25,7 @@ public enum Utility
 {
     None, LightBlast, LightBlink
 }
+#endregion
 
 public class PlayerController : MonoBehaviour
 {

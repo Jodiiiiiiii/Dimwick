@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 {
     // constants
     private const int MAX_PLAYER_HP = 8;
+    private const float MAX_PLAYER_FLAME = 100;
 
     // instance
     public static GameManager instance;
@@ -97,7 +98,7 @@ public class GameManager : MonoBehaviour
     public void InitializeDefaultPlayerData()
     {
         _data.Health = MAX_PLAYER_HP;
-        _data.Flame = 1; // 1 is max flame
+        _data.Flame = MAX_PLAYER_FLAME; // 1 is max flame
         _data.Primary = Primary.None;
         _data.Secondary = Secondary.None;
         _data.Utility = Utility.None;

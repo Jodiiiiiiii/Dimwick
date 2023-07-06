@@ -69,9 +69,9 @@ public class PlayerController : MonoBehaviour
     public RuntimeAnimatorController SecondaryAnimator;
 
     [Header("Weapons")]
-    public Primary primary = Primary.None;
-    public Secondary secondary = Secondary.None;
-    public Utility utility = Utility.None;
+    public Primary Primary = Primary.None;
+    public Secondary Secondary = Secondary.None;
+    public Utility Utility = Utility.None;
 
     [Header("Overheat")]
     public float OverheatDuration = 5f;
@@ -145,12 +145,19 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
-        // decrement health for tutorial only
-        if(SceneManager.GetActiveScene().name == "Tutorial")
-            _hp--;
-
         // default weapon animator to primary
         WeaponAnimator.runtimeAnimatorController = PrimaryAnimator;
+
+        // load current player data from game manager
+        _hp = GameManager.instance.GetHealth();
+        _flameIntensity = GameManager.instance.GetFlame();
+        Primary = GameManager.instance.GetPrimary();
+        Secondary = GameManager.instance.GetSecondary();
+        Utility = GameManager.instance.GetUtility();
+
+        // decrement health for tutorial only
+        if (SceneManager.GetActiveScene().name == "Tutorial")
+            _hp--;
     }
 
     #region CHARACTER STATES
@@ -287,7 +294,7 @@ public class PlayerController : MonoBehaviour
                 // Create projectiles and sets weapon cooldown/heatPer stats
                 if (_isprimaryEquipped)
                 {
-                    switch (primary)
+                    switch (Primary)
                     {
                         case Primary.RapidFlare:
                             _primaryCooldown = Cooldown_RapidFlare;
@@ -316,7 +323,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else // secondary
                 {
-                    switch (secondary)
+                    switch (Secondary)
                     {
                         case Secondary.FlameGun:
                             _secondaryCooldown = Cooldown_FlameGun;
@@ -465,18 +472,18 @@ public class PlayerController : MonoBehaviour
         #region DEBUG_CONTROLS
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (primary == Primary.FlareBurst)
-                primary = Primary.RapidFlare;
+            if (Primary == Primary.FlareBurst)
+                Primary = Primary.RapidFlare;
             else
-                primary = Primary.FlareBurst;
+                Primary = Primary.FlareBurst;
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (secondary == Secondary.FlameGun)
-                secondary = Secondary.FlameSlash;
+            if (Secondary == Secondary.FlameGun)
+                Secondary = Secondary.FlameSlash;
             else
-                secondary = Secondary.FlameGun;
+                Secondary = Secondary.FlameGun;
         }    
         #endregion
     }
@@ -559,8 +566,18 @@ public class PlayerController : MonoBehaviour
 
     public bool IsPrimaryEquipped() { return _isprimaryEquipped; }
 
-    public Primary GetPrimary() { return primary; }
+    public Primary GetPrimary() { return Primary; }
 
-    public Secondary GetSecondary() { return secondary; }
+    public Secondary GetSecondary() { return Secondary; }
     #endregion
+
+    // should be called whenever a new scene is loaded to preserve player data
+    private void _savePlayerData()
+    {
+        GameManager.instance.SetHealth(_hp);
+        GameManager.instance.SetFlame(_flameIntensity);
+        GameManager.instance.SetPrimary(Primary);
+        GameManager.instance.SetSecondary(Secondary);
+        GameManager.instance.SetUtility(Utility);
+    }
 }

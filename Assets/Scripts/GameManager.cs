@@ -64,6 +64,9 @@ public class GameManager : MonoBehaviour
             else // default save file configuration
             {
                 InitializeDefaultPlayerData();
+
+                // default difficulty upon first initialization
+                _data.Difficulty = Difficulty.Tutorial;
             }
 
             // components

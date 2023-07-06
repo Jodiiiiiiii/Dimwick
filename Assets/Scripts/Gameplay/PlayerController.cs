@@ -440,6 +440,11 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isStunned", _isHitStunned);
         #endregion
 
+        #region SCENE TRANSITIONS
+        if (_hp <= 0)
+            SceneManager.LoadScene("Game Over");
+        #endregion
+
         #region DEBUG_CONTROLS
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {

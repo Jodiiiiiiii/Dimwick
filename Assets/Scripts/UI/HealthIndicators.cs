@@ -28,8 +28,8 @@ public class HealthIndicators : MonoBehaviour
         // iterate through all and set proper ones to active or inactive
         for(int i = 0; i < hearts.Length; i++)
         {
-            if (_currentHP > i) hearts[_currentHP].SetActive(true);
-            else hearts[_currentHP].SetActive(false);
+            if (_currentHP > i) hearts[i].SetActive(true);
+            else hearts[i].SetActive(false);
         }
     }
 }

@@ -98,6 +98,8 @@ public class GameManager : MonoBehaviour
         _data.Primary = Primary.None;
         _data.Secondary = Secondary.None;
         _data.Utility = Utility.None;
+
+        // does not reset difficulty (handled through setter functions)
     }
 
     #region GETTERS

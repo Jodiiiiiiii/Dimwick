@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
+public enum Difficulty
+{
+    Tutorial,
+    Easy,
+    Hard
+}
+
 /// <summary>
 /// Manages all save data throughout scenes and between sessions
 /// </summary>
@@ -30,6 +37,8 @@ public class GameManager : MonoBehaviour
         public Primary Primary;
         public Secondary Secondary;
         public Utility Utility;
+
+        public Difficulty Difficulty;
     }
     private PlayerData _data;
 
@@ -116,6 +125,11 @@ public class GameManager : MonoBehaviour
     {
         return _data.Utility;
     }
+
+    public Difficulty GetDifficulty()
+    {
+        return _data.Difficulty;
+    }
     #endregion
 
     #region SETTERS
@@ -142,6 +156,11 @@ public class GameManager : MonoBehaviour
     public void SetUtility(Utility utility)
     {
         _data.Utility = utility;
+    }
+
+    public void SetDifficulty(Difficulty difficulty)
+    {
+        _data.Difficulty = difficulty;
     }
     #endregion
 

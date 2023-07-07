@@ -1,8 +1,7 @@
 using System.Collections;
 using System.IO;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public enum Difficulty
 {
@@ -83,7 +82,17 @@ public class GameManager : MonoBehaviour
     {}
 
     private void Update()
-    {}
+    {
+        // quit application from any scene with escape
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+
+            Application.Quit();
+        }
+    }
 
     private void OnApplicationQuit()
     {

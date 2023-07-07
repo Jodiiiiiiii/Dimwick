@@ -364,6 +364,7 @@ public class PlayerController : MonoBehaviour
                             }
                             break;
                         case Primary.None:
+                            _primaryHeat = 0f;
                             break;
                     }
                 }
@@ -392,6 +393,7 @@ public class PlayerController : MonoBehaviour
                             }
                             break;
                         case Secondary.None:
+                            _secondaryHeat = 0f;
                             break;
                     }
                 }
@@ -646,6 +648,21 @@ public class PlayerController : MonoBehaviour
     {
         _hp = Mathf.Clamp(_hp + HealthRecoverPerTorch, 0, MAX_HP);
         _flameIntensity = Mathf.Clamp(_flameIntensity + FlameRecoverPerTorch, 0, MAX_FLAME);
+    }
+
+    public void CollectRandomPrimary()
+    {
+        Primary = Random.Range(0, 2) == 0 ? Primary.RapidFlare : Primary.FlareBurst;
+    }
+
+    public void CollectRandomSecondary()
+    {
+        Secondary = Random.Range(0, 2) == 0 ? Secondary.FlameGun : Secondary.FlameSlash;
+    }
+
+    public void CollectRandomUtility()
+    {
+        // no implementation yet
     }
 
     // should be called whenever a new scene is loaded to preserve player data

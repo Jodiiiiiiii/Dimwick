@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour
     private float _facingAngle = 0;
     private bool _isSitting = true;
     private float _flameIntensity = MAX_FLAME;
+    private bool _isFlameRegen = false;
     private int _hp = MAX_HP;
     // Hitstun
     private bool _isHitStunned = false;
@@ -402,7 +403,10 @@ public class PlayerController : MonoBehaviour
 
         #region LIGHTING
         // update flame values
-        _flameIntensity -= FlameDecayRate * Time.deltaTime;
+        if(_isFlameRegen)
+            _flameIntensity += FlameRegenRate * Time.deltaTime;
+        else
+            _flameIntensity -= FlameDecayRate * Time.deltaTime;
         _flameIntensity = Mathf.Clamp(_flameIntensity, 0, MAX_FLAME); // clamp within range
 
         // Update candle light
@@ -488,11 +492,6 @@ public class PlayerController : MonoBehaviour
         #endregion
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Campfire"))
-            _flameIntensity += FlameRegenRate * Time.deltaTime;
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("EnemyBullet")) // apply damage and hitstun
@@ -512,6 +511,18 @@ public class PlayerController : MonoBehaviour
             else
                 Debug.LogError("Invalid enemy projectile collison");
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Campfire"))
+            _isFlameRegen = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Campfire"))
+            _isFlameRegen = false;
     }
 
     #region PUBLIC_GETTERS

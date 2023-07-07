@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
+    public GameObject InteractionIndicator;
+
     private bool _isInteractive = false;
 
     protected PlayerController _player;
@@ -12,13 +14,22 @@ public abstract class Interactable : MonoBehaviour
     void Start()
     {
         _player = GameObject.Find("Dimwick").GetComponent<PlayerController>();
+
+        InteractionIndicator.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(_isInteractive && InputHelper.GetInteractPress())
-            OnInteraction();
+        if (_isInteractive)
+        {
+            InteractionIndicator.SetActive(true);
+
+            if (InputHelper.GetInteractPress())
+                OnInteraction();
+        }
+        else
+            InteractionIndicator.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

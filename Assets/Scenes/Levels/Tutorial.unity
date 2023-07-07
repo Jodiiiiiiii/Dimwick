@@ -31790,7 +31790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9765d4abe9ec91c4884654f52ed3a93b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 847306867}
+  Player: {fileID: 847306871}
   Cam: {fileID: 0}
   CamMovementSpeed: 3
   CamMovementSharpness: 100
@@ -32533,6 +32533,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
+  SceneEnterFallTime: 1.5
+  SceneEnterFallDistance: 15
   MaxWalkSpeed: 5
   MovementSharpness: 20
   CandleLight: {fileID: 585542797}
@@ -32577,8 +32579,9 @@ MonoBehaviour:
   HeatPer_FlameSlash: 0.6
   Displacement_FlameSlash: 1.3
   AngleOffset_FlameSlash: -10
-  rb: {fileID: 0}
-  animator: {fileID: 0}
+  Rb: {fileID: 0}
+  Animator: {fileID: 0}
+  Collider: {fileID: 0}
 --- !u!95 &847306873
 Animator:
   serializedVersion: 5

@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 #region PUBLIC ENUMERATIONS
 public enum CharacterState
 {
+    SceneEnterFall,
     Default,
     Hitstun
 }
@@ -39,6 +40,10 @@ public class PlayerController : MonoBehaviour
     private const int MAX_HP = 8;
 
     public Camera cam;
+
+    [Header("Scene Enter - Fall")]
+    public float SceneEnterFallTime = 2f;
+    public float SceneEnterFallDistance = 10f;
 
     [Header("Movement")]
     public float MaxWalkSpeed = 10f;
@@ -107,19 +112,24 @@ public class PlayerController : MonoBehaviour
     public float AngleOffset_FlameSlash = 10f;
 
     // components
-    [HideInInspector] public Rigidbody2D rb;
-    [HideInInspector] public Animator animator;
+    [HideInInspector] public Rigidbody2D Rb;
+    [HideInInspector] public Animator Animator;
+    [HideInInspector] public CapsuleCollider2D Collider;
 
     public CharacterState CurrentCharacterState { get; private set; } = CharacterState.Default;
 
     // private variables
     private Vector2 _targetVelocity = Vector2.zero;
-    private Vector2 _facing = Vector2.right;
-    private float _facingAngle = 0;
+    private Vector2 _facing = Vector2.down;
+    private float _facingAngle = 180f;
     private bool _isSitting = true;
     private float _flameIntensity = MAX_FLAME;
     private bool _isFlameRegen = false;
     private int _hp = MAX_HP;
+    // Scene Enter state
+    private float _sceneEnterFallTimer = 0f;
+    private Vector2 _topFallPos, _botFallPos;
+    private bool _isFalling = false;
     // Hitstun
     private bool _isHitStunned = false;
     private float _hitStunTimer = 0f;
@@ -143,8 +153,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // componesnts
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        Rb = GetComponent<Rigidbody2D>();
+        Animator = GetComponent<Animator>();
+        Collider = GetComponent<CapsuleCollider2D>();
 
         // default weapon animator to primary
         WeaponAnimator.runtimeAnimatorController = PrimaryAnimator;
@@ -159,6 +170,9 @@ public class PlayerController : MonoBehaviour
         // decrement health for tutorial only
         if (SceneManager.GetActiveScene().name == "Tutorial")
             _hp--;
+
+        // enter scene enter falling state
+        TransitionToState(CharacterState.SceneEnterFall);
     }
 
     #region CHARACTER STATES
@@ -174,6 +188,19 @@ public class PlayerController : MonoBehaviour
     {
         switch(state)
         {
+            case CharacterState.SceneEnterFall:
+                Collider.enabled = false;
+                _isFalling = true;
+
+                // set position information
+                _botFallPos = Rb.position;
+                Rb.position = Rb.position + Vector2.up * SceneEnterFallDistance;
+                _topFallPos = Rb.position;
+
+                _sceneEnterFallTimer = 0f;
+                _facing = Vector2.down;
+
+                break;
             case CharacterState.Default:
                 break;
             case CharacterState.Hitstun:
@@ -186,6 +213,10 @@ public class PlayerController : MonoBehaviour
     {
         switch(state)
         {
+            case CharacterState.SceneEnterFall:
+                Collider.enabled = true;
+                _isFalling = false;
+                break;
             case CharacterState.Default:
                 break;
             case CharacterState.Hitstun:
@@ -200,14 +231,24 @@ public class PlayerController : MonoBehaviour
     {
         switch (CurrentCharacterState)
         {
+            case CharacterState.SceneEnterFall:
+
+                #region SCENE ENTER FALL EFFECT
+                Rb.position = Vector2.Lerp(_topFallPos, _botFallPos, Mathf.Clamp(_sceneEnterFallTimer / SceneEnterFallTime, 0, 1));
+
+                if (Rb.position == _botFallPos)
+                    TransitionToState(CharacterState.Default);
+                else
+                    _sceneEnterFallTimer += Time.deltaTime;
+                #endregion
+
+                break;
             case CharacterState.Default:
 
                 #region MOVEMENT_INPUTS
                 // update facing direction (mouse inputs)
                 _facing = ((Vector2)cam.ScreenToWorldPoint(Input.mousePosition) - (Vector2)AimPivot.transform.position).normalized;
                 _facingAngle = Vector2.SignedAngle(Vector2.up, _facing);
-                // Set weapon rotation
-                AimPivot.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, _facingAngle + 90);
 
                 // Handle movement direction input
                 switch (InputHelper.GetOctoDirectionHeld())
@@ -242,7 +283,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 // update velocity based on target and current velocities
-                rb.velocity = Vector2.Lerp(rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
+                Rb.velocity = Vector2.Lerp(Rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
                 #endregion
 
                 #region ATTACKING
@@ -392,7 +433,7 @@ public class PlayerController : MonoBehaviour
                     // no controls for movement or attacking
 
                     // update velocity based on target and current velocities
-                    rb.velocity = Vector2.Lerp(rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
+                    Rb.velocity = Vector2.Lerp(Rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
 
                     _hitStunTimer -= Time.deltaTime;
                 }
@@ -414,8 +455,9 @@ public class PlayerController : MonoBehaviour
         CandleLight.intensity = Mathf.Lerp(MinCandlelightIntensity, MaxCandlelightIntensity, _flameIntensity / MAX_FLAME);
 
         // update flashlight
-        
+
         // enable proper light depending on facing direction
+        _facingAngle = Vector2.SignedAngle(Vector2.up, _facing); // update facing angle
         if (_facingAngle >= -45f && _facingAngle <= 45f) // if facing up
         {
             // light values
@@ -445,27 +487,31 @@ public class PlayerController : MonoBehaviour
         #region ANIMATION
         // set proper weapon sprite animation
         WeaponAnimator.runtimeAnimatorController = _isprimaryEquipped ? PrimaryAnimator : SecondaryAnimator;
+        // Set weapon visual rotation
+        AimPivot.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, _facingAngle + 90);
 
-        // update sitting state
-        if (rb.velocity.magnitude < SIT_SPEED_THRESHOLD && InputHelper.GetOctoDirectionHeld() == InputHelper.OctoDirection.None)
+        // sitting state
+        if (Rb.velocity.magnitude < SIT_SPEED_THRESHOLD && (InputHelper.GetOctoDirectionHeld() == InputHelper.OctoDirection.None || _isFalling))
             _isSitting = true;
         else
             _isSitting = false;
-        // sutting animator state
-        animator.SetBool("sit", _isSitting);
+        Animator.SetBool("sit", _isSitting);
 
-        // direction animator state
-        if (_facingAngle >= 45f && _facingAngle <= 135f)
-            animator.SetInteger("direction", LEFT_DIRECTION);
-        else if (_facingAngle >= -45f && _facingAngle <= 45f)
-            animator.SetInteger("direction", UP_DIRECTION);
-        else if (_facingAngle >= -135f && _facingAngle < -45f)
-            animator.SetInteger("direction", RIGHT_DIRECTION);
-        else
-            animator.SetInteger("direction", DOWN_DIRECTION);
+        // falling state
+        Animator.SetBool("isFalling", _isFalling);
 
         // isStunned state
-        animator.SetBool("isStunned", _isHitStunned);
+        Animator.SetBool("isStunned", _isHitStunned);
+
+        // direction state
+        if (_facingAngle >= 45f && _facingAngle <= 135f)
+            Animator.SetInteger("direction", LEFT_DIRECTION);
+        else if (_facingAngle >= -45f && _facingAngle <= 45f)
+            Animator.SetInteger("direction", UP_DIRECTION);
+        else if (_facingAngle >= -135f && _facingAngle < -45f)
+            Animator.SetInteger("direction", RIGHT_DIRECTION);
+        else
+            Animator.SetInteger("direction", DOWN_DIRECTION);
         #endregion
 
         #region SCENE TRANSITIONS
@@ -580,6 +626,15 @@ public class PlayerController : MonoBehaviour
     public Primary GetPrimary() { return Primary; }
 
     public Secondary GetSecondary() { return Secondary; }
+
+    // returns camera focus point of the player
+    public Vector3 GetFocusPosition()
+    {
+        if (CurrentCharacterState == CharacterState.SceneEnterFall)
+            return _botFallPos;
+        else
+            return transform.position; // might need to be changed for camera tracking bug later (?)
+    }
     #endregion
 
     // should be called whenever a new scene is loaded to preserve player data

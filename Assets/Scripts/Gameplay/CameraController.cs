@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public GameObject Player;
+    public PlayerController Player;
     public Camera Cam;
 
     [Header("Movement")]
@@ -31,7 +31,7 @@ public class CameraController : MonoBehaviour
     void FixedUpdate()
     {
         // Calculate goal camera position (based on player and mouse positions)
-        _goalPosition = Player.transform.position;
+        _goalPosition = Player.GetFocusPosition();
         Vector2 difference = (Vector2)(Cam.ScreenToWorldPoint(Input.mousePosition) - Player.transform.position);
         if(difference.magnitude > MouseInfluenceRange)
             _goalPosition += new Vector2(difference.normalized.x * MouseOffsetFactorX, difference.normalized.y * MouseOffsetFactorY);

@@ -81,6 +81,8 @@ public class PlayerController : MonoBehaviour
     public Primary Primary = Primary.None;
     public Secondary Secondary = Secondary.None;
     public Utility Utility = Utility.None;
+    [Tooltip("Cooldown for firing shot after swapping weapons")]
+    public float WeaponSwapCooldownDelay = 0.25f;
 
     [Header("Overheat")]
     public float OverheatDuration = 5f;
@@ -425,7 +427,13 @@ public class PlayerController : MonoBehaviour
 
                 // Primary/secondary equipped swap
                 if (InputHelper.GetRightClickDown())
+                {
                     _isPrimaryEquipped = !_isPrimaryEquipped;
+
+                    // apply weapon swap cooldown delay to cooldown timers
+                    _primaryCooldownTimer = _primaryCooldown - WeaponSwapCooldownDelay;
+                    _secondaryCooldownTimer = _secondaryCooldown - WeaponSwapCooldownDelay;
+                }
                 #endregion
 
                 break;

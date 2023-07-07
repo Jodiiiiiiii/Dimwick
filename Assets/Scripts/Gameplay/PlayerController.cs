@@ -665,12 +665,36 @@ public class PlayerController : MonoBehaviour
 
     public void CollectRandomPrimary()
     {
-        Primary = Random.Range(0f, 1f) > 0.5 ? Primary.FlareBurst : Primary.RapidFlare;
+        switch(Primary)
+        {
+            case Primary.None:
+                Primary = Random.Range(0f, 1f) > 0.5 ? Primary.FlareBurst : Primary.RapidFlare;
+                break;
+            case Primary.FlareBurst:
+                Primary = Primary.RapidFlare;
+                break;
+            case Primary.RapidFlare:
+                Primary = Primary.FlareBurst;
+                break;
+        }
+        
     }
 
     public void CollectRandomSecondary()
     {
-        Secondary = Random.Range(0f, 1f) > 0.5 ? Secondary.FlameGun : Secondary.FlameSlash;
+        switch (Secondary)
+        {
+            case Secondary.None:
+                Secondary = Random.Range(0f, 1f) > 0.5 ? Secondary.FlameGun : Secondary.FlameSlash;
+                break;
+            case Secondary.FlameGun:
+                Secondary = Secondary.FlameSlash;
+                break;
+            case Secondary.FlameSlash:
+                Secondary = Secondary.FlameGun;
+                break;
+        }
+        
     }
 
     public void CollectRandomUtility()

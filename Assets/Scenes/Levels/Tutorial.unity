@@ -32537,6 +32537,8 @@ MonoBehaviour:
   SceneEnterFallDistance: 15
   MaxWalkSpeed: 5
   MovementSharpness: 20
+  HealthRecoverPerTorch: 1
+  FlameRecoverPerTorch: 50
   CandleLight: {fileID: 585542797}
   FlashlightStandard: {fileID: 285682656}
   FlashlightUp: {fileID: 1566718439}
@@ -40232,10 +40234,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Campfire
       objectReference: {fileID: 0}
-    - target: {fileID: 3905576703487113369, guid: 9fe1e2ad0e64995448ec18e6c4900d11, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3905576703487113375, guid: 9fe1e2ad0e64995448ec18e6c4900d11, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -40293,10 +40291,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1252764941}
     m_Modifications:
-    - target: {fileID: 4459160022757743620, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6140520521655104399, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
       propertyPath: m_RootOrder
       value: 0

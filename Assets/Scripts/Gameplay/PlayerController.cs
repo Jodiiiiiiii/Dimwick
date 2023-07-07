@@ -50,6 +50,10 @@ public class PlayerController : MonoBehaviour
     [Tooltip("rate at which character reached max speed")]
     public float MovementSharpness = 10f;
 
+    [Header("Health/Flame")]
+    public int HealthRecoverPerTorch = 1;
+    public float FlameRecoverPerTorch = MAX_FLAME / 2;
+
     [Header("Lighting")]
     public Light2D CandleLight;
     public Light2D FlashlightStandard;
@@ -637,8 +641,15 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    #region PUBLIC MODIFIERS
+    public void ConsumeHealTorch()
+    {
+        _hp = Mathf.Clamp(_hp + HealthRecoverPerTorch, 0, MAX_HP);
+        _flameIntensity = Mathf.Clamp(_flameIntensity + FlameRecoverPerTorch, 0, MAX_FLAME);
+    }
+
     // should be called whenever a new scene is loaded to preserve player data
-    private void _savePlayerData()
+    public void _savePlayerData()
     {
         GameManager.instance.SetHealth(_hp);
         GameManager.instance.SetFlame(_flameIntensity);
@@ -646,4 +657,5 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.SetSecondary(Secondary);
         GameManager.instance.SetUtility(Utility);
     }
+    #endregion
 }

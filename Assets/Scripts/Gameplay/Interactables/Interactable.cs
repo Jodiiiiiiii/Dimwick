@@ -6,6 +6,14 @@ public abstract class Interactable : MonoBehaviour
 {
     private bool _isInteractive = false;
 
+    protected PlayerController _player;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        _player = GameObject.Find("Dimwick").GetComponent<PlayerController>();
+    }
+
     // Update is called once per frame
     void Update()
     {

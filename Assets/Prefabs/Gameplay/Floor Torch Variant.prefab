@@ -11,6 +11,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.114
       objectReference: {fileID: 0}
+    - target: {fileID: 3899066460593070749, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3899066460593070749, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4459160022757743620, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
       propertyPath: m_Sprite
       value: 

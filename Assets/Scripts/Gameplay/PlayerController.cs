@@ -665,12 +665,12 @@ public class PlayerController : MonoBehaviour
 
     public void CollectRandomPrimary()
     {
-        Primary = Random.Range(0, 2) == 0 ? Primary.RapidFlare : Primary.FlareBurst;
+        Primary = Random.Range(0f, 1f) > 0.5 ? Primary.FlareBurst : Primary.RapidFlare;
     }
 
     public void CollectRandomSecondary()
     {
-        Secondary = Random.Range(0, 2) == 0 ? Secondary.FlameGun : Secondary.FlameSlash;
+        Secondary = Random.Range(0f, 1f) > 0.5 ? Secondary.FlameGun : Secondary.FlameSlash;
     }
 
     public void CollectRandomUtility()

@@ -128,6 +128,11 @@ public static class InputHelper
         return Input.GetMouseButtonDown(1);
     }
 
+    public static bool GetInteractPress()
+    {
+        return Input.GetKeyDown(KeyCode.E);
+    }
+
     /// <summary>
     /// Enumeration including eight directions and "None"
     /// </summary>

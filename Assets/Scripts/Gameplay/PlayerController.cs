@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
     private bool _isHitStunned = false;
     private float _hitStunTimer = 0f;
     // Primary weapons
-    private bool _isprimaryEquipped = true;
+    private bool _isPrimaryEquipped = true;
     private float _primaryCooldownTimer = 0f;
     private float _primaryCooldown = 1f;
     private float _primaryHeat = 0f;
@@ -303,7 +303,7 @@ public class PlayerController : MonoBehaviour
                 bool isFireReady = false;
                 if (InputHelper.GetLeftClick())
                 {
-                    if (_isprimaryEquipped && _primaryCooldownTimer > _primaryCooldown && !_isPrimaryOverheat)
+                    if (_isPrimaryEquipped && _primaryCooldownTimer > _primaryCooldown && !_isPrimaryOverheat)
                     {
                         // restart cooldown for next shot
                         _primaryCooldownTimer = 0;
@@ -319,7 +319,7 @@ public class PlayerController : MonoBehaviour
 
                         isFireReady = true;
                     }
-                    else if (!_isprimaryEquipped && _secondaryCooldownTimer > _secondaryCooldown && !_isSecondaryOverheat)
+                    else if (!_isPrimaryEquipped && _secondaryCooldownTimer > _secondaryCooldown && !_isSecondaryOverheat)
                     {
                         // restart cooldown for next shot
                         _secondaryCooldownTimer = 0;
@@ -338,7 +338,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 // Create projectiles and sets weapon cooldown/heatPer stats
-                if (_isprimaryEquipped)
+                if (_isPrimaryEquipped)
                 {
                     switch (Primary)
                     {
@@ -425,7 +425,7 @@ public class PlayerController : MonoBehaviour
 
                 // Primary/secondary equipped swap
                 if (InputHelper.GetRightClickDown())
-                    _isprimaryEquipped = !_isprimaryEquipped;
+                    _isPrimaryEquipped = !_isPrimaryEquipped;
                 #endregion
 
                 break;
@@ -492,9 +492,14 @@ public class PlayerController : MonoBehaviour
 
         #region ANIMATION
         // set proper weapon sprite animation
-        WeaponAnimator.runtimeAnimatorController = _isprimaryEquipped ? PrimaryAnimator : SecondaryAnimator;
+        WeaponAnimator.runtimeAnimatorController = _isPrimaryEquipped ? PrimaryAnimator : SecondaryAnimator;
         // Set weapon visual rotation
         AimPivot.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, _facingAngle + 90);
+        // toggle weapon and flashlight visibility with whether you have a weapon equipped
+        if ((_isPrimaryEquipped && Primary == Primary.None) || (!_isPrimaryEquipped && Secondary == Secondary.None))
+            AimPivot.SetActive(false);
+        else
+            AimPivot.SetActive(true);
 
         // sitting state
         if (Rb.velocity.magnitude < SIT_SPEED_THRESHOLD && (InputHelper.GetOctoDirectionHeld() == InputHelper.OctoDirection.None || _isFalling))
@@ -590,7 +595,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public float GetEquippedOverheat()
     {
-        if (_isprimaryEquipped)
+        if (_isPrimaryEquipped)
         {
             if (_isPrimaryOverheat)
                 return (int)(Time.time / OverheatFlashRate) % 2 == 0 ? 0f : 1f;
@@ -611,7 +616,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public float GetUnequippedOverheat()
     {
-        if (_isprimaryEquipped)
+        if (_isPrimaryEquipped)
         {
             if (_isSecondaryOverheat)
                 return (int)(Time.time / OverheatFlashRate) % 2 == 0 ? 0f : 1f;
@@ -627,7 +632,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public bool IsPrimaryEquipped() { return _isprimaryEquipped; }
+    public bool IsPrimaryEquipped() { return _isPrimaryEquipped; }
 
     public Primary GetPrimary() { return Primary; }
 

@@ -45,10 +45,12 @@ public class PlayerController : MonoBehaviour
     public float SceneEnterFallTime = 2f;
     public float SceneEnterFallDistance = 10f;
 
-    [Header("Movement")]
+    [Header("Movement Inputs")]
     public float MaxWalkSpeed = 10f;
     [Tooltip("rate at which character reached max speed")]
     public float MovementSharpness = 10f;
+    [Tooltip("rate at which character reaches goal rotation (mouse location)")]
+    public float AimingSharpness = 10f;
 
     [Header("Health/Flame")]
     public int HealthRecoverPerTorch = 1;
@@ -126,6 +128,7 @@ public class PlayerController : MonoBehaviour
 
     // private variables
     private Vector2 _targetVelocity = Vector2.zero;
+    private Vector2 _targetFacing = Vector2.down;
     private Vector2 _facing = Vector2.down;
     private float _facingAngle = 180f;
     private bool _isSitting = true;
@@ -253,7 +256,8 @@ public class PlayerController : MonoBehaviour
 
                 #region MOVEMENT_INPUTS
                 // update facing direction (mouse inputs)
-                _facing = ((Vector2)cam.ScreenToWorldPoint(Input.mousePosition) - (Vector2)AimPivot.transform.position).normalized;
+                _targetFacing = ((Vector2)cam.ScreenToWorldPoint(Input.mousePosition) - (Vector2)AimPivot.transform.position).normalized;
+                _facing = Vector2.Lerp(_facing, _targetFacing, 1 - Mathf.Exp(-AimingSharpness * Time.deltaTime));
                 _facingAngle = Vector2.SignedAngle(Vector2.up, _facing);
 
                 // Handle movement direction input

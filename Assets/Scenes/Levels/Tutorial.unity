@@ -32537,6 +32537,7 @@ MonoBehaviour:
   SceneEnterFallDistance: 15
   MaxWalkSpeed: 5
   MovementSharpness: 20
+  AimingSharpness: 50
   HealthRecoverPerTorch: 1
   FlameRecoverPerTorch: 50
   CandleLight: {fileID: 585542797}

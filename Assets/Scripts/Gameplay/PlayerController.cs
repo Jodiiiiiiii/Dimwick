@@ -658,6 +658,11 @@ public class PlayerController : MonoBehaviour
         else
             return transform.position; // might need to be changed for camera tracking bug later (?)
     }
+
+    public Vector3 GetAimPivotPosition()
+    {
+        return AimPivot.transform.position;
+    }
     #endregion
 
     #region PUBLIC MODIFIERS

@@ -31796,7 +31796,7 @@ MonoBehaviour:
   CamMovementSharpness: 100
   MouseOffsetFactorX: 2
   MouseOffsetFactorY: 1.125
-  MouseInfluenceRange: 1.5
+  MouseInfluenceRange: 2
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0

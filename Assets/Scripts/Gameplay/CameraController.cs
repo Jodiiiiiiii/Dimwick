@@ -32,7 +32,7 @@ public class CameraController : MonoBehaviour
     {
         // Calculate goal camera position (based on player and mouse positions)
         _goalPosition = Player.GetFocusPosition();
-        Vector2 difference = (Vector2)(Cam.ScreenToWorldPoint(Input.mousePosition) - Player.transform.position);
+        Vector2 difference = (Vector2)(Cam.ScreenToWorldPoint(Input.mousePosition) - Player.GetAimPivotPosition());
         if(difference.magnitude > MouseInfluenceRange)
             _goalPosition += new Vector2(difference.normalized.x * MouseOffsetFactorX, difference.normalized.y * MouseOffsetFactorY);
 

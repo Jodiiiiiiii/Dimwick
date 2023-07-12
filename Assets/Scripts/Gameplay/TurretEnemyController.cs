@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum TurretEnemyState
 {
+    Sleep,
     Default,
     Hitstun
 }
@@ -19,18 +20,19 @@ public class TurretEnemyController : MonoBehaviour
     [Header("Attacking")]
     public GameObject ProjectilePrefab;
     [Tooltip("layers for checking player line of sight raycast")]
-    public LayerMask raycastLayerMask;
+    public LayerMask RaycastLayermask;
     public float RaycastRadius = 0.5f;
-    public float FireRange = 3f;
+    public float RaycastRange = 3f;
     public float AttackCooldown = 5f;
-    public float SpreadAngle = 5f;
+    public float SpreadAngle = 3f;
 
     [Header("Misc.")]
     public float MaxHP = 5f;
+    public float WakeupRadius = 10f;
 
     // public and hidden
     [HideInInspector] public Rigidbody2D Rb;
-    [HideInInspector] public TurretEnemyState CurrentEnemyState = TurretEnemyState.Default;
+    [HideInInspector] public TurretEnemyState CurrentEnemyState = TurretEnemyState.Sleep;
 
     // private variables
     private GameObject _player;
@@ -66,6 +68,8 @@ public class TurretEnemyController : MonoBehaviour
     {
         switch (state)
         {
+            case TurretEnemyState.Sleep:
+                break;
             case TurretEnemyState.Default:
                 break;
             case TurretEnemyState.Hitstun:
@@ -78,6 +82,8 @@ public class TurretEnemyController : MonoBehaviour
     {
         switch (state)
         {
+            case TurretEnemyState.Sleep:
+                break;
             case TurretEnemyState.Default:
                 break;
             case TurretEnemyState.Hitstun:
@@ -92,6 +98,13 @@ public class TurretEnemyController : MonoBehaviour
     {
         switch(CurrentEnemyState)
         {
+            case TurretEnemyState.Sleep:
+
+                // wake up if player within range
+                if (Vector2.Distance(_player.transform.position, transform.position) < WakeupRadius)
+                    TransitionToState(TurretEnemyState.Default);
+
+                break;
             case TurretEnemyState.Default:
 
                 #region MOVEMENT
@@ -112,11 +125,11 @@ public class TurretEnemyController : MonoBehaviour
                     // check for line of sight to player
                     RaycastHit2D hit = Physics2D.CircleCast(transform.position, RaycastRadius,
                         (Vector2)_player.transform.position + _playerCollider.offset - Vector2.up * _playerCollider.size.y - (Vector2)transform.position,
-                        FireRange, raycastLayerMask);
+                        RaycastRange, RaycastLayermask);
 
                     // shows when enemy is attempting to lock on to player
                     Debug.DrawRay(transform.position,
-                        ((Vector2)_player.transform.position + _playerCollider.offset - Vector2.up * _playerCollider.size.y - (Vector2)transform.position).normalized * FireRange,
+                        ((Vector2)_player.transform.position + _playerCollider.offset - Vector2.up * _playerCollider.size.y - (Vector2)transform.position).normalized * RaycastRange,
                         Color.green);
 
                     if (hit.collider != null && hit.collider.CompareTag("Player"))

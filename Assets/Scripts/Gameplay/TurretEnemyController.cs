@@ -32,6 +32,7 @@ public class TurretEnemyController : MonoBehaviour
 
     // public and hidden
     [HideInInspector] public Rigidbody2D Rb;
+    [HideInInspector] public Animator Anim;
     [HideInInspector] public TurretEnemyState CurrentEnemyState = TurretEnemyState.Sleep;
 
     // private variables
@@ -41,13 +42,17 @@ public class TurretEnemyController : MonoBehaviour
     private float _attackCooldownTimer = 0f;
     private Vector2 _targetVelocity = Vector2.zero;
     // Hitstun
-    private bool _isHitStunned = false;
     private float _hitStunTimer = 0f;
+    // Animation States
+    private bool _isHitStunned = false;
+    private bool _isSleeping = true;
+    private bool _isAttacking = false;
 
     // Start is called before the first frame update
     void Start()
     {
         Rb = GetComponent<Rigidbody2D>();
+        Anim = GetComponent<Animator>();
 
         _player = GameObject.Find("Dimwick");
         _playerCollider = _player.GetComponent<CapsuleCollider2D>();
@@ -69,6 +74,7 @@ public class TurretEnemyController : MonoBehaviour
         switch (state)
         {
             case TurretEnemyState.Sleep:
+                _isSleeping = true;
                 break;
             case TurretEnemyState.Default:
                 break;
@@ -83,6 +89,7 @@ public class TurretEnemyController : MonoBehaviour
         switch (state)
         {
             case TurretEnemyState.Sleep:
+                _isSleeping = false;
                 break;
             case TurretEnemyState.Default:
                 break;
@@ -139,6 +146,7 @@ public class TurretEnemyController : MonoBehaviour
                             + Random.Range(-SpreadAngle, SpreadAngle)));
 
                         _attackCooldownTimer = AttackCooldown; // put attack on cooldown
+                        _isAttacking = true; // used for animation state
                     }
                 }
                 #endregion
@@ -162,6 +170,20 @@ public class TurretEnemyController : MonoBehaviour
 
                 break;
         }
+
+        #region ANIMATION
+        Anim.SetBool("isSleeping", _isSleeping);
+        Anim.SetBool("isHitstun", _isHitStunned);
+        if (_isAttacking)
+        {
+            Anim.SetTrigger("attack");
+            _isAttacking = false;
+        }
+        else
+        {
+            Anim.ResetTrigger("attack");
+        }
+        #endregion
 
         // destroy object when dies (Replace with death animation??)
         if (_hp < 0f) Destroy(gameObject);

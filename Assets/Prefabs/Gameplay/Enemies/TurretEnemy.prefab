@@ -105,6 +105,7 @@ MonoBehaviour:
   raycastLayerMask:
     serializedVersion: 2
     m_Bits: 320
+  RaycastRadius: 0.5
   FireRange: 30
   AttackCooldown: 5
   SpreadAngle: 5

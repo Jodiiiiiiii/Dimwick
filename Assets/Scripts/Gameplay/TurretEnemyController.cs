@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum RangeEnemyState
+public enum TurretEnemyState
 {
     Default,
     Hitstun
@@ -20,6 +20,7 @@ public class TurretEnemyController : MonoBehaviour
     public GameObject ProjectilePrefab;
     [Tooltip("layers for checking player line of sight raycast")]
     public LayerMask raycastLayerMask;
+    public float RaycastRadius = 0.5f;
     public float FireRange = 3f;
     public float AttackCooldown = 5f;
     public float SpreadAngle = 5f;
@@ -29,7 +30,7 @@ public class TurretEnemyController : MonoBehaviour
 
     // public and hidden
     [HideInInspector] public Rigidbody2D Rb;
-    [HideInInspector] public RangeEnemyState CurrentEnemyState = RangeEnemyState.Default;
+    [HideInInspector] public TurretEnemyState CurrentEnemyState = TurretEnemyState.Default;
 
     // private variables
     private GameObject _player;
@@ -53,33 +54,33 @@ public class TurretEnemyController : MonoBehaviour
     }
 
     #region ENEMY STATES
-    public void TransitionToState(RangeEnemyState newState)
+    public void TransitionToState(TurretEnemyState newState)
     {
-        RangeEnemyState tmpInitialState = CurrentEnemyState;
+        TurretEnemyState tmpInitialState = CurrentEnemyState;
         OnStateExit(tmpInitialState, newState);
         CurrentEnemyState = newState;
         OnStateEnter(newState, tmpInitialState);
     }
 
-    public void OnStateEnter(RangeEnemyState state, RangeEnemyState fromState)
+    public void OnStateEnter(TurretEnemyState state, TurretEnemyState fromState)
     {
         switch (state)
         {
-            case RangeEnemyState.Default:
+            case TurretEnemyState.Default:
                 break;
-            case RangeEnemyState.Hitstun:
+            case TurretEnemyState.Hitstun:
                 _isHitStunned = true;
                 break;
         }
     }
 
-    public void OnStateExit(RangeEnemyState state, RangeEnemyState toState)
+    public void OnStateExit(TurretEnemyState state, TurretEnemyState toState)
     {
         switch (state)
         {
-            case RangeEnemyState.Default:
+            case TurretEnemyState.Default:
                 break;
-            case RangeEnemyState.Hitstun:
+            case TurretEnemyState.Hitstun:
                 _isHitStunned = false;
                 break;
         }
@@ -91,7 +92,7 @@ public class TurretEnemyController : MonoBehaviour
     {
         switch(CurrentEnemyState)
         {
-            case RangeEnemyState.Default:
+            case TurretEnemyState.Default:
 
                 #region MOVEMENT
                 // turret enemy does not move freely on its own
@@ -109,7 +110,7 @@ public class TurretEnemyController : MonoBehaviour
                 else
                 {
                     // check for line of sight to player
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position,
+                    RaycastHit2D hit = Physics2D.CircleCast(transform.position, RaycastRadius,
                         (Vector2)_player.transform.position + _playerCollider.offset - Vector2.up * _playerCollider.size.y - (Vector2)transform.position,
                         FireRange, raycastLayerMask);
 
@@ -130,11 +131,11 @@ public class TurretEnemyController : MonoBehaviour
                 #endregion
 
                 break;
-            case RangeEnemyState.Hitstun:
+            case TurretEnemyState.Hitstun:
 
                 #region HITSTUN HANDLING
                 if (_hitStunTimer < 0f) // ends hitstun
-                    TransitionToState(RangeEnemyState.Default);
+                    TransitionToState(TurretEnemyState.Default);
                 else
                 {
                     // no controls for movement or attacking
@@ -160,7 +161,7 @@ public class TurretEnemyController : MonoBehaviour
             collision.gameObject.TryGetComponent<Projectile>(out Projectile projectile);
             if (projectile != null)
             {
-                TransitionToState(RangeEnemyState.Hitstun);
+                TransitionToState(TurretEnemyState.Hitstun);
 
                 // decrement hp
                 _hp -= projectile.Damage;

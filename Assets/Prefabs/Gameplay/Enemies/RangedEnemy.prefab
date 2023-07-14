@@ -178,4 +178,4 @@ MonoBehaviour:
   MaxGoalRange: 5
   MinSpeed: 1.5
   MaxSpeed: 3
-  GoalToleranceThreshold: 0.5
+  GoalToleranceThreshold: 0.75

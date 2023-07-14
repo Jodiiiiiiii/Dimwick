@@ -14,7 +14,7 @@ public class RangedEnemyController : EnemyController
     public float MaxGoalRange = 9f;
     public float MinSpeed = 1.5f;
     public float MaxSpeed = 2f;
-    
+    [Tooltip("error threshold from range goal within which enemy switches to rotating instead of seeking")]
     public float GoalToleranceThreshold = 0.5f;
 
     // private variables

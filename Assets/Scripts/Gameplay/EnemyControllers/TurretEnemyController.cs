@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TurretEnemyController : EnemyController
 {
-    [Header("Turret Enemy Projectiles")]
+    [Header("Turret Enemy - Projectiles")]
     public GameObject ProjectilePrefab;
     public float SpreadAngle = 3f;
 
@@ -23,19 +23,19 @@ public class TurretEnemyController : EnemyController
         base.Update();
     }
 
+    protected override void Attack()
+    {
+        Instantiate(ProjectilePrefab, transform.position, Quaternion.Euler(0, 0,
+            Vector2.SignedAngle(Vector2.right, (Vector2)_player.transform.position - (Vector2)transform.position)
+            + Random.Range(-SpreadAngle, SpreadAngle)));
+    }
+
     protected override void UpdateMovement()
     {
         // turret enemy does not move freely on its own
         _targetVelocity = Vector2.zero;
 
         // update velocity based on target and current velocities
-        Rb.velocity = Vector2.Lerp(Rb.velocity, _targetVelocity, 1 - Mathf.Exp(-KnockbackMovementSharpness * Time.deltaTime));
-    }
-
-    protected override void Attack()
-    {
-        Instantiate(ProjectilePrefab, transform.position, Quaternion.Euler(0, 0,
-            Vector2.SignedAngle(Vector2.right, (Vector2)_player.transform.position - (Vector2)transform.position)
-            + Random.Range(-SpreadAngle, SpreadAngle)));
+        Rb.velocity = Vector2.Lerp(Rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
     }
 }

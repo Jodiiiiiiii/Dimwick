@@ -25,8 +25,8 @@ public abstract class EnemyController : MonoBehaviour
     public float AttackCooldown = 5f;
 
     [Header("Hitstun")]
-    [Tooltip("rate at which enemy reaches max speed")]
-    public float KnockbackMovementSharpness = 10f;
+    [Tooltip("rate at which enemy reaches max speed (movement and knockback)")]
+    public float MovementSharpness = 10f;
     [Tooltip("percentage of knockback that is ignored for turret enemy type")]
     public float KnockbackReductionFactor = 0.75f;
 
@@ -154,7 +154,7 @@ public abstract class EnemyController : MonoBehaviour
                     // no controls for movement or attacking
 
                     // update velocity based on target and knockback velocity
-                    Rb.velocity = Vector2.Lerp(Rb.velocity, _knockbackVelocity, 1 - Mathf.Exp(-KnockbackMovementSharpness * Time.deltaTime));
+                    Rb.velocity = Vector2.Lerp(Rb.velocity, _knockbackVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
 
                     _hitStunTimer -= Time.deltaTime;
                 }

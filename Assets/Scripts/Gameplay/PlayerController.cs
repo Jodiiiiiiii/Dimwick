@@ -72,6 +72,10 @@ public class PlayerController : MonoBehaviour
     public float FlameDecayRate = 0.1f;
     public float FlameRegenRate = 1.0f;
 
+    [Header("Contact Damage")]
+    public float ContactDamageHitstun = 1f;
+    public float ContactDamageKnockbackSpeed = 4f;
+
     [Header("Aiming")]
     public GameObject AimPivot;
     public SpriteRenderer WeaponSprite;
@@ -568,17 +572,30 @@ public class PlayerController : MonoBehaviour
             collision.gameObject.TryGetComponent<Projectile>(out Projectile projectile);
             if (projectile != null)
             {
-                TransitionToState(CharacterState.Hitstun);
-
                 // decrement health
-                _hp--;
+                if(CurrentCharacterState != CharacterState.Hitstun) // prevent multihits
+                    _hp--;
                 // start hitstun timer
                 _hitStunTimer = projectile.HitstunTime;
                 // set knockback based on bullet rotation and knockback stats
                 _targetVelocity = Quaternion.Euler(0, 0, collision.transform.rotation.eulerAngles.z) * Vector2.right * projectile.KnockbackSpeed;
+
+                TransitionToState(CharacterState.Hitstun);
             }
             else
                 Debug.LogError("Invalid enemy projectile collison");
+        }
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            // decrement health
+            if (CurrentCharacterState != CharacterState.Hitstun) // prevent multihits
+                _hp--;
+            // start hitstun timer
+            _hitStunTimer = ContactDamageHitstun;
+            // set knockback based on bullet rotation and knockback stats
+            _targetVelocity = ((Vector2) AimPivot.transform.position - (Vector2) collision.transform.position) * ContactDamageKnockbackSpeed;
+
+            TransitionToState(CharacterState.Hitstun);
         }
     }
 

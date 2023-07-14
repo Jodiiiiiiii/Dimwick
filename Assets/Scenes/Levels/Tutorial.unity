@@ -32677,6 +32677,8 @@ MonoBehaviour:
   MinCandlelightRange: 1
   FlameDecayRate: 2
   FlameRegenRate: 10
+  ContactDamageHitstun: 0.2
+  ContactDamageKnockbackSpeed: 5
   AimPivot: {fileID: 1573312390}
   WeaponSprite: {fileID: 126564847}
   WeaponAnimator: {fileID: 126564846}

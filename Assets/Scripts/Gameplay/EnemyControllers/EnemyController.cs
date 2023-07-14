@@ -22,7 +22,8 @@ public abstract class EnemyController : MonoBehaviour
     public LayerMask RaycastLayermask;
     public float RaycastRadius = 0.5f;
     public float RaycastRange = 3f;
-    public float AttackCooldown = 5f;
+    public float MinAttackCooldown = 4f;
+    public float MaxAttackCooldown = 6f;
 
     [Header("Hitstun")]
     [Tooltip("rate at which enemy reaches max speed (movement and knockback)")]
@@ -46,7 +47,7 @@ public abstract class EnemyController : MonoBehaviour
     private float _hp;
     private float _hitStunTimer = 0f;
     private Vector2 _knockbackVelocity = Vector2.zero;
-    private float _attackCooldownTimer = 0f;
+    private float _attackCooldownTimer;
 
 
     // Start is called before the first frame update
@@ -59,6 +60,7 @@ public abstract class EnemyController : MonoBehaviour
         _playerCollider = _player.GetComponent<CapsuleCollider2D>();
 
         _hp = MaxHP;
+        _attackCooldownTimer = MaxAttackCooldown; // start with max cooldown
     }
 
     #region ENEMY STATES
@@ -136,7 +138,7 @@ public abstract class EnemyController : MonoBehaviour
                         // create/start attack
                         Attack();
 
-                        _attackCooldownTimer = AttackCooldown; // put attack on cooldown
+                        _attackCooldownTimer = Random.Range(MinAttackCooldown, MaxAttackCooldown); ; // put attack on cooldown
                         _isAttacking = true; // used for animation state
                     }
                 }

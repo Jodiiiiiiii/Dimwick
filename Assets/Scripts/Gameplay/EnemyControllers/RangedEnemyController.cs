@@ -65,7 +65,6 @@ public class RangedEnemyController : EnemyController
         Vector2 clockwiseDirection = -1 * Vector2.Perpendicular(playerDirection);
 
         // generate target velocity
-        // _targetVelocity = ((distance > _goalRange ? 1 : -1) * playerDirection + (_clockwise ? 1 : -1) * clockwiseDirection).normalized * _goalSpeed;
         _targetVelocity = Mathf.Abs(distance - _goalRange) > GoalToleranceThreshold ? 
             (distance > _goalRange ? 1 : -1) * playerDirection * _goalSpeed : (_clockwise ? 1 : -1) * clockwiseDirection * _goalSpeed;
 

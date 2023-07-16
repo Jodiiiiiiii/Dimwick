@@ -165,11 +165,12 @@ MonoBehaviour:
     m_Bits: 320
   RaycastRadius: 0.1
   RaycastRange: 30
-  AttackCooldown: 5
+  MinAttackCooldown: 4
+  MaxAttackCooldown: 6
   MovementSharpness: 10
   KnockbackReductionFactor: 0.9
   Rb: {fileID: 0}
   Anim: {fileID: 0}
   CurrentEnemyState: 0
-  ProjectilePrefab: {fileID: 9221771718114101272, guid: 536901bb865cf0540891b0de093f1403, type: 3}
+  ProjectilePrefab: {fileID: 7294615517687792031, guid: aa3dc6f46b45e9743b0d95a6faa32ae1, type: 3}
   SpreadAngle: 3

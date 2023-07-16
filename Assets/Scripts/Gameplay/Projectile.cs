@@ -59,12 +59,12 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        _stopped = true;
+        if (collision.collider.CompareTag("Wall"))
+            _stopped = true;
 
-        // if destroy on collision or opposite projectiles collided
-        if (DestroyOnCollision 
-            || (gameObject.CompareTag("PlayerBullet") && (collision.collider.CompareTag("EnemyBullet") || collision.collider.CompareTag("Enemy"))) 
-            || (gameObject.CompareTag("EnemyBullet") && collision.collider.CompareTag("PlayerBullet")))
+        // walls destroy enemy projectiles, enemy projectiles destroy player projectiles
+        if ((DestroyOnCollision && collision.collider.CompareTag("Wall"))
+            || (gameObject.CompareTag("PlayerBullet") && (collision.collider.CompareTag("EnemyBullet") || collision.collider.CompareTag("Enemy"))))
             Destroy(gameObject);
     }
 }

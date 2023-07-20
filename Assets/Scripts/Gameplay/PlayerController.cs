@@ -56,6 +56,9 @@ public class PlayerController : MonoBehaviour
     public int HealthRecoverPerTorch = 1;
     public float FlameRecoverPerTorch = MAX_FLAME / 2;
 
+    [Header("Invulnerability")]
+    public float InvulnerabilityTime = 1.5f;
+
     [Header("Lighting")]
     public Light2D CandleLight;
     public Light2D FlashlightStandard;
@@ -147,6 +150,9 @@ public class PlayerController : MonoBehaviour
     // Hitstun
     private bool _isHitStunned = false;
     private float _hitStunTimer = 0f;
+    // invulnerability
+    private bool _isInvulnerable = false;
+    private float _invulnerabilityTimer = 0f;
     // Primary weapons
     private bool _isPrimaryEquipped = true;
     private float _primaryCooldownTimer = 0f;
@@ -171,7 +177,6 @@ public class PlayerController : MonoBehaviour
         Animator = GetComponent<Animator>();
         Collider = GetComponent<CapsuleCollider2D>();
         FlashEffect = GetComponent<FlashEffect>();
-        FlashEffect.StartFlash();
 
         // default weapon animator to primary
         WeaponAnimator.runtimeAnimatorController = PrimaryAnimator;
@@ -221,6 +226,12 @@ public class PlayerController : MonoBehaviour
                 break;
             case CharacterState.Hitstun:
                 _isHitStunned = true;
+
+                // start invulnerability
+                _isInvulnerable = true;
+                _invulnerabilityTimer = InvulnerabilityTime;
+                FlashEffect.StartFlash();
+      
                 break;
         }
     }
@@ -467,9 +478,21 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
+        #region INVULNERABILITY
+        if(_isInvulnerable)
+        {
+            _invulnerabilityTimer -= Time.deltaTime;
+            if (_invulnerabilityTimer < 0)
+            {
+                _isInvulnerable = false;
+                FlashEffect.StopFlash();
+            }
+        }
+        #endregion
+
         #region LIGHTING
         // update flame values
-        if(_isFlameRegen)
+        if (_isFlameRegen)
             _flameIntensity += FlameRegenRate * Time.deltaTime;
         else
             _flameIntensity -= FlameDecayRate * Time.deltaTime;
@@ -570,14 +593,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("EnemyBullet")) // apply damage and hitstun
+        if(!_isInvulnerable && collision.gameObject.CompareTag("EnemyBullet")) // apply damage and hitstun
         {
             collision.gameObject.TryGetComponent<Projectile>(out Projectile projectile);
             if (projectile != null)
             {
                 // decrement health
-                if(CurrentCharacterState != CharacterState.Hitstun) // prevent multihits
-                    _hp--;
+                _hp--;
                 // start hitstun timer
                 _hitStunTimer = projectile.HitstunTime;
                 // set knockback based on bullet rotation and knockback stats
@@ -588,11 +610,10 @@ public class PlayerController : MonoBehaviour
             else
                 Debug.LogError("Invalid enemy projectile collison");
         }
-        if(collision.gameObject.CompareTag("Enemy"))
+        if(!_isInvulnerable && collision.gameObject.CompareTag("Enemy"))
         {
             // decrement health
-            if (CurrentCharacterState != CharacterState.Hitstun) // prevent multihits
-                _hp--;
+            _hp--;
             // start hitstun timer
             _hitStunTimer = ContactDamageHitstun;
             // set knockback based on bullet rotation and knockback stats

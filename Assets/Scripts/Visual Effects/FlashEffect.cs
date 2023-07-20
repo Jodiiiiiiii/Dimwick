@@ -69,6 +69,7 @@ public class FlashEffect : MonoBehaviour
     public void StopFlash()
     {
         _isFlashing = false;
+        SetFlashAmount(0); // reset to default flash level (none)
     }
     #endregion
 }

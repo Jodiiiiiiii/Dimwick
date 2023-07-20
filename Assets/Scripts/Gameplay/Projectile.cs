@@ -63,7 +63,7 @@ public class Projectile : MonoBehaviour
             _stopped = true;
 
         // walls destroy enemy projectiles, enemy projectiles destroy player projectiles
-        if ((DestroyOnCollision && collision.collider.CompareTag("Wall"))
+        if ((DestroyOnCollision && (collision.collider.CompareTag("Wall") || collision.collider.CompareTag("Player")))
             || (gameObject.CompareTag("PlayerBullet") && (collision.collider.CompareTag("EnemyBullet") || collision.collider.CompareTag("Enemy"))))
             Destroy(gameObject);
     }

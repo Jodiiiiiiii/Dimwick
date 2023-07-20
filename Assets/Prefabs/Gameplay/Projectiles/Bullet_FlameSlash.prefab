@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Intensity: 0.5
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 0000000075e7a32215891ea765ad872aabaf62570bb116583d9051655797d49d0b243de363a909c4112b4a0d
+  m_ApplyToSortingLayers: 0000000075e7a32215891ea765ad872aabaf62570bb116583d9051655797d49d63a909c4112b4a0de34fc6ef
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -261,10 +261,11 @@ MonoBehaviour:
   MinLightIntensity: 0
   MaxLightRange: 15
   MinLightRange: 0
-  Lifespan: 8
   DestroyOnCollision: 0
   HitstunTime: 2
   KnockbackSpeed: 1
+  Damage: 1
+  Lifespan: 8
 --- !u!61 &-4305271094723904223
 BoxCollider2D:
   m_ObjectHideFlags: 0

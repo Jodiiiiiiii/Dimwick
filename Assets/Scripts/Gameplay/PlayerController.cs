@@ -63,6 +63,8 @@ public class PlayerController : MonoBehaviour
     public Light2D CandleLight;
     public Light2D FlashlightStandard;
     public Light2D FlashlightUp;
+    public ParticleSystem FlameParticles;
+    public Light2D FlameLight;
     [Tooltip("offset of light transform from center when looking left or right")]
     public float MaxFlashlightIntensity = 1f;
     public float MinFlashlightIntensity = 0f;
@@ -72,6 +74,10 @@ public class PlayerController : MonoBehaviour
     public float MinFlashlightRange = 1f;
     public float MaxCandlelightRange = 5f;
     public float MinCandlelightRange = 1f;
+    public int MaxFlameParticleEmissionRate = 50;
+    public int MinFlameParticleEmissionRate = 5;
+    public float MaxFlameLightIntensity = 3f;
+    public float MinFlameLightIntensity = 1.5f;
     public float FlameDecayRate = 0.1f;
     public float FlameRegenRate = 1.0f;
 
@@ -530,6 +536,11 @@ public class PlayerController : MonoBehaviour
             // visible in front of player
             WeaponSprite.sortingLayerName = "Player_InFront";
         }
+
+        // Update flame particles
+        FlameLight.intensity = Mathf.Lerp(MinFlameLightIntensity, MaxFlameLightIntensity, _flameIntensity / MAX_FLAME);
+        var emission = FlameParticles.emission;
+        emission.rateOverTime = Mathf.Lerp(MinFlameParticleEmissionRate, MaxFlameParticleEmissionRate, _flameIntensity / MAX_FLAME);
         #endregion
 
         #region ANIMATION

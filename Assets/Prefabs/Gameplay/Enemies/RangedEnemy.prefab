@@ -96,8 +96,9 @@ GameObject:
   - component: {fileID: 9184802251503072623}
   - component: {fileID: 9184802251503072531}
   - component: {fileID: 9184802251503072528}
-  - component: {fileID: 7048296520547854055}
   - component: {fileID: 5231229233506742933}
+  - component: {fileID: 7048296520547854055}
+  - component: {fileID: 2163136197444873651}
   m_Layer: 11
   m_Name: RangedEnemy
   m_TagString: Enemy
@@ -141,7 +142,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 1bdd1503bd86e0b4ca2570fc1ffd4929, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -210,6 +211,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.22}
   m_Size: {x: 1.5214598, y: 1.5214599}
   m_Direction: 0
+--- !u!95 &5231229233506742933
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9184802251503072620}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b6b697c355f74ff4293841ac3154ce4e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &7048296520547854055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +257,7 @@ MonoBehaviour:
   KnockbackReductionFactor: 0
   Rb: {fileID: 0}
   Anim: {fileID: 0}
+  FlashEffect: {fileID: 0}
   CurrentEnemyState: 0
   ProjectilePrefab: {fileID: 9221771718114101272, guid: 536901bb865cf0540891b0de093f1403, type: 3}
   SpreadAngle: 3
@@ -244,24 +267,51 @@ MonoBehaviour:
   MinSpeed: 1.5
   MaxSpeed: 3
   GoalToleranceThreshold: 0.75
---- !u!95 &5231229233506742933
-Animator:
-  serializedVersion: 5
+--- !u!114 &2163136197444873651
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9184802251503072620}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b6b697c355f74ff4293841ac3154ce4e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749e8fda2a40a0b42b3e7ba461429362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flashColor: {r: 10.680627, g: 9.958685, b: 2.5693958, a: 1}
+  _flashTime: 0.25
+  _flashSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -9.674299
+      outSlope: -9.674299
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.062003523
+      value: 0.4001594
+      inSlope: -5.9014235
+      outSlope: -5.9014235
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.25
+      value: 0
+      inSlope: -0.07277148
+      outSlope: -0.07277148
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.31439558
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _loopEffect: 0

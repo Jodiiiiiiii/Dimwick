@@ -34,6 +34,7 @@ public abstract class EnemyController : MonoBehaviour
     // public and hidden
     [HideInInspector] public Rigidbody2D Rb;
     [HideInInspector] public Animator Anim;
+    [HideInInspector] public FlashEffect FlashEffect;
     [HideInInspector] public EnemyState CurrentEnemyState = EnemyState.Sleep;
 
     // protected variables
@@ -55,6 +56,7 @@ public abstract class EnemyController : MonoBehaviour
     {
         Rb = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();
+        FlashEffect = GetComponent<FlashEffect>();
 
         _player = GameObject.Find("Dimwick");
         _playerCollider = _player.GetComponent<CapsuleCollider2D>();
@@ -83,6 +85,7 @@ public abstract class EnemyController : MonoBehaviour
                 break;
             case EnemyState.Hitstun:
                 _isHitStunned = true;
+                FlashEffect.StartFlash();
                 break;
         }
     }

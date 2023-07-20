@@ -8,6 +8,7 @@ public class FlashEffect : MonoBehaviour
     [SerializeField] private Color _flashColor = Color.white;
     [SerializeField] private float _flashTime = 0.25f;
     [SerializeField] private AnimationCurve _flashSpeedCurve;
+    [SerializeField] private bool _loopEffect = true;
 
     private SpriteRenderer[] _spriteRenderers;
     private Material[] _materials;
@@ -33,12 +34,17 @@ public class FlashEffect : MonoBehaviour
         float elapsedTime = 0f;
         while(_isFlashing)
         {
+            SetFlashAmount(_flashSpeedCurve.Evaluate(elapsedTime));
+
             elapsedTime += Time.deltaTime;
             if (elapsedTime > _flashTime)
-                elapsedTime = 0f;
+            {
+                if (_loopEffect)
+                    elapsedTime = 0f;
+                else
+                    StopFlash();
+            }
 
-            SetFlashAmount(_flashSpeedCurve.Evaluate(elapsedTime));
-            Debug.Log("we in");
             yield return true;
         }
     }
@@ -62,10 +68,22 @@ public class FlashEffect : MonoBehaviour
     #region PUBLIC FUNCTIONS
     public void StartFlash()
     {
-        _isFlashing = true;
-        _flashCoroutine = StartCoroutine(Flasher());
+        if(_isFlashing)
+        {
+            // restart flash
+            StopCoroutine(_flashCoroutine);
+            _flashCoroutine = StartCoroutine(Flasher());
+        }
+        else
+        {
+            _isFlashing = true;
+            _flashCoroutine = StartCoroutine(Flasher());
+        }
     }
 
+    /// <summary>
+    /// Only needs to be called if loopEffect is true (or else stops automatically after once)
+    /// </summary>
     public void StopFlash()
     {
         _isFlashing = false;

@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 7997961523792440377}
   - component: {fileID: 8095250060080578509}
   - component: {fileID: 7997961523792440376}
+  - component: {fileID: 3071349857354518389}
   m_Layer: 11
   m_Name: TurretEnemy
   m_TagString: Enemy
@@ -141,7 +142,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 1bdd1503bd86e0b4ca2570fc1ffd4929, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -256,6 +257,55 @@ MonoBehaviour:
   KnockbackReductionFactor: 0.9
   Rb: {fileID: 0}
   Anim: {fileID: 0}
+  FlashEffect: {fileID: 0}
   CurrentEnemyState: 0
   ProjectilePrefab: {fileID: 7294615517687792031, guid: aa3dc6f46b45e9743b0d95a6faa32ae1, type: 3}
   SpreadAngle: 3
+--- !u!114 &3071349857354518389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7997961523792440389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749e8fda2a40a0b42b3e7ba461429362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flashColor: {r: 10.680627, g: 9.157348, b: 2.3678746, a: 1}
+  _flashTime: 0.25
+  _flashSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -7.971487
+      outSlope: -7.971487
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.074360676
+      value: 0.40723485
+      inSlope: -5.145036
+      outSlope: -5.145036
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.25
+      value: 0
+      inSlope: -0.07277148
+      outSlope: -0.07277148
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.31439558
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _loopEffect: 0

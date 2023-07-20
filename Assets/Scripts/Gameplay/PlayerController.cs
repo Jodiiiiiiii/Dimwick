@@ -127,6 +127,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Rigidbody2D Rb;
     [HideInInspector] public Animator Animator;
     [HideInInspector] public CapsuleCollider2D Collider;
+    [HideInInspector] public FlashEffect FlashEffect;
 
     public CharacterState CurrentCharacterState { get; private set; } = CharacterState.Default;
 
@@ -169,6 +170,8 @@ public class PlayerController : MonoBehaviour
         Rb = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
         Collider = GetComponent<CapsuleCollider2D>();
+        FlashEffect = GetComponent<FlashEffect>();
+        FlashEffect.StartFlash();
 
         // default weapon animator to primary
         WeaponAnimator.runtimeAnimatorController = PrimaryAnimator;

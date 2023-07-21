@@ -30845,6 +30845,7 @@ GameObject:
   - component: {fileID: 772196120}
   - component: {fileID: 772196119}
   - component: {fileID: 772196122}
+  - component: {fileID: 772196123}
   m_Layer: 11
   m_Name: Darkness
   m_TagString: Enemy
@@ -30957,6 +30958,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &772196123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772196118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4476799b174e2a47b61ff9cd2471e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: 5
+  MinAttackCooldown: 3
+  MaxAttackCooldown: 8
+  SpawnProjectile: {fileID: 7294615517687792031, guid: eacacd063e122a341b6fe352ae8739ce, type: 3}
 --- !u!114 &847306871 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8879769926183105552, guid: 7bff4968418c42c488eace1b71d40637, type: 3}

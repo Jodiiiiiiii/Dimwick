@@ -25,7 +25,8 @@ public class Projectile : MonoBehaviour
 
     [Header("Misc")]
     public float Lifespan = 5f;
-    
+    [Tooltip("-1 means motion never stops")]
+    public float StopMotionAfter = -1f;
 
     // private variables
     private Rigidbody2D _rb;
@@ -54,6 +55,8 @@ public class Projectile : MonoBehaviour
         // lifespan updates
         if (_lifespanTimer > Lifespan)
             Destroy(gameObject);
+        if (StopMotionAfter != -1 && _lifespanTimer > StopMotionAfter)
+            _stopped = true;
         _lifespanTimer += Time.deltaTime;
     }
 

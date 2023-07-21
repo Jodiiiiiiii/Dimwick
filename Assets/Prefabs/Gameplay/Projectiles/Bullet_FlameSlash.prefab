@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4c5cfe8efa6bd4f9a0187b807903c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxSpeed: 0
+  MaxSpeed: 5
   MinSpeed: 0
   Light: {fileID: 9221771717792645841}
   MaxLightIntensity: 1.5
@@ -266,6 +266,7 @@ MonoBehaviour:
   KnockbackSpeed: 1
   Damage: 1
   Lifespan: 8
+  StopMotionAfter: 0.4
 --- !u!61 &-4305271094723904223
 BoxCollider2D:
   m_ObjectHideFlags: 0

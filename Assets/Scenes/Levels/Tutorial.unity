@@ -37494,7 +37494,7 @@ MonoBehaviour:
   Bullet_FlameSlash: {fileID: 9221771718114101272, guid: 80bd479c93b8f1c4e9bc20179a8babce, type: 3}
   Cooldown_FlameSlash: 1
   HeatPer_FlameSlash: 0.6
-  Displacement_FlameSlash: 1.3
+  Displacement_FlameSlash: 0.5
   AngleOffset_FlameSlash: -10
   Rb: {fileID: 0}
   Animator: {fileID: 0}

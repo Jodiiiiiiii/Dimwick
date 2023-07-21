@@ -60,14 +60,14 @@ public class Projectile : MonoBehaviour
         _lifespanTimer += Time.deltaTime;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Wall"))
+        if (collision.CompareTag("Wall"))
             _stopped = true;
 
         // walls destroy enemy projectiles, enemy projectiles destroy player projectiles
-        if ((DestroyOnCollision && (collision.collider.CompareTag("Wall") || collision.collider.CompareTag("Player")))
-            || (gameObject.CompareTag("PlayerBullet") && (collision.collider.CompareTag("EnemyBullet") || collision.collider.CompareTag("Enemy"))))
+        if ((DestroyOnCollision && (collision.CompareTag("Wall") || collision.CompareTag("Player")))
+            || (gameObject.CompareTag("PlayerBullet") && (collision.CompareTag("EnemyBullet") || collision.CompareTag("Enemy"))))
             Destroy(gameObject);
     }
 }

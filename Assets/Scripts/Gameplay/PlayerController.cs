@@ -604,7 +604,27 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(!_isInvulnerable && collision.gameObject.CompareTag("EnemyBullet")) // apply damage and hitstun
+        // enemy contact damage
+        if (!_isInvulnerable && collision.gameObject.CompareTag("Enemy"))
+        {
+            // decrement health
+            _hp--;
+            // start hitstun timer
+            _hitStunTimer = ContactDamageHitstun;
+            // set knockback based on bullet rotation and knockback stats
+            _targetVelocity = ((Vector2)AimPivot.transform.position - (Vector2)collision.transform.position) * ContactDamageKnockbackSpeed;
+
+            TransitionToState(CharacterState.Hitstun);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Campfire"))
+            _isFlameRegen = true;
+
+        // Enemy bullet damage
+        if (!_isInvulnerable && collision.CompareTag("EnemyBullet")) // apply damage and hitstun
         {
             collision.gameObject.TryGetComponent<Projectile>(out Projectile projectile);
             if (projectile != null)
@@ -621,23 +641,6 @@ public class PlayerController : MonoBehaviour
             else
                 Debug.LogError("Invalid enemy projectile collison");
         }
-        if(!_isInvulnerable && collision.gameObject.CompareTag("Enemy"))
-        {
-            // decrement health
-            _hp--;
-            // start hitstun timer
-            _hitStunTimer = ContactDamageHitstun;
-            // set knockback based on bullet rotation and knockback stats
-            _targetVelocity = ((Vector2) AimPivot.transform.position - (Vector2) collision.transform.position) * ContactDamageKnockbackSpeed;
-
-            TransitionToState(CharacterState.Hitstun);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Campfire"))
-            _isFlameRegen = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

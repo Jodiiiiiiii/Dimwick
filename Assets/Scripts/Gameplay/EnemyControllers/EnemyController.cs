@@ -187,21 +187,9 @@ public abstract class EnemyController : MonoBehaviour
         if (_hp < 0f) Destroy(gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("PlayerBullet")) // apply damage and hitstun
-        {
-            collision.gameObject.TryGetComponent<Projectile>(out Projectile projectile);
-            if (projectile != null)
-                ApplyHit(projectile);
-            else
-                Debug.LogError("Invalid player projectile collison");
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("FlameSlash")) // flame slash uses trigger so it doesnt move
+        if(collision.CompareTag("PlayerBullet") || collision.CompareTag("FlameSlash")) // flame slash uses trigger so it doesnt move
         {
             collision.gameObject.TryGetComponent<Projectile>(out Projectile projectile);
             if (projectile != null)
@@ -222,7 +210,7 @@ public abstract class EnemyController : MonoBehaviour
 
         // set knockback based on bullet rotation and knockback stats
         Vector2 knockback = Quaternion.Euler(0, 0, projectile.transform.rotation.eulerAngles.z)
-            * Vector2.right * projectile.KnockbackSpeed * (1 - KnockbackReductionFactor) * 0;
+            * Vector2.right * projectile.KnockbackSpeed * (1 - KnockbackReductionFactor);
         _knockbackVelocity += knockback;
     }
 

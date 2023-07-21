@@ -494,6 +494,7 @@ MonoBehaviour:
   KnockbackSpeed: 6
   Damage: 1
   Lifespan: 10
+  StopMotionAfter: -1
 --- !u!58 &2280687205066691027
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -504,7 +505,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0000007774519, y: 0}

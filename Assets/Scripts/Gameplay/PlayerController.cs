@@ -767,7 +767,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // should be called whenever a new scene is loaded to preserve player data
-    public void _savePlayerData()
+    public void SavePlayerData()
     {
         GameManager.instance.SetHealth(_hp);
         GameManager.instance.SetFlame(_flameIntensity);

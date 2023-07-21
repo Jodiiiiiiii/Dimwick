@@ -101,7 +101,9 @@ public abstract class EnemyController : MonoBehaviour
                 break;
             case EnemyState.Hitstun:
                 _isHitStunned = false;
-                _knockbackVelocity = Vector2.zero; // reset knockback before next hit
+
+                if(toState != EnemyState.Hitstun)
+                    _knockbackVelocity = Vector2.zero; // reset knockback before next hit
                 break;
         }
     }
@@ -160,7 +162,7 @@ public abstract class EnemyController : MonoBehaviour
                     // no controls for movement or attacking
 
                     // update velocity based on target and knockback velocity
-                    Rb.velocity = Vector2.Lerp(Rb.velocity, _knockbackVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
+                    Rb.velocity = _knockbackVelocity; // no lerping (snappier)
 
                     _hitStunTimer -= Time.deltaTime;
                 }
@@ -206,7 +208,7 @@ public abstract class EnemyController : MonoBehaviour
         // decrement hp
         _hp -= projectile.Damage;
         // start hitstun timer
-        _hitStunTimer = projectile.HitstunTime;
+        _hitStunTimer += projectile.HitstunTime;
 
         // set knockback based on bullet rotation and knockback stats
         Vector2 knockback = Quaternion.Euler(0, 0, projectile.transform.rotation.eulerAngles.z)

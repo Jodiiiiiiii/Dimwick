@@ -254,7 +254,7 @@ MonoBehaviour:
   MinAttackCooldown: 4
   MaxAttackCooldown: 6
   MovementSharpness: 10
-  KnockbackReductionFactor: 1
+  KnockbackReductionFactor: 0.95
   Rb: {fileID: 0}
   Anim: {fileID: 0}
   FlashEffect: {fileID: 0}

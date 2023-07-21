@@ -475,7 +475,7 @@ public class PlayerController : MonoBehaviour
                     // no controls for movement or attacking
 
                     // update velocity based on target and current velocities
-                    Rb.velocity = Vector2.Lerp(Rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
+                    Rb.velocity = _targetVelocity; // no lerping (snappier)
 
                     _hitStunTimer -= Time.deltaTime;
                 }

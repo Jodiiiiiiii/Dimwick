@@ -60,6 +60,9 @@ public class GameManager : MonoBehaviour
                 // read json file into data object
                 string json = File.ReadAllText(path);
                 _data = JsonUtility.FromJson<PlayerData>(json);
+
+                // Override save file (currently no save file usage)
+                InitializeDefaultPlayerData();
             }
             else // default save file configuration
             {

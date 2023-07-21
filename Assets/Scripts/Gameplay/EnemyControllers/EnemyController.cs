@@ -192,22 +192,37 @@ public abstract class EnemyController : MonoBehaviour
         {
             collision.gameObject.TryGetComponent<Projectile>(out Projectile projectile);
             if (projectile != null)
-            {
-                TransitionToState(EnemyState.Hitstun);
-
-                // decrement hp
-                _hp -= projectile.Damage;
-                // start hitstun timer
-                _hitStunTimer = projectile.HitstunTime;
-
-                // set knockback based on bullet rotation and knockback stats
-                Vector2 knockback = Quaternion.Euler(0, 0, collision.transform.rotation.eulerAngles.z)
-                    * Vector2.right * projectile.KnockbackSpeed * (1 - KnockbackReductionFactor);
-                _knockbackVelocity += knockback;
-            }
+                ApplyHit(projectile);
             else
                 Debug.LogError("Invalid player projectile collison");
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("FlameSlash")) // flame slash uses trigger so it doesnt move
+        {
+            collision.gameObject.TryGetComponent<Projectile>(out Projectile projectile);
+            if (projectile != null)
+                ApplyHit(projectile);
+            else
+                Debug.LogError("Invalid player projectile collison");
+        }
+    }
+
+    private void ApplyHit(Projectile projectile)
+    {
+        TransitionToState(EnemyState.Hitstun);
+
+        // decrement hp
+        _hp -= projectile.Damage;
+        // start hitstun timer
+        _hitStunTimer = projectile.HitstunTime;
+
+        // set knockback based on bullet rotation and knockback stats
+        Vector2 knockback = Quaternion.Euler(0, 0, projectile.transform.rotation.eulerAngles.z)
+            * Vector2.right * projectile.KnockbackSpeed * (1 - KnockbackReductionFactor);
+        _knockbackVelocity += knockback;
     }
 
     /// <summary>

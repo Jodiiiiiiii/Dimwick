@@ -101,6 +101,7 @@ public abstract class EnemyController : MonoBehaviour
                 break;
             case EnemyState.Hitstun:
                 _isHitStunned = false;
+                _knockbackVelocity = Vector2.zero; // reset knockback before next hit
                 break;
         }
     }
@@ -221,7 +222,7 @@ public abstract class EnemyController : MonoBehaviour
 
         // set knockback based on bullet rotation and knockback stats
         Vector2 knockback = Quaternion.Euler(0, 0, projectile.transform.rotation.eulerAngles.z)
-            * Vector2.right * projectile.KnockbackSpeed * (1 - KnockbackReductionFactor);
+            * Vector2.right * projectile.KnockbackSpeed * (1 - KnockbackReductionFactor) * 0;
         _knockbackVelocity += knockback;
     }
 

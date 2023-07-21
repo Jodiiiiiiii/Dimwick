@@ -262,9 +262,9 @@ MonoBehaviour:
   MaxLightRange: 15
   MinLightRange: 0
   DestroyOnCollision: 0
-  HitstunTime: 2
-  KnockbackSpeed: 1
-  Damage: 1
+  HitstunTime: 0.5
+  KnockbackSpeed: 9
+  Damage: 30
   Lifespan: 8
   StopMotionAfter: 0.4
 --- !u!61 &-4305271094723904223

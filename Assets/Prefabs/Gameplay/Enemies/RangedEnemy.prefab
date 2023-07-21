@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c6d9d2cfae76d7428a696c1f31d3877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 5
+  MaxHP: 50
   WakeupRadius: 10
   RaycastLayermask:
     serializedVersion: 2
@@ -254,7 +254,7 @@ MonoBehaviour:
   MinAttackCooldown: 4
   MaxAttackCooldown: 6
   MovementSharpness: 10
-  KnockbackReductionFactor: 0
+  KnockbackReductionFactor: 0.4
   Rb: {fileID: 0}
   Anim: {fileID: 0}
   FlashEffect: {fileID: 0}

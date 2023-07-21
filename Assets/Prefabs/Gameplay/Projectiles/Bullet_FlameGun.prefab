@@ -262,10 +262,11 @@ MonoBehaviour:
   MaxLightRange: 10
   MinLightRange: 0
   DestroyOnCollision: 0
-  HitstunTime: 2
-  KnockbackSpeed: 1
-  Damage: 1
+  HitstunTime: 0.3
+  KnockbackSpeed: 7
+  Damage: 10
   Lifespan: 10
+  StopMotionAfter: -1
 --- !u!61 &-4305271094723904223
 BoxCollider2D:
   m_ObjectHideFlags: 0

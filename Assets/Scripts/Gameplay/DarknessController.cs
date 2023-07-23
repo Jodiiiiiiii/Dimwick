@@ -24,6 +24,7 @@ public class DarknessController : MonoBehaviour
     [HideInInspector] public Animator Anim;
     [HideInInspector] public Rigidbody2D Rb;
 
+    private float _hp;
     private Vector2 _targetVelocity = Vector2.zero;
     private float _goalSwapTimer;
     private float _attackCooldownTimer;
@@ -34,6 +35,8 @@ public class DarknessController : MonoBehaviour
     {
         Anim = GetComponent<Animator>();
         Rb = GetComponent<Rigidbody2D>();
+
+        _hp = MaxHP;
 
         _goalSwapTimer = GoalSwapPeriod;
         _attackCooldownTimer = Random.Range(MinAttackCooldown, MaxAttackCooldown);
@@ -95,4 +98,11 @@ public class DarknessController : MonoBehaviour
         }
         #endregion
     }
+
+    #region PUBLIC GETTERS
+    public float GetHP()
+    {
+        return _hp;
+    }
+    #endregion
 }

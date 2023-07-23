@@ -108,12 +108,12 @@ TextureImporter:
       name: DarknessMeter_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 160
-        width: 256
-        height: 32
+        x: 15
+        y: 169
+        width: 226
+        height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -129,12 +129,12 @@ TextureImporter:
       name: DarknessMeter_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
-        width: 256
-        height: 32
+        x: 15
+        y: 137
+        width: 226
+        height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -150,12 +150,12 @@ TextureImporter:
       name: DarknessMeter_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 96
-        width: 256
-        height: 32
+        x: 15
+        y: 105
+        width: 226
+        height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -171,12 +171,12 @@ TextureImporter:
       name: DarknessMeter_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 64
-        width: 256
-        height: 32
+        x: 15
+        y: 73
+        width: 226
+        height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -192,12 +192,12 @@ TextureImporter:
       name: DarknessMeter_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
-        width: 256
-        height: 32
+        x: 15
+        y: 41
+        width: 226
+        height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -213,12 +213,12 @@ TextureImporter:
       name: DarknessMeter_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 256
-        height: 32
+        x: 15
+        y: 9
+        width: 226
+        height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

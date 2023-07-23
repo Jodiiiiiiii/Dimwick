@@ -6,6 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class DarknessController : MonoBehaviour
 {
+    [Header("Sleep")]
+    public float WakeupRange = 15f;
+    // boss meter to show when boss wakes up
+    public GameObject BossMeter;
+
     [Header("HP")]
     public float MaxHP = 200f;
     [Tooltip("percent of health healed by heal 'attack'")]
@@ -51,6 +56,8 @@ public class DarknessController : MonoBehaviour
     // victory transition
     private bool _isVictoryTransition = false;
     private float _victoryTransitionTimer = 0f;
+    // sleep state
+    private bool _isSleeping = true;
 
     // Start is called before the first frame update
     void Start()
@@ -64,97 +71,110 @@ public class DarknessController : MonoBehaviour
 
         _goalSwapTimer = GoalSwapPeriod;
         _attackCooldownTimer = Random.Range(MinAttackCooldown, MaxAttackCooldown);
+
+        BossMeter.SetActive(false); // inactive by default
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_isVictoryTransition)
+        if(_isSleeping)
         {
-            GlobalLight.intensity += Time.deltaTime * LightIncreaseRate;
-
-            if (_victoryTransitionTimer < 0f)
+            if (Vector2.Distance(_player.transform.position, transform.position) < WakeupRange)
             {
-                SceneManager.LoadScene("Start"); // REPLACE WITH VICTORY SCREEN
+                _isSleeping = false;
+                BossMeter.SetActive(true);
             }
-
-            _victoryTransitionTimer -= Time.deltaTime;
         }
-        else
+        else // AWAKE
         {
-            #region MOVEMENT
-            if (_goalSwapTimer <= 0) // set new target
+            if (_isVictoryTransition)
             {
-                if (_dashReady)
+                GlobalLight.intensity += Time.deltaTime * LightIncreaseRate;
+
+                if (_victoryTransitionTimer < 0f)
                 {
-                    Vector2 playerDirection = ((Vector2)_player.transform.position - (Vector2)transform.position).normalized;
-                    _targetVelocity = playerDirection * DashMoveSpeed;
-                    _goalSwapTimer = DashDuration;
-                    _dashReady = false;
+                    SceneManager.LoadScene("Start"); // REPLACE WITH VICTORY SCREEN
                 }
-                else // default movemenet
-                {
-                    float randAngle = Random.Range(0f, 360f);
-                    _targetVelocity = new Vector2(Mathf.Cos(randAngle), Mathf.Sin(randAngle)) * BaseMoveSpeed;
-                    _goalSwapTimer = GoalSwapPeriod;
-                }
+
+                _victoryTransitionTimer -= Time.deltaTime;
             }
             else
             {
-                _goalSwapTimer -= Time.deltaTime;
-            }
-
-            Rb.velocity = Vector2.Lerp(Rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
-            #endregion
-
-            #region ATTACKING
-            if (_attackCooldownTimer < 0)
-            {
-                float rand = Random.Range(0, 4);
-                if (rand < 1) // spawn attack
+                #region MOVEMENT
+                if (_goalSwapTimer <= 0) // set new target
                 {
-                    // replace later with random of attack options
-                    Instantiate(SpawnProjectile, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+                    if (_dashReady)
+                    {
+                        Vector2 playerDirection = ((Vector2)_player.transform.position - (Vector2)transform.position).normalized;
+                        _targetVelocity = playerDirection * DashMoveSpeed;
+                        _goalSwapTimer = DashDuration;
+                        _dashReady = false;
+                    }
+                    else // default movemenet
+                    {
+                        float randAngle = Random.Range(0f, 360f);
+                        _targetVelocity = new Vector2(Mathf.Cos(randAngle), Mathf.Sin(randAngle)) * BaseMoveSpeed;
+                        _goalSwapTimer = GoalSwapPeriod;
+                    }
                 }
-                else if (rand < 2) // darkness attack
+                else
                 {
-                    Anim.SetTrigger("darkWave");
-                }
-                else if (rand < 3) // dash attack
-                {
-                    _dashReady = true;
-                }
-                else // heal attack
-                {
-                    _healTimer = HealDuration;
+                    _goalSwapTimer -= Time.deltaTime;
                 }
 
-                // restart attack cooldown
-                _attackCooldownTimer = Random.Range(MinAttackCooldown, MaxAttackCooldown);
-            }
-            else
-            {
-                _attackCooldownTimer -= Time.deltaTime;
+                Rb.velocity = Vector2.Lerp(Rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
+                #endregion
 
-                Anim.ResetTrigger("darkWave");
-            }
-            #endregion
+                #region ATTACKING
+                if (_attackCooldownTimer < 0)
+                {
+                    float rand = Random.Range(0, 4);
+                    if (rand < 1) // spawn attack
+                    {
+                        // replace later with random of attack options
+                        Instantiate(SpawnProjectile, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+                    }
+                    else if (rand < 2) // darkness attack
+                    {
+                        Anim.SetTrigger("darkWave");
+                    }
+                    else if (rand < 3) // dash attack
+                    {
+                        _dashReady = true;
+                    }
+                    else // heal attack
+                    {
+                        _healTimer = HealDuration;
+                    }
 
-            #region HEALING
-            if (_healTimer > 0f)
-            {
-                _hp += HealRatio * MaxHP * Time.deltaTime / HealDuration;
-                if (_hp > MaxHP) _hp = MaxHP; // cap at max HP
-                _healTimer -= Time.deltaTime;
-            }
-            #endregion
+                    // restart attack cooldown
+                    _attackCooldownTimer = Random.Range(MinAttackCooldown, MaxAttackCooldown);
+                }
+                else
+                {
+                    _attackCooldownTimer -= Time.deltaTime;
 
-            if (_hp <= 0)
-            {
-                _isVictoryTransition = true;
-                Destroy(EnemiesParent);
-                _victoryTransitionTimer = VictoryTransitionTime;
-                DarkSpotLight.intensity = 0f;
+                    Anim.ResetTrigger("darkWave");
+                }
+                #endregion
+
+                #region HEALING
+                if (_healTimer > 0f)
+                {
+                    _hp += HealRatio * MaxHP * Time.deltaTime / HealDuration;
+                    if (_hp > MaxHP) _hp = MaxHP; // cap at max HP
+                    _healTimer -= Time.deltaTime;
+                }
+                #endregion
+
+                if (_hp <= 0)
+                {
+                    _isVictoryTransition = true;
+                    Destroy(EnemiesParent);
+                    _victoryTransitionTimer = VictoryTransitionTime;
+                    DarkSpotLight.intensity = 0f;
+                }
             }
         }
     }

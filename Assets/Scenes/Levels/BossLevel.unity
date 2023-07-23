@@ -30717,6 +30717,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6140520521655104399, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
   m_PrefabInstance: {fileID: 1608135772}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &641300533 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2804774019032306561, guid: f55d05808ea250447aed2f6da202d63e, type: 3}
+  m_PrefabInstance: {fileID: 3462045488209480437}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &675947781 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6140520521655104399, guid: ca8247c604cbf924a8e8b20e4492b06e, type: 3}
@@ -30972,6 +30977,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4476799b174e2a47b61ff9cd2471e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WakeupRange: 15
+  BossMeter: {fileID: 641300533}
   MaxHP: 200
   HealRatio: 0.1
   HealDuration: 4

@@ -62,7 +62,7 @@ public class DarknessController : MonoBehaviour
         {
             _goalSwapTimer -= Time.deltaTime;
         }
-        Debug.Log(_targetVelocity);
+
         Rb.velocity = Vector2.Lerp(Rb.velocity, _targetVelocity, 1 - Mathf.Exp(-MovementSharpness * Time.deltaTime));
         #endregion
 

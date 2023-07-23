@@ -23,6 +23,7 @@ public class DarknessController : MonoBehaviour
 
     [HideInInspector] public Animator Anim;
     [HideInInspector] public Rigidbody2D Rb;
+    [HideInInspector] private GameObject _player;
 
     private float _hp;
     private Vector2 _targetVelocity = Vector2.zero;
@@ -35,6 +36,7 @@ public class DarknessController : MonoBehaviour
     {
         Anim = GetComponent<Animator>();
         Rb = GetComponent<Rigidbody2D>();
+        _player = GameObject.Find("Dimwick");
 
         _hp = MaxHP;
 
@@ -48,15 +50,16 @@ public class DarknessController : MonoBehaviour
         #region MOVEMENT
         if(_goalSwapTimer <= 0) // set new target
         {
-            float randAngle = Random.Range(0f, 360f);
             if (_dashReady)
             {
-                _targetVelocity = new Vector2(Mathf.Cos(randAngle), Mathf.Sin(randAngle)) * DashMoveSpeed;
+                Vector2 playerDirection = ((Vector2)_player.transform.position - (Vector2)transform.position).normalized;
+                _targetVelocity = playerDirection * DashMoveSpeed;
                 _goalSwapTimer = DashDuration;
                 _dashReady = false;
             }
             else // default movemenet
             {
+                float randAngle = Random.Range(0f, 360f);
                 _targetVelocity = new Vector2(Mathf.Cos(randAngle), Mathf.Sin(randAngle)) * BaseMoveSpeed;
                 _goalSwapTimer = GoalSwapPeriod;
             }

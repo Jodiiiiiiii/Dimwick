@@ -30971,7 +30971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4476799b174e2a47b61ff9cd2471e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 500
+  MaxHP: 1000
   GoalSwapPeriod: 5
   BaseMoveSpeed: 0.8
   DashDuration: 1

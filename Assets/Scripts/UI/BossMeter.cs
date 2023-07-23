@@ -21,6 +21,6 @@ public class BossMeter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _slider.value = _darkness.GetHP();
+        _slider.value = _darkness.GetHPRatio();
     }
 }

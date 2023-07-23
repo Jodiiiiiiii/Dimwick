@@ -100,9 +100,9 @@ public class DarknessController : MonoBehaviour
     }
 
     #region PUBLIC GETTERS
-    public float GetHP()
+    public float GetHPRatio()
     {
-        return _hp;
+        return _hp / MaxHP;
     }
     #endregion
 }

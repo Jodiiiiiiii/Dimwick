@@ -30972,13 +30972,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 1000
+  HealRatio: 0.1
+  HealDuration: 4
   GoalSwapPeriod: 5
   BaseMoveSpeed: 0.8
   DashDuration: 1
   DashMoveSpeed: 5
   MovementSharpness: 10
-  MinAttackCooldown: 3
-  MaxAttackCooldown: 8
+  MinAttackCooldown: 2
+  MaxAttackCooldown: 5
   SpawnProjectile: {fileID: 7294615517687792031, guid: eacacd063e122a341b6fe352ae8739ce, type: 3}
   Anim: {fileID: 0}
   Rb: {fileID: 0}

@@ -6,6 +6,10 @@ public class DarknessController : MonoBehaviour
 {
     [Header("HP")]
     public float MaxHP = 200f;
+    [Tooltip("percent of health healed by heal 'attack'")]
+    public float HealRatio = 0.1f;
+    [Tooltip("period over which an individual heal takes place")]
+    public float HealDuration = 2f;
 
     [Header("Movement")]
     public float GoalSwapPeriod = 5f;
@@ -26,10 +30,14 @@ public class DarknessController : MonoBehaviour
     [HideInInspector] private GameObject _player;
 
     private float _hp;
+    // movement
     private Vector2 _targetVelocity = Vector2.zero;
     private float _goalSwapTimer;
-    private float _attackCooldownTimer;
     private bool _dashReady = false;
+    // attacking
+    private float _attackCooldownTimer;
+    // healing
+    private float _healTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -75,7 +83,7 @@ public class DarknessController : MonoBehaviour
         #region ATTACKING
         if (_attackCooldownTimer < 0)
         {
-            float rand = Random.Range(0, 3);
+            float rand = Random.Range(0, 4);
             if (rand < 1) // spawn attack
             {
                 // replace later with random of attack options
@@ -85,9 +93,13 @@ public class DarknessController : MonoBehaviour
             {
                 Anim.SetTrigger("darkWave");
             }
-            else // dash attack
+            else if (rand < 3) // dash attack
             {
                 _dashReady = true;
+            }
+            else // heal attack
+            {
+                _healTimer = HealDuration;
             }
 
             // restart attack cooldown
@@ -98,6 +110,14 @@ public class DarknessController : MonoBehaviour
             _attackCooldownTimer -= Time.deltaTime;
 
             Anim.ResetTrigger("darkWave");
+        }
+        #endregion
+
+        #region HEALING
+        if(_healTimer > 0f)
+        {
+            _hp += HealRatio * MaxHP  * Time.deltaTime / HealDuration;
+            _healTimer -= Time.deltaTime;
         }
         #endregion
     }

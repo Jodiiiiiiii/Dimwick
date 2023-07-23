@@ -2,6 +2,7 @@ using System.Collections;
 using System.IO;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Rendering.Universal;
 
 public enum Difficulty
 {
@@ -23,7 +24,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     // components
-    private AudioSource audioSource;
+    private AudioSource _audioSource;
 
     // audio
     //[SerializeField] private AudioClip secureCollectibleAudio;
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
             }
 
             // components
-            audioSource = GetComponent<AudioSource>();
+            _audioSource = GetComponent<AudioSource>();
         }
         else
         {
@@ -188,5 +189,4 @@ public class GameManager : MonoBehaviour
         //audioSource.PlayOneShot(SOUND);
     }
     #endregion
-
 }

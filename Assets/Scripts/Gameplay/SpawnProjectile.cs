@@ -12,6 +12,7 @@ public class SpawnProjectile : MonoBehaviour
     public GameObject MeleeEnemy;
     public GameObject RangedEnemy;
     public GameObject TurretEnemy;
+    [HideInInspector] public GameObject EnemiesParent;
 
     [Header("Lifespan")]
     public float Lifespan = 3f;
@@ -25,6 +26,8 @@ public class SpawnProjectile : MonoBehaviour
     void Start()
     {
         Rb = GetComponent<Rigidbody2D>();
+
+        EnemiesParent = GameObject.Find("Enemies");
     }
 
     // Update is called once per frame
@@ -41,11 +44,11 @@ public class SpawnProjectile : MonoBehaviour
         {
             float rand = Random.Range(0, 3);
             if (rand < 1)
-                Instantiate(MeleeEnemy, transform.position, MeleeEnemy.transform.rotation);
+                Instantiate(MeleeEnemy, transform.position, MeleeEnemy.transform.rotation, EnemiesParent.transform);
             else if (rand < 2)
-                Instantiate(RangedEnemy, transform.position, RangedEnemy.transform.rotation);
+                Instantiate(RangedEnemy, transform.position, RangedEnemy.transform.rotation, EnemiesParent.transform);
             else
-                Instantiate(TurretEnemy, transform.position, TurretEnemy.transform.rotation);
+                Instantiate(TurretEnemy, transform.position, TurretEnemy.transform.rotation, EnemiesParent.transform);
 
             Destroy(gameObject);
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class DarknessController : MonoBehaviour
 {
     [Header("HP")]
-    public float MaxHP = 5f;
+    public float MaxHP = 200f;
 
     [Header("Movement")]
     public float GoalSwapPeriod = 5f;
@@ -97,6 +97,21 @@ public class DarknessController : MonoBehaviour
             Anim.ResetTrigger("darkWave");
         }
         #endregion
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("PlayerBullet") || collision.CompareTag("FlameSlash")) // flame slash uses trigger so it doesnt move
+        {
+            collision.gameObject.TryGetComponent<Projectile>(out Projectile projectile);
+            if (projectile != null)
+            {
+                _hp -= projectile.Damage;
+                Destroy(collision.gameObject);
+            }
+            else
+                Debug.LogError("Invalid player projectile collison");
+        }
     }
 
     #region PUBLIC GETTERS

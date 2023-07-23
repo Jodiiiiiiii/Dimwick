@@ -195,7 +195,10 @@ public abstract class EnemyController : MonoBehaviour
         {
             collision.gameObject.TryGetComponent<Projectile>(out Projectile projectile);
             if (projectile != null)
+            {
                 ApplyHit(projectile);
+                Destroy(collision.gameObject);
+            }
             else
                 Debug.LogError("Invalid player projectile collison");
         }

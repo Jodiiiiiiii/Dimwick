@@ -636,6 +636,8 @@ public class PlayerController : MonoBehaviour
                 // set knockback based on bullet rotation and knockback stats
                 _targetVelocity = Quaternion.Euler(0, 0, collision.transform.rotation.eulerAngles.z) * Vector2.right * projectile.KnockbackSpeed;
 
+                Destroy(collision.gameObject);
+
                 TransitionToState(CharacterState.Hitstun);
             }
             else

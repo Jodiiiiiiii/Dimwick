@@ -30843,6 +30843,7 @@ GameObject:
   m_Component:
   - component: {fileID: 772196121}
   - component: {fileID: 772196120}
+  - component: {fileID: 772196124}
   - component: {fileID: 772196119}
   - component: {fileID: 772196122}
   - component: {fileID: 772196123}
@@ -30971,9 +30972,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 5
+  GoalSwapPeriod: 5
+  BaseMoveSpeed: 0.8
+  DashDuration: 1
+  DashMoveSpeed: 5
+  MovementSharpness: 10
   MinAttackCooldown: 3
   MaxAttackCooldown: 8
   SpawnProjectile: {fileID: 7294615517687792031, guid: eacacd063e122a341b6fe352ae8739ce, type: 3}
+  Anim: {fileID: 0}
+  Rb: {fileID: 0}
+--- !u!50 &772196124
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772196118}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &847306871 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8879769926183105552, guid: 7bff4968418c42c488eace1b71d40637, type: 3}

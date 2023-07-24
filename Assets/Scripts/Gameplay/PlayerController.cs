@@ -824,7 +824,18 @@ public class PlayerController : MonoBehaviour
 
     public void CollectRandomUtility()
     {
-        // no implementation yet
+        switch (Utility)
+        {
+            case Utility.None:
+                Utility = Random.Range(0f, 1f) > 0.5 ? Utility.LightBlast : Utility.LightBlink;
+                break;
+            case Utility.LightBlast:
+                Utility = Utility.LightBlink;
+                break;
+            case Utility.LightBlink:
+                Utility = Utility.LightBlast;
+                break;
+        }
     }
 
     // should be called whenever a new scene is loaded to preserve player data

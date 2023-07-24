@@ -197,7 +197,8 @@ public abstract class EnemyController : MonoBehaviour
             if (projectile != null)
             {
                 ApplyHit(projectile);
-                Destroy(collision.gameObject);
+                if(collision.CompareTag("PlayerBullet")) // don't clear flame slashes
+                    Destroy(collision.gameObject);
             }
             else
                 Debug.LogError("Invalid player projectile collison");

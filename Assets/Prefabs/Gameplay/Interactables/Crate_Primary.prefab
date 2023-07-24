@@ -167,6 +167,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5625046867321240853, guid: b0358db52c219dd45918a24cc31a61de, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 6007505766500420110, guid: b0358db52c219dd45918a24cc31a61de, type: 3}
       propertyPath: m_Name
       value: Interaction Indicator

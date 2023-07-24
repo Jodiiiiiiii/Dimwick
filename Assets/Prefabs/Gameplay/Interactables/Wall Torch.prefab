@@ -265,6 +265,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.78
       objectReference: {fileID: 0}
+    - target: {fileID: 5625046867321240853, guid: b0358db52c219dd45918a24cc31a61de, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7888841565611207560, guid: b0358db52c219dd45918a24cc31a61de, type: 3}
       propertyPath: m_Name
       value: Interaction Indicator

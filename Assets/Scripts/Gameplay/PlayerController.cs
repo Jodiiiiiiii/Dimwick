@@ -174,6 +174,9 @@ public class PlayerController : MonoBehaviour
     private float _secondaryHeatPer = 0.1f;
     private bool _isSecondaryOverheat = false;
     private float _secondaryOverheatTimer = 0f;
+    // utility weapons
+    private bool _isUtilityOverheat = false;
+    private float _utilityOverheatTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -428,6 +431,34 @@ public class PlayerController : MonoBehaviour
                     }
                 }
 
+                // Utility Ability Handling (nothing for now)
+                if (InputHelper.GetSpacePress() && !_isUtilityOverheat)
+                {
+                    switch(Utility)
+                    {
+                        case Utility.LightBlink:
+
+                            // light blink implementation
+
+                            _isUtilityOverheat = true;
+                            // start overheat timer
+                            _utilityOverheatTimer = 0f;
+
+                            break;
+                        case Utility.LightBlast:
+
+                            // light blast implementation
+
+                            _isUtilityOverheat = true;
+                            // start overheat timer
+                            _utilityOverheatTimer = 0f;
+
+                            break;
+                        case Utility.None:
+                            break;
+                    }
+                }
+
                 // handle primary overheat state
                 if (_isPrimaryOverheat)
                 {
@@ -450,8 +481,16 @@ public class PlayerController : MonoBehaviour
                     else
                         _secondaryOverheatTimer += Time.deltaTime;
                 }
-
-                // Utility Ability Handling (nothing for now)
+                // handle utility overheat state
+                if(_isUtilityOverheat)
+                {
+                    if (_utilityOverheatTimer > OverheatDuration)
+                    {
+                        _isUtilityOverheat = false;
+                    }
+                    else
+                        _utilityOverheatTimer += Time.deltaTime;
+                }
 
                 // Primary/secondary equipped swap
                 if (InputHelper.GetRightClickDown())
@@ -701,11 +740,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public float GetUtilityOverheat()
+    {
+        // no intermediate heat state required (overheat or no overheat only)
+        if (_isUtilityOverheat)
+            return (int)(Time.time / OverheatFlashRate) % 2 == 0 ? 0f : 1f;
+        else
+            return 0f;
+    }
+
     public bool IsPrimaryEquipped() { return _isPrimaryEquipped; }
 
     public Primary GetPrimary() { return Primary; }
 
     public Secondary GetSecondary() { return Secondary; }
+
+    public Utility GetUtility() { return Utility; }
 
     // returns camera focus point of the player
     public Vector3 GetFocusPosition()

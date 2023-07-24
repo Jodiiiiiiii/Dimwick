@@ -1936,7 +1936,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 25719cede48abb04b895bdd223354fdc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5235687f9e52e1546b29a7ba8ab27970, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2010,11 +2010,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Icon: {fileID: 3415720960000732488}
+  BackColor: {fileID: 0}
   RapidFlare: {fileID: 21300000, guid: 5f3761a7638dde043bf677865a5501b4, type: 3}
   FlareBurst: {fileID: 21300000, guid: 0efed6b1781f53c4bbb0a38ab89e9393, type: 3}
   FlameGun: {fileID: 21300000, guid: 8783c68b48d31f344bc5a8c8d439db49, type: 3}
   FlameSlash: {fileID: 21300000, guid: 1ee53a0fc7ad6e747a4ec019bba70973, type: 3}
-  None: {fileID: 21300000, guid: 25719cede48abb04b895bdd223354fdc, type: 3}
+  NonePrimary: {fileID: 21300000, guid: 5235687f9e52e1546b29a7ba8ab27970, type: 3}
+  NoneSecondary: {fileID: 21300000, guid: 2f2c99f0ee0233c429a0b79615a05acf, type: 3}
 --- !u!1 &3415720960853545274
 GameObject:
   m_ObjectHideFlags: 0
@@ -2462,7 +2464,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: efd2d9ea2e68ff7419ff33a12fe0df49, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e52ac73c6a3bdf443a686a000082093d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2536,11 +2538,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Icon: {fileID: 3415720960381522004}
+  BackColor: {fileID: 0}
   RapidFlare: {fileID: 21300000, guid: 5ab6007f1de65e54a846d850cc4c51f5, type: 3}
   FlareBurst: {fileID: 21300000, guid: 1165581ba64e99e46a6b1ada7c2209f4, type: 3}
   FlameGun: {fileID: 21300000, guid: af6201c72c40d444e8f7e09985bb248b, type: 3}
   FlameSlash: {fileID: 21300000, guid: 11d3f97593fc04c4c84ea71eea12959f, type: 3}
-  None: {fileID: 21300000, guid: efd2d9ea2e68ff7419ff33a12fe0df49, type: 3}
+  NonePrimary: {fileID: 21300000, guid: e7fbe711bfc1c0348a25a293a5dfc88c, type: 3}
+  NoneSecondary: {fileID: 21300000, guid: e52ac73c6a3bdf443a686a000082093d, type: 3}
 --- !u!1 &5710271717940793684
 GameObject:
   m_ObjectHideFlags: 0

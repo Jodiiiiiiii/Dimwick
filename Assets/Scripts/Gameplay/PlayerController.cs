@@ -623,6 +623,7 @@ public class PlayerController : MonoBehaviour
         #endregion
 
         #region DEBUG_CONTROLS
+        #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (Primary == Primary.FlareBurst)
@@ -638,6 +639,14 @@ public class PlayerController : MonoBehaviour
             else
                 Secondary = Secondary.FlameGun;
         }    
+        if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (Utility == Utility.LightBlast)
+                Utility = Utility.LightBlink;
+            else
+                Utility = Utility.LightBlast;
+        }
+        #endif
         #endregion
     }
 

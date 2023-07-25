@@ -132,6 +132,11 @@ public class PlayerController : MonoBehaviour
     [Tooltip("additional angle to rotate slash by relative to player origin")]
     public float AngleOffset_FlameSlash = 10f;
 
+    [Header("Utility - LightBlink")]
+    [Tooltip("Includes Walls/Edges which player can collide with and should not teleport into")]
+    public LayerMask BlinkLayerMask;
+    public float MaxBlinkRange = 5f;
+
     // components
     [HideInInspector] public Rigidbody2D Rb;
     [HideInInspector] public Animator Animator;
@@ -438,7 +443,19 @@ public class PlayerController : MonoBehaviour
                     {
                         case Utility.LightBlink:
 
-                            // light blink implementation
+                            // raycast towards mouse for teleport
+                            float raycastDistance = Mathf.Min(MaxBlinkRange, Vector2.Distance(AimPivot.transform.position, cam.ScreenToWorldPoint(Input.mousePosition)));
+                            float raycastRadius = Mathf.Max(Collider.bounds.extents.x, Collider.bounds.extents.y);
+                            RaycastHit2D hit = Physics2D.CircleCast(AimPivot.transform.position, raycastRadius, _targetFacing, raycastDistance, BlinkLayerMask);
+
+                            if (hit.collider == null) // no obstructions
+                            {
+                                Rb.position = Rb.position + _targetFacing * raycastDistance;
+                            }
+                            else // obstruction collision
+                            {
+                                Rb.position = Rb.position + _targetFacing * (hit.distance - raycastRadius);
+                            }
 
                             _isUtilityOverheat = true;
                             // start overheat timer

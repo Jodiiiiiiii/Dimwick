@@ -33,9 +33,9 @@ public class DarknessController : MonoBehaviour
     public GameObject SpawnProjectile;
 
     [Header("Victory Transition")]
-    public Light2D GlobalLight;
+    public SpriteRenderer VictoryTransitionWhite;
     public float VictoryTransitionTime = 4f;
-    public float LightIncreaseRate = 3f;
+    public float AlphaIncreaseRate = 3f;
     [Tooltip("to be disabled during victory")]
     public Light2D DarkSpotLight;
     [HideInInspector] public GameObject EnemiesParent;
@@ -90,7 +90,7 @@ public class DarknessController : MonoBehaviour
         {
             if (_isVictoryTransition)
             {
-                GlobalLight.intensity += Time.deltaTime * LightIncreaseRate;
+                VictoryTransitionWhite.color = new Color(1, 1, 1, VictoryTransitionWhite.color.a + Time.deltaTime * AlphaIncreaseRate);
 
                 if (_victoryTransitionTimer < 0f)
                 {

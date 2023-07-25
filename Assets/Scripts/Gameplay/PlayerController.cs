@@ -138,6 +138,9 @@ public class PlayerController : MonoBehaviour
     public LayerMask BlinkLayerMask;
     public float MaxBlinkRange = 5f;
 
+    [Header("Utility - LightBlast")]
+    public GameObject Bullet_LightBlast;
+
     // components
     [HideInInspector] public Rigidbody2D Rb;
     [HideInInspector] public Animator Animator;
@@ -474,7 +477,8 @@ public class PlayerController : MonoBehaviour
                             break;
                         case Utility.LightBlast:
 
-                            // light blast implementation
+                            // create blast 'projectile'
+                            Instantiate(Bullet_LightBlast, AimPivot.transform.position, Bullet_LightBlast.transform.rotation);
 
                             _isUtilityOverheat = true;
                             // start overheat timer

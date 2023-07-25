@@ -191,7 +191,7 @@ public abstract class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("PlayerBullet") || collision.CompareTag("FlameSlash")) // flame slash uses trigger so it doesnt move
+        if(collision.CompareTag("PlayerBullet") || collision.CompareTag("FlameSlash") || collision.CompareTag("LightBlast")) // flame slash uses trigger so it doesnt move
         {
             collision.gameObject.TryGetComponent<Projectile>(out Projectile projectile);
             if (projectile != null)
@@ -214,10 +214,13 @@ public abstract class EnemyController : MonoBehaviour
         // start hitstun timer
         _hitStunTimer += projectile.HitstunTime;
 
-        // set knockback based on bullet rotation and knockback stats
-        Vector2 knockback = Quaternion.Euler(0, 0, projectile.transform.rotation.eulerAngles.z)
-            * Vector2.right * projectile.KnockbackSpeed * (1 - KnockbackReductionFactor);
-        _knockbackVelocity += knockback;
+        // set knockback based on bullet type/rotation and knockback stats
+        Vector2 knockback;
+        if (projectile.CompareTag("LightBlast"))
+            knockback = ((Vector2) transform.position - (Vector2) projectile.transform.position).normalized;
+        else // standard projectiles or flame slash
+            knockback = Quaternion.Euler(0, 0, projectile.transform.rotation.eulerAngles.z) * Vector2.right;
+        _knockbackVelocity += knockback * projectile.KnockbackSpeed * (1 - KnockbackReductionFactor);
     }
 
     /// <summary>

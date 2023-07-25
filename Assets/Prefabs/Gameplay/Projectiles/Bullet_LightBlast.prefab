@@ -47,7 +47,7 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.7
+  m_FalloffIntensity: 0.427
   m_Color: {r: 0.8537736, g: 1, b: 0.9827247, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 2
+  m_PointLightOuterRadius: 4
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -124,9 +124,11 @@ GameObject:
   - component: {fileID: 9221771718114101273}
   - component: {fileID: 9221771718114101277}
   - component: {fileID: 9221771718114101276}
+  - component: {fileID: 8954214250727867301}
+  - component: {fileID: 2615626082532666061}
   m_Layer: 7
-  m_Name: Bullet_LightBlink
-  m_TagString: PlayerBullet
+  m_Name: Bullet_LightBlast
+  m_TagString: LightBlast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -258,11 +260,41 @@ MonoBehaviour:
   Light: {fileID: 9221771717792645841}
   MaxLightIntensity: 1
   MinLightIntensity: 0
-  MaxLightRange: 2
+  MaxLightRange: 4
   MinLightRange: 0
   DestroyOnCollision: 0
   HitstunTime: 0.3
-  KnockbackSpeed: 7
-  Damage: 10
-  Lifespan: 5
+  KnockbackSpeed: 14
+  Damage: 0
+  Lifespan: 3
   StopMotionAfter: -1
+--- !u!58 &8954214250727867301
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9221771718114101272}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5
+--- !u!114 &2615626082532666061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9221771718114101272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e0b9e540c707a488b38c96a659511f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Collider: {fileID: 8954214250727867301}
+  DelayTime: 0.25

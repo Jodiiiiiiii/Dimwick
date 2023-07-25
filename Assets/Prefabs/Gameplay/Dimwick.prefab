@@ -5698,6 +5698,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 576
   MaxBlinkRange: 7
+  Bullet_LightBlast: {fileID: 9221771718114101272, guid: 52b97e35cbe21094fb57c2a7a6ec2272, type: 3}
   Rb: {fileID: 0}
   Animator: {fileID: 0}
   Collider: {fileID: 0}

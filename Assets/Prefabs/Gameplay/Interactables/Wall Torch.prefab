@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 8268736603772655361}
   - component: {fileID: 3899066460593070749}
   - component: {fileID: -1447720196453420413}
+  - component: {fileID: 5627485146942854987}
   m_Layer: 0
   m_Name: Wall Torch
   m_TagString: Untagged
@@ -250,6 +251,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractionIndicator: {fileID: 6065324763167660307}
+--- !u!114 &5627485146942854987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7072434203628208720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b324170ba77948c48973f66d7ea5808e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Light: {fileID: 3576055666579410395}
+  MaxPeriod: 0.2
+  MinPeriod: 0.1
+  MaxIntensity: 0.95
+  MinIntensity: 0.75
+  MaxRange: 8.2
+  MinRange: 7.8
+  GoalSharpness: 100
 --- !u!1001 &536682718573056797
 PrefabInstance:
   m_ObjectHideFlags: 0

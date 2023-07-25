@@ -266,7 +266,7 @@ MonoBehaviour:
   HitstunTime: 0.3
   KnockbackSpeed: 14
   Damage: 0
-  Lifespan: 3
+  Lifespan: 1
   StopMotionAfter: -1
 --- !u!58 &8954214250727867301
 CircleCollider2D:

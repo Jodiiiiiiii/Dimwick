@@ -30813,7 +30813,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9184802251503072622, guid: 59369981d8414274286d4e137b39490b, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9184802251503072622, guid: 59369981d8414274286d4e137b39490b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -37399,10 +37399,6 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 8879769926183105552, guid: 7bff4968418c42c488eace1b71d40637, type: 3}
-      propertyPath: BlinkLayerMask.m_Bits
-      value: 576
-      objectReference: {fileID: 0}
     - target: {fileID: 8879769926183105553, guid: 7bff4968418c42c488eace1b71d40637, type: 3}
       propertyPath: m_RootOrder
       value: 3

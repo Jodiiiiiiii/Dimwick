@@ -5678,7 +5678,7 @@ MonoBehaviour:
   Bullet_RapidFlare: {fileID: 9221771718114101272, guid: 324f1b2dc10fae9439c8e23db3fb1f7e, type: 3}
   Cooldown_RapidFlare: 0.15
   HeatPer_RapidFlare: 0.075
-  SpreadAngle_RapidFlare: 10
+  SpreadAngle_RapidFlare: 8
   Bullet_FlareBurst: {fileID: 9221771718114101272, guid: c0df8cedb21d93748aecf5eecf6a44a9, type: 3}
   Cooldown_FlareBurst: 0.6
   HeatPer_FlareBurst: 0.35
@@ -5693,6 +5693,11 @@ MonoBehaviour:
   HeatPer_FlameSlash: 0.6
   Displacement_FlameSlash: 0.5
   AngleOffset_FlameSlash: -10
+  Bullet_LightBlink: {fileID: 9221771718114101272, guid: 0f8d219537641734fb2183d065efe980, type: 3}
+  BlinkLayerMask:
+    serializedVersion: 2
+    m_Bits: 576
+  MaxBlinkRange: 7
   Rb: {fileID: 0}
   Animator: {fileID: 0}
   Collider: {fileID: 0}

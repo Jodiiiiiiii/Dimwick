@@ -133,6 +133,7 @@ public class PlayerController : MonoBehaviour
     public float AngleOffset_FlameSlash = 10f;
 
     [Header("Utility - LightBlink")]
+    public GameObject Bullet_LightBlink;
     [Tooltip("Includes Walls/Edges which player can collide with and should not teleport into")]
     public LayerMask BlinkLayerMask;
     public float MaxBlinkRange = 5f;
@@ -443,6 +444,9 @@ public class PlayerController : MonoBehaviour
                     {
                         case Utility.LightBlink:
 
+                            // create initial light
+                            Instantiate(Bullet_LightBlink, AimPivot.transform.position, Bullet_LightBlink.transform.rotation);
+
                             // raycast towards mouse for teleport
                             float raycastDistance = Mathf.Min(MaxBlinkRange, Vector2.Distance(AimPivot.transform.position, cam.ScreenToWorldPoint(Input.mousePosition)));
                             float raycastRadius = Mathf.Max(Collider.bounds.extents.x, Collider.bounds.extents.y);
@@ -451,10 +455,16 @@ public class PlayerController : MonoBehaviour
                             if (hit.collider == null) // no obstructions
                             {
                                 Rb.position = Rb.position + _targetFacing * raycastDistance;
+                                // create destination light
+                                Instantiate(Bullet_LightBlink, AimPivot.transform.position + (Vector3) _targetFacing * raycastDistance, 
+                                    Bullet_LightBlink.transform.rotation);
                             }
                             else // obstruction collision
                             {
                                 Rb.position = Rb.position + _targetFacing * (hit.distance - raycastRadius);
+                                // create destination light
+                                Instantiate(Bullet_LightBlink, AimPivot.transform.position + (Vector3) _targetFacing * (hit.distance - raycastRadius),
+                                    Bullet_LightBlink.transform.rotation);
                             }
 
                             _isUtilityOverheat = true;

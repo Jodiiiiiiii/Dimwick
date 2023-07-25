@@ -36,9 +36,6 @@ public class DarknessController : MonoBehaviour
     public SpriteRenderer VictoryTransitionWhite;
     public float VictoryTransitionTime = 4f;
     public float AlphaIncreaseRate = 3f;
-    [Tooltip("to be disabled during victory")]
-    public Light2D DarkSpotLight;
-    [HideInInspector] public GameObject EnemiesParent;
 
     [HideInInspector] public Animator Anim;
     [HideInInspector] public Rigidbody2D Rb;
@@ -65,7 +62,6 @@ public class DarknessController : MonoBehaviour
         Anim = GetComponent<Animator>();
         Rb = GetComponent<Rigidbody2D>();
         _player = GameObject.Find("Dimwick");
-        EnemiesParent = GameObject.Find("Enemies");
 
         _hp = MaxHP;
 
@@ -171,9 +167,8 @@ public class DarknessController : MonoBehaviour
                 if (_hp <= 0)
                 {
                     _isVictoryTransition = true;
-                    Destroy(EnemiesParent);
                     _victoryTransitionTimer = VictoryTransitionTime;
-                    DarkSpotLight.intensity = 0f;
+                    _player.GetComponent<PlayerController>().SetInvincibility(true); // so player cannot die during victory
                 }
             }
         }

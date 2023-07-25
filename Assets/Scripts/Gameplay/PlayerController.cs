@@ -41,6 +41,10 @@ public class PlayerController : MonoBehaviour
 
     public Camera cam;
 
+    [Header("Invincibility")]
+    [Tooltip("invincible player takes no damage but all other states apply - used for victory transition")]
+    public bool IsInvincible = false;
+
     [Header("Scene Enter - Fall")]
     public float SceneEnterFallTime = 2f;
     public float SceneEnterFallDistance = 10f;
@@ -687,7 +691,8 @@ public class PlayerController : MonoBehaviour
         if (!_isInvulnerable && collision.gameObject.CompareTag("Enemy"))
         {
             // decrement health
-            _hp--;
+            if(!IsInvincible)
+                _hp--;
             // start hitstun timer
             _hitStunTimer = ContactDamageHitstun;
             // set knockback based on bullet rotation and knockback stats
@@ -709,7 +714,8 @@ public class PlayerController : MonoBehaviour
             if (projectile != null)
             {
                 // decrement health
-                _hp--;
+                if(!IsInvincible)
+                    _hp--;
                 // start hitstun timer
                 _hitStunTimer = projectile.HitstunTime;
                 // set knockback based on bullet rotation and knockback stats
@@ -813,6 +819,8 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region PUBLIC MODIFIERS
+    public void SetInvincibility(bool isInvincible) { IsInvincible = isInvincible; }
+
     public void ConsumeHealTorch()
     {
         _hp = Mathf.Clamp(_hp + HealthRecoverPerTorch, 0, MAX_HP);

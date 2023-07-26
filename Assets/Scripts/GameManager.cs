@@ -6,8 +6,7 @@ using UnityEngine.Rendering.Universal;
 
 public enum Difficulty
 {
-    Tutorial,
-    Easy,
+    Demo,
     Hard
 }
 
@@ -70,7 +69,7 @@ public class GameManager : MonoBehaviour
                 InitializeDefaultPlayerData();
 
                 // default difficulty upon first initialization
-                _data.Difficulty = Difficulty.Tutorial;
+                _data.Difficulty = Difficulty.Demo;
             }
 
             // components

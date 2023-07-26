@@ -17,11 +17,8 @@ public class SceneManagementHelper : MonoBehaviour
     {
         switch(GameManager.instance.GetDifficulty())
         {
-            case Difficulty.Tutorial:
-                SceneManager.LoadScene("Tutorial");
-                break;
-            case Difficulty.Easy:
-                // currently no easy scene
+            case Difficulty.Demo:
+                SceneManager.LoadScene("Demo1");
                 break;
             case Difficulty.Hard:
                 // currently no hard scene
@@ -48,10 +45,8 @@ public class SceneManagementHelper : MonoBehaviour
 
     public void SetDifficulty(string difficulty)
     {
-        if (difficulty == "Tutorial")
-            GameManager.instance.SetDifficulty(Difficulty.Tutorial);
-        else if (difficulty == "Easy")
-            GameManager.instance.SetDifficulty(Difficulty.Easy);
+        if (difficulty == "Demo")
+            GameManager.instance.SetDifficulty(Difficulty.Demo);
         else if (difficulty == "Hard")
             GameManager.instance.SetDifficulty(Difficulty.Hard);
         else

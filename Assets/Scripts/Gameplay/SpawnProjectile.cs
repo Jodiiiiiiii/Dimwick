@@ -17,6 +17,10 @@ public class SpawnProjectile : MonoBehaviour
     [Header("Lifespan")]
     public float Lifespan = 3f;
 
+    [Header("Hit Stats")]
+    public float HitstunTime = 0.4f;
+    public float KnockbackSpeed = 6f;
+
     [HideInInspector] public Rigidbody2D Rb;
 
     private bool _isStopped = false;
@@ -40,7 +44,7 @@ public class SpawnProjectile : MonoBehaviour
             Rb.velocity = (Vector2)transform.right * Mathf.Lerp(MaxSpeed, MinSpeed, _lifespanTimer / Lifespan);
 
         // lifespan updates
-        if (_lifespanTimer > Lifespan)
+        if (_lifespanTimer >= Lifespan)
         {
             float rand = Random.Range(0, 3);
             if (rand < 1)
@@ -59,5 +63,9 @@ public class SpawnProjectile : MonoBehaviour
     {
         if (collision.CompareTag("Wall") || collision.CompareTag("Edge"))
             _isStopped = true;
+
+        if (collision.CompareTag("LightBlast"))
+            _lifespanTimer = Lifespan; // immediately burst the spawn projectile
+
     }
 }

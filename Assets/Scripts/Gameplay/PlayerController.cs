@@ -728,6 +728,25 @@ public class PlayerController : MonoBehaviour
             else
                 Debug.LogError("Invalid enemy projectile collison");
         }
+        // spawn projectile bullet damage
+        if(!_isInvulnerable && collision.CompareTag("SpawnProjectile")) // apply damage and hitstun
+        {
+            collision.gameObject.TryGetComponent<SpawnProjectile>(out SpawnProjectile projectile);
+            if (projectile != null)
+            {
+                // decrement health
+                if (!IsInvincible)
+                    _hp--;
+                // start hitstun timer
+                _hitStunTimer = projectile.HitstunTime;
+                // set knockback based on bullet rotation and knockback stats
+                _targetVelocity = Quaternion.Euler(0, 0, collision.transform.rotation.eulerAngles.z) * Vector2.right * projectile.KnockbackSpeed;
+
+                TransitionToState(CharacterState.Hitstun);
+            }
+            else
+                Debug.Log("Invalid spawn projectile collision");
+        }    
     }
 
     private void OnTriggerExit2D(Collider2D collision)

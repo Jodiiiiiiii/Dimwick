@@ -12,6 +12,7 @@ TagManager:
   - FlameSlash
   - Edge
   - LightBlast
+  - SpawnProjectile
   layers:
   - Default
   - TransparentFX

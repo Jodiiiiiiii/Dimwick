@@ -5,6 +5,7 @@ using UnityEngine.Rendering.Universal;
 
 public class Projectile : MonoBehaviour
 {
+
     [Header("Motion")]
     public float MaxSpeed = 1f;
     public float MinSpeed = 0.5f;
@@ -28,36 +29,70 @@ public class Projectile : MonoBehaviour
     [Tooltip("-1 means motion never stops")]
     public float StopMotionAfter = -1f;
 
+    [Header("Fading")]
+    public float FadePeriod = 1f;
+
     // private variables
     private Rigidbody2D _rb;
+    private Collider2D _collider;
+    private SpriteRenderer _spriteRenderer;
     private float _lifespanTimer = 0f;
     private bool _stopped = false;
+    private bool _isFading = false;
+    private float _fadingTimer;
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        TryGetComponent(out _collider);
+        TryGetComponent(out _spriteRenderer);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // update lighting
-        Light.intensity = Mathf.Lerp(MaxLightIntensity, MinLightIntensity, _lifespanTimer / Lifespan);
-        Light.pointLightOuterRadius = Mathf.Lerp(MaxLightRange, MinLightRange, _lifespanTimer / Lifespan);
+        // fading
+        if (_isFading)
+        {
+            // destroy at end of fade
+            if (_fadingTimer <= 0)
+                Destroy(gameObject);
 
-        // update velocity
-        if (_stopped)
-            _rb.velocity = Vector2.zero;
+            // fade out
+            if(_spriteRenderer != null)
+                _spriteRenderer.color = new Color(1, 1, 1, _fadingTimer / FadePeriod);
+            // update timer
+            _fadingTimer -= Time.deltaTime;
+        }
         else
-            _rb.velocity = (Vector2) transform.right * Mathf.Lerp(MaxSpeed, MinSpeed, _lifespanTimer / Lifespan);
+        {
+            // update lighting
+            Light.intensity = Mathf.Lerp(MaxLightIntensity, MinLightIntensity, _lifespanTimer / Lifespan);
+            Light.pointLightOuterRadius = Mathf.Lerp(MaxLightRange, MinLightRange, _lifespanTimer / Lifespan);
 
-        // lifespan updates
-        if (_lifespanTimer > Lifespan)
-            Destroy(gameObject);
-        if (StopMotionAfter != -1 && _lifespanTimer > StopMotionAfter)
-            _stopped = true;
-        _lifespanTimer += Time.deltaTime;
+            // lifespan updates
+            if (_lifespanTimer > Lifespan)
+            {
+                _isFading = true;
+                _fadingTimer = FadePeriod;
+                _stopped = true;
+            }
+            if (StopMotionAfter != -1 && _lifespanTimer > StopMotionAfter)
+                _stopped = true;
+
+            _lifespanTimer += Time.deltaTime;
+
+            // update velocity
+            if (_stopped)
+            {
+                _rb.velocity = Vector2.zero;
+                if(_collider != null)
+                    _collider.enabled = false; // disable collider so it cannot keep hitting enemies
+            }
+            else
+                _rb.velocity = (Vector2)transform.right * Mathf.Lerp(MaxSpeed, MinSpeed, _lifespanTimer / Lifespan);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

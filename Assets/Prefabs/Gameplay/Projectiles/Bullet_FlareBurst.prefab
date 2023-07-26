@@ -188,7 +188,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1477882123
   m_SortingLayer: 5
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1038145359, guid: f3275382ae35bb844bf5607434275460, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -267,6 +267,7 @@ MonoBehaviour:
   Damage: 2
   Lifespan: 5
   StopMotionAfter: -1
+  FadePeriod: 1
 --- !u!61 &-4305271094723904223
 BoxCollider2D:
   m_ObjectHideFlags: 0

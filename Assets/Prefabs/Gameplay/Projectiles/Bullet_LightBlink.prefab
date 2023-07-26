@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 0000000075e7a32215891ea765ad872aabaf62570bb116583d9051655797d49d63a909c4112b4a0de34fc6ef
+  m_ApplyToSortingLayers: 0000000075e7a32215891ea765ad872aabaf62570bb116583d9051655797d49d63a909c4112b4a0de34fc6efabeef77a
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -266,3 +266,4 @@ MonoBehaviour:
   Damage: 10
   Lifespan: 5
   StopMotionAfter: -1
+  FadePeriod: 1

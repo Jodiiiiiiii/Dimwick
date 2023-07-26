@@ -36798,7 +36798,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3212011642237149334, guid: e6d97707cc9e3cd4ea0fcb102329ca95, type: 3}
       propertyPath: Text
-      value: Watch out for enemies that will launch darkness at you
+      value: Watch out for enemies that will launch darkness at you. you must remove
+        them all to move on
       objectReference: {fileID: 0}
     - target: {fileID: 3212011642237149334, guid: e6d97707cc9e3cd4ea0fcb102329ca95, type: 3}
       propertyPath: TextBox
@@ -36868,7 +36869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3212011642237149334, guid: e6d97707cc9e3cd4ea0fcb102329ca95, type: 3}
       propertyPath: Text
-      value: Pick up the weapon crate for a random primary weapon. Press left click
+      value: Pick up the red weapon crate for a random flare weapon. Press left click
         to fire!
       objectReference: {fileID: 0}
     - target: {fileID: 3212011642237149334, guid: e6d97707cc9e3cd4ea0fcb102329ca95, type: 3}

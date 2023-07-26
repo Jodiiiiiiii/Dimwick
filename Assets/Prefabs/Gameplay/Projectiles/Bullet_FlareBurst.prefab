@@ -263,7 +263,7 @@ MonoBehaviour:
   MinLightRange: 0
   DestroyOnCollision: 0
   HitstunTime: 0.05
-  KnockbackSpeed: 2
+  KnockbackSpeed: 1.4
   Damage: 2
   Lifespan: 5
   StopMotionAfter: -1

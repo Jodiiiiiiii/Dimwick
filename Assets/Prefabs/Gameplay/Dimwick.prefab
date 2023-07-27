@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 0000000075e7a32265ad872aabaf62570bb116585797d49d15891ea763a909c4112b4a0d
+  m_ApplyToSortingLayers: 0000000075e7a32265ad872aabaf62570bb116585797d49d15891ea763a909c4112b4a0dabeef77a
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 0000000075e7a32265ad872aabaf62570bb116585797d49d15891ea73d90516563a909c4112b4a0d
+  m_ApplyToSortingLayers: 0000000075e7a32265ad872aabaf62570bb116585797d49d15891ea73d90516563a909c4112b4a0dabeef77a
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -5459,7 +5459,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -272216093
-  m_SortingLayer: 11
+  m_SortingLayer: 12
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -5634,6 +5634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+  IsInvincible: 0
   SceneEnterFallTime: 1.5
   SceneEnterFallDistance: 15
   MaxWalkSpeed: 5
@@ -5678,12 +5679,12 @@ MonoBehaviour:
   Bullet_RapidFlare: {fileID: 9221771718114101272, guid: 324f1b2dc10fae9439c8e23db3fb1f7e, type: 3}
   Cooldown_RapidFlare: 0.15
   HeatPer_RapidFlare: 0.075
-  SpreadAngle_RapidFlare: 8
+  SpreadAngle_RapidFlare: 9
   Bullet_FlareBurst: {fileID: 9221771718114101272, guid: c0df8cedb21d93748aecf5eecf6a44a9, type: 3}
   Cooldown_FlareBurst: 0.6
   HeatPer_FlareBurst: 0.35
   SpreadAngle_FlareBurst: 10
-  BulletCount_FlareBurst: 10
+  BulletCount_FlareBurst: 7
   Bullet_FlameGun: {fileID: 9221771718114101272, guid: 6819c162b8feb8a4eb7c1f11984bfc11, type: 3}
   Cooldown_FlameGun: 0.4
   HeatPer_FlameGun: 0.2
@@ -5842,7 +5843,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 0000000075e7a32265ad872aabaf62570bb116583d9051655797d49d15891ea763a909c4112b4a0de34fc6ef
+  m_ApplyToSortingLayers: 0000000075e7a32265ad872aabaf62570bb116583d9051655797d49d15891ea763a909c4112b4a0de34fc6efabeef77a
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0

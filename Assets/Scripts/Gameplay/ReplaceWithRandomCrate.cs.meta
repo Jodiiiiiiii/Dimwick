@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2850f9a6a52fe5c4198025ee34692cfa
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - PrimaryCrate: {fileID: 6688824165608884168, guid: b9ba5944828880c4f803851f506973dd, type: 3}
+  - SecondaryCrate: {fileID: 1294866721260043812, guid: c6b454092b1e5e641a65831ab5c1fc0c, type: 3}
+  - UtilityCrate: {fileID: 677284278907964209, guid: a1fd5a9e421358448b022b25150d13af, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

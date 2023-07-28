@@ -182,7 +182,8 @@ public class DarknessController : MonoBehaviour
             if (projectile != null)
             {
                 _hp -= projectile.Damage;
-                Destroy(collision.gameObject);
+                if(collision.CompareTag("PlayerBullet")) // only destroy bullets, not flame slash
+                    Destroy(collision.gameObject);
             }
             else
                 Debug.LogError("Invalid player projectile collison");

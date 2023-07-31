@@ -101696,7 +101696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3212011642237149334, guid: e6d97707cc9e3cd4ea0fcb102329ca95, type: 3}
       propertyPath: Text
-      value: Beware up ahead for enmies that can both fire darkness shots and move!
+      value: Beware up ahead for enemies that can both fire darkness shots and move!
       objectReference: {fileID: 0}
     - target: {fileID: 3212011642237149334, guid: e6d97707cc9e3cd4ea0fcb102329ca95, type: 3}
       propertyPath: TextBox

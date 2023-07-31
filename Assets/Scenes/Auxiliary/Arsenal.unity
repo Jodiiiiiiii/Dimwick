@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 145858732}
   - component: {fileID: 145858731}
   - component: {fileID: 145858730}
+  - component: {fileID: 145858733}
   m_Layer: 5
   m_Name: Torch Left
   m_TagString: Untagged
@@ -417,6 +418,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145858728}
   m_CullTransparentMesh: 1
+--- !u!114 &145858733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145858728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b324170ba77948c48973f66d7ea5808e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Light: {fileID: 8263090}
+  MaxPeriod: 0.2
+  MinPeriod: 0.1
+  MaxIntensity: 0.95
+  MinIntensity: 0.75
+  MaxRange: 8.5
+  MinRange: 8
+  GoalSharpness: 100
 --- !u!1 &167086053
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,6 +982,7 @@ GameObject:
   - component: {fileID: 517237781}
   - component: {fileID: 517237780}
   - component: {fileID: 517237779}
+  - component: {fileID: 517237782}
   m_Layer: 5
   m_Name: Torch Right
   m_TagString: Untagged
@@ -1048,6 +1070,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 517237777}
   m_CullTransparentMesh: 1
+--- !u!114 &517237782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517237777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b324170ba77948c48973f66d7ea5808e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Light: {fileID: 653990885}
+  MaxPeriod: 0.2
+  MinPeriod: 0.1
+  MaxIntensity: 0.95
+  MinIntensity: 0.75
+  MaxRange: 8.5
+  MinRange: 8
+  GoalSharpness: 100
 --- !u!1 &546850086
 GameObject:
   m_ObjectHideFlags: 0

@@ -53,4 +53,11 @@ public class SceneManagementHelper : MonoBehaviour
             Debug.LogError("Invalid difficulty type. double check spelling on button function");
     }
     #endregion
+
+    #region AUDIO FUNCTIONS
+    public void UIClickSound()
+    {
+        GameManager.instance.UIClickSound();
+    }
+    #endregion
 }

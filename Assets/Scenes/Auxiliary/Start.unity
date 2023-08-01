@@ -243,6 +243,18 @@ MonoBehaviour:
           m_StringArgument: Intro Narration
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 141451842}
+        m_TargetAssemblyTypeName: SceneManagementHelper, Assembly-CSharp
+        m_MethodName: UIClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &16894239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,6 +387,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Arsenal
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 141451842}
+        m_TargetAssemblyTypeName: SceneManagementHelper, Assembly-CSharp
+        m_MethodName: UIClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &78786618
@@ -911,6 +935,18 @@ MonoBehaviour:
       - m_Target: {fileID: 141451842}
         m_TargetAssemblyTypeName: SceneManagementHelper, Assembly-CSharp
         m_MethodName: QuitApplication
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 141451842}
+        m_TargetAssemblyTypeName: SceneManagementHelper, Assembly-CSharp
+        m_MethodName: UIClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6763,6 +6799,18 @@ MonoBehaviour:
           m_StringArgument: Credits
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 141451842}
+        m_TargetAssemblyTypeName: SceneManagementHelper, Assembly-CSharp
+        m_MethodName: UIClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1067794731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7295,6 +7343,30 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Hard
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SceneManagementHelper, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 141451842}
+        m_TargetAssemblyTypeName: SceneManagementHelper, Assembly-CSharp
+        m_MethodName: UIClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1625498777

@@ -48,6 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 6486460354989044400}
   _musicSource: {fileID: 4157891663871870567}
+  _musicVolume: 0.3
+  _uiClickClip: {fileID: 8300000, guid: ae521ae090f7a0f4ea2569a54ea5f298, type: 3}
+  _uiClickVolume: 0.7
 --- !u!82 &6486460354989044400
 AudioSource:
   m_ObjectHideFlags: 0

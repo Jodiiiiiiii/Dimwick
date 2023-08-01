@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
     private AudioClip[] _musicTracks;
     [SerializeField] private float _musicVolume = 0.3f;
 
+    // UI click sounds
+    [SerializeField] private AudioClip _uiClickClip;
+    [Range(0f, 1f)] [SerializeField] private float _uiClickVolume;
+
     // save data
     [System.Serializable]
     private class PlayerData
@@ -205,6 +209,11 @@ public class GameManager : MonoBehaviour
     public void StopMusic()
     {
         _musicSource.Stop();
+    }
+
+    public void UIClickSound()
+    {
+        _audioSource.PlayOneShot(_uiClickClip, _uiClickVolume);
     }
     #endregion
 }

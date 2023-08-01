@@ -176,7 +176,7 @@ MonoBehaviour:
   DeathClip: {fileID: 8300000, guid: 1d2b3afb33bbe3c418bd39455bcaf633, type: 3}
   DeathVolume: 0.5
   AttackClip: {fileID: 8300000, guid: ba1df5d09ec8b274f803f8fefd418ba8, type: 3}
-  AttackVolume: 0.4
+  AttackVolume: 0.5
   Rb: {fileID: 0}
   Anim: {fileID: 0}
   FlashEffect: {fileID: 0}

@@ -5707,20 +5707,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e656086d6eaa94a4ab626ef8558acacb, type: 3}
   - {fileID: 8300000, guid: 36cab5692e2e7ce4bbc190ffa711c1c3, type: 3}
   - {fileID: 8300000, guid: 02b5b057355522e4cae76aab38257506, type: 3}
-  StepVolume: 0.3
+  StepVolume: 0.2
   StepInterval: 0.25
   RapidFlareClip: {fileID: 8300000, guid: b9ccdddf10ee4fc4e91bca8749fa8889, type: 3}
-  RapidFlareVolume: 0
-  FlareBurstClip: {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
-  FlareBurstVolume: 0
-  FlameShotClip: {fileID: 8300000, guid: 0bd05763df902854a80475577a26666a, type: 3}
-  SlameShotVolume: 0
-  FlameSlashClip: {fileID: 8300000, guid: 9ab7ac9f6e729457d8a8dfa89151ee30, type: 3}
-  FlameSlashVolume: 0
-  LightBlinkClip: {fileID: 8300000, guid: 6e0f953c84c654df598106bc1cfa2275, type: 3}
-  LightBlinkVolume: 0
-  LightBlastClip: {fileID: 8300000, guid: 6e0f953c84c654df598106bc1cfa2275, type: 3}
-  LightBlastVolume: 0
+  RapidFlareVolume: 0.5
+  FlareBurstClip: {fileID: 8300000, guid: 7f99418db90fde74fa303eafe606fb62, type: 3}
+  FlareBurstVolume: 0.7
+  FlameShotClip: {fileID: 8300000, guid: 4e795f48c01f1aa4fa0cd812bcb42b43, type: 3}
+  FlameShotVolume: 0.2
+  FlameSlashClip: {fileID: 8300000, guid: 5674e9e8ce97e0045b192852805c49e5, type: 3}
+  FlameSlashVolume: 0.5
+  LightBlinkClip: {fileID: 8300000, guid: be48a55c4e3ccac4cb482ca0c192a0fc, type: 3}
+  LightBlinkVolume: 0.5
+  LightBlastClip: {fileID: 8300000, guid: 5908ad2686a42a6439e55bd917f01d84, type: 3}
+  LightBlastVolume: 0.5
   CratePickupClip: {fileID: 8300000, guid: dd3461af8012c5844ae334bcc8b92971, type: 3}
   CratePickupVolume: 0
   HealClip: {fileID: 8300000, guid: c48a972d3d024c2408a3331750786a29, type: 3}

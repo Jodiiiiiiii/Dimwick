@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip FlareBurstClip;
     [Range(0f, 1f)] public float FlareBurstVolume;
     public AudioClip FlameShotClip;
-    [Range(0f, 1f)] public float SlameShotVolume;
+    [Range(0f, 1f)] public float FlameShotVolume;
     public AudioClip FlameSlashClip;
     [Range(0f, 1f)] public float FlameSlashVolume;
     public AudioClip LightBlinkClip;
@@ -430,6 +430,8 @@ public class PlayerController : MonoBehaviour
                             {
                                 Instantiate(Bullet_RapidFlare, WeaponSprite.transform.position,
                                     Quaternion.Euler(0, 0, _facingAngle + 90 + Random.Range(-SpreadAngle_RapidFlare, SpreadAngle_RapidFlare)));
+
+                                GameManager.instance.PlaySound(RapidFlareClip, RapidFlareVolume);
                             }
                             break;
                         case Primary.FlareBurst:
@@ -441,6 +443,8 @@ public class PlayerController : MonoBehaviour
                                 for (int i = 0; i < BulletCount_FlareBurst; i++)
                                     Instantiate(Bullet_FlareBurst, WeaponSprite.transform.position,
                                         Quaternion.Euler(0, 0, _facingAngle + 90 + Random.Range(-SpreadAngle_FlareBurst, SpreadAngle_FlareBurst)));
+
+                                GameManager.instance.PlaySound(FlareBurstClip, FlareBurstVolume);
                             }
                             break;
                         case Primary.None:
@@ -460,6 +464,8 @@ public class PlayerController : MonoBehaviour
                             {
                                 Instantiate(Bullet_FlameGun, WeaponSprite.transform.position,
                                     Quaternion.Euler(0, 0, _facingAngle + 90 + Random.Range(-SpreadAngle_FlameGun, SpreadAngle_FlameGun)));
+
+                                GameManager.instance.PlaySound(FlameShotClip, FlameShotVolume);
                             }
                             break;
                         case Secondary.FlameSlash:
@@ -470,6 +476,8 @@ public class PlayerController : MonoBehaviour
                             {
                                 Instantiate(Bullet_FlameSlash, WeaponSprite.transform.position + Displacement_FlameSlash * new Vector3(_facing.x, _facing.y, 0),
                                     Quaternion.Euler(0, 0, _facingAngle + 90 + AngleOffset_FlameSlash));
+
+                                GameManager.instance.PlaySound(FlameSlashClip, FlameSlashVolume);
                             }
                             break;
                         case Secondary.None:
@@ -512,6 +520,8 @@ public class PlayerController : MonoBehaviour
                             // start overheat timer
                             _utilityOverheatTimer = 0f;
 
+                            GameManager.instance.PlaySound(LightBlinkClip, LightBlinkVolume);
+
                             break;
                         case Utility.LightBlast:
 
@@ -521,6 +531,8 @@ public class PlayerController : MonoBehaviour
                             _isUtilityOverheat = true;
                             // start overheat timer
                             _utilityOverheatTimer = 0f;
+
+                            GameManager.instance.PlaySound(LightBlastClip, LightBlastVolume);
 
                             break;
                         case Utility.None:
@@ -686,7 +698,7 @@ public class PlayerController : MonoBehaviour
             Animator.SetInteger("direction", DOWN_DIRECTION);
         #endregion
 
-        #region AUDIO
+        #region STEP AUDIO
         if (!_isSitting)
         {
             if (_stepTimer <= 0)

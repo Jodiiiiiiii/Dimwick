@@ -3,7 +3,12 @@ guid: 5f71a969b470a6e489845fbe67d609a5
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - DamageClip: {fileID: 8300000, guid: 2876e7fa4419a4a7096b8bb38641daa3, type: 3}
+  - DeathClip: {fileID: 8300000, guid: 1d2b3afb33bbe3c418bd39455bcaf633, type: 3}
+  - Rb: {instanceID: 0}
+  - Anim: {instanceID: 0}
+  - FlashEffect: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

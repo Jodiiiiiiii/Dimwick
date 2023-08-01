@@ -255,6 +255,10 @@ MonoBehaviour:
   MaxAttackCooldown: 6
   MovementSharpness: 10
   KnockbackReductionFactor: 0.95
+  DamageClip: {fileID: 8300000, guid: 2876e7fa4419a4a7096b8bb38641daa3, type: 3}
+  DamageVolume: 0.4
+  DeathClip: {fileID: 8300000, guid: 1d2b3afb33bbe3c418bd39455bcaf633, type: 3}
+  DeathVolume: 1
   Rb: {fileID: 0}
   Anim: {fileID: 0}
   FlashEffect: {fileID: 0}

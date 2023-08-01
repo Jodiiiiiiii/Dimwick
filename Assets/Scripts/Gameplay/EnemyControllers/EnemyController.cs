@@ -31,6 +31,12 @@ public abstract class EnemyController : MonoBehaviour
     [Tooltip("percentage of knockback that is ignored for turret enemy type")]
     public float KnockbackReductionFactor = 0.75f;
 
+    [Header("Audio")]
+    public AudioClip DamageClip;
+    [Range(0f, 1f)] public float DamageVolume;
+    public AudioClip DeathClip;
+    [Range(0f, 1f)] public float DeathVolume;
+
     // public and hidden
     [HideInInspector] public Rigidbody2D Rb;
     [HideInInspector] public Animator Anim;
@@ -86,6 +92,10 @@ public abstract class EnemyController : MonoBehaviour
             case EnemyState.Hitstun:
                 _isHitStunned = true;
                 FlashEffect.StartFlash();
+
+                if(_hp > 0 && fromState != EnemyState.Hitstun) // prevent playign death and damage clip at same time (or multiple damage clips)
+                    GameManager.instance.PlaySound(DamageClip, DamageVolume);
+
                 break;
         }
     }
@@ -186,7 +196,12 @@ public abstract class EnemyController : MonoBehaviour
         #endregion
 
         // destroy object when dies (Replace with death animation??)
-        if (_hp < 0f) Destroy(gameObject);
+        if (_hp < 0f)
+        {
+            GameManager.instance.PlaySound(DeathClip, DeathVolume);
+
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

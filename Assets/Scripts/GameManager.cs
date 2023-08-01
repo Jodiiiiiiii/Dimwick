@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioSource _musicSource;
     private AudioClip[] _musicTracks;
-    private float _musicVolume = 0.4f;
+    [SerializeField] private float _musicVolume = 0.3f;
 
     // save data
     [System.Serializable]

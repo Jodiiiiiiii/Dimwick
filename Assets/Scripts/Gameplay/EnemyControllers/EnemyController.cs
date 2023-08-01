@@ -36,6 +36,8 @@ public abstract class EnemyController : MonoBehaviour
     [Range(0f, 1f)] public float DamageVolume;
     public AudioClip DeathClip;
     [Range(0f, 1f)] public float DeathVolume;
+    public AudioClip AttackClip;
+    [Range(0f, 1f)] public float AttackVolume;
 
     // public and hidden
     [HideInInspector] public Rigidbody2D Rb;
@@ -156,6 +158,8 @@ public abstract class EnemyController : MonoBehaviour
 
                         _attackCooldownTimer = Random.Range(MinAttackCooldown, MaxAttackCooldown); ; // put attack on cooldown
                         _isAttacking = true; // used for animation state
+
+                        GameManager.instance.PlaySound(AttackClip, AttackVolume);
                     }
                 }
 

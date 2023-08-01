@@ -921,7 +921,8 @@ public class PlayerController : MonoBehaviour
                 Primary = Primary.FlareBurst;
                 break;
         }
-        
+
+        GameManager.instance.PlaySound(CratePickupClip, CratePickupVolume);
     }
 
     public void CollectRandomSecondary()
@@ -938,7 +939,8 @@ public class PlayerController : MonoBehaviour
                 Secondary = Secondary.FlameGun;
                 break;
         }
-        
+
+        GameManager.instance.PlaySound(CratePickupClip, CratePickupVolume);
     }
 
     public void CollectRandomUtility()
@@ -955,6 +957,8 @@ public class PlayerController : MonoBehaviour
                 Utility = Utility.LightBlast;
                 break;
         }
+
+        GameManager.instance.PlaySound(CratePickupClip, CratePickupVolume);
     }
 
     // should be called whenever a new scene is loaded to preserve player data

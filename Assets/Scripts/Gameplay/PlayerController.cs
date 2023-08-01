@@ -145,6 +145,38 @@ public class PlayerController : MonoBehaviour
     [Header("Utility - LightBlast")]
     public GameObject Bullet_LightBlast;
 
+    [Header("Audio - Footsteps")]
+    public AudioClip[] StepClips;
+    [Range(0f, 1f)] public float StepVolume;
+    [Tooltip("Time between each step")]
+    public float StepInterval = 0.2f;
+
+    [Header("Audio - Abilities")]
+    public AudioClip RapidFlareClip;
+    [Range(0f, 1f)] public float RapidFlareVolume;
+    public AudioClip FlareBurstClip;
+    [Range(0f, 1f)] public float FlareBurstVolume;
+    public AudioClip FlameShotClip;
+    [Range(0f, 1f)] public float SlameShotVolume;
+    public AudioClip FlameSlashClip;
+    [Range(0f, 1f)] public float FlameSlashVolume;
+    public AudioClip LightBlinkClip;
+    [Range(0f, 1f)] public float LightBlinkVolume;
+    public AudioClip LightBlastClip;
+    [Range(0f, 1f)] public float LightBlastVolume;
+
+    [Header("Audio - Misc.")]
+    public AudioClip CratePickupClip;
+    [Range(0f, 1f)] public float CratePickupVolume;
+    public AudioClip HealClip;
+    [Range(0f, 1f)] public float HealVolume;
+    public AudioClip ToggleEquippedClip;
+    [Range(0f, 1f)] public float ToggleEquippedVolume;
+    public AudioClip PlayerDamageClip;
+    [Range(0f, 1f)] public float PlayerDamageVolume;
+    public AudioClip GameOverClip;
+    [Range(0f, 1f)] public float GameOverVolume;
+
     // components
     [HideInInspector] public Rigidbody2D Rb;
     [HideInInspector] public Animator Animator;
@@ -190,6 +222,8 @@ public class PlayerController : MonoBehaviour
     // utility weapons
     private bool _isUtilityOverheat = false;
     private float _utilityOverheatTimer = 0f;
+    // audio
+    private float _stepTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -210,9 +244,8 @@ public class PlayerController : MonoBehaviour
         Secondary = GameManager.instance.GetSecondary();
         Utility = GameManager.instance.GetUtility();
 
-        // decrement health for tutorial only
-        if (SceneManager.GetActiveScene().name == "Tutorial")
-            _hp--;
+        // audio
+        _stepTimer = StepInterval;
 
         // enter scene enter falling state
         TransitionToState(CharacterState.SceneEnterFall);
@@ -265,6 +298,7 @@ public class PlayerController : MonoBehaviour
             case CharacterState.SceneEnterFall:
                 Collider.enabled = true;
                 _isFalling = false;
+                GameManager.instance.PlaySound(StepClips[Random.Range(0, StepClips.Length)], StepVolume); // landing sound
                 break;
             case CharacterState.Default:
                 break;
@@ -652,7 +686,22 @@ public class PlayerController : MonoBehaviour
             Animator.SetInteger("direction", DOWN_DIRECTION);
         #endregion
 
-        #region SCENE TRANSITIONS
+        #region AUDIO
+        if (!_isSitting)
+        {
+            if (_stepTimer <= 0)
+            {
+                _stepTimer = StepInterval;
+                GameManager.instance.PlaySound(StepClips[Random.Range(0, StepClips.Length)], StepVolume);
+            }
+            else
+                _stepTimer -= Time.deltaTime;
+        }
+        else
+            _stepTimer = 0; // instantly play sound on stand up
+        #endregion
+
+        #region GAME OVER
         if (_hp <= 0)
             SceneManager.LoadScene("Game Over");
         #endregion

@@ -5700,6 +5700,37 @@ MonoBehaviour:
     m_Bits: 576
   MaxBlinkRange: 7
   Bullet_LightBlast: {fileID: 9221771718114101272, guid: 52b97e35cbe21094fb57c2a7a6ec2272, type: 3}
+  StepClips:
+  - {fileID: 8300000, guid: 02e61c4748d7ba945b342c081e78717a, type: 3}
+  - {fileID: 8300000, guid: 67fcc558de7e7fd4cb86872f1844c064, type: 3}
+  - {fileID: 8300000, guid: fbd11a930e2656a46b993e681c338d41, type: 3}
+  - {fileID: 8300000, guid: e656086d6eaa94a4ab626ef8558acacb, type: 3}
+  - {fileID: 8300000, guid: 36cab5692e2e7ce4bbc190ffa711c1c3, type: 3}
+  - {fileID: 8300000, guid: 02b5b057355522e4cae76aab38257506, type: 3}
+  StepVolume: 0.3
+  StepInterval: 0.25
+  RapidFlareClip: {fileID: 8300000, guid: b9ccdddf10ee4fc4e91bca8749fa8889, type: 3}
+  RapidFlareVolume: 0
+  FlareBurstClip: {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
+  FlareBurstVolume: 0
+  FlameShotClip: {fileID: 8300000, guid: 0bd05763df902854a80475577a26666a, type: 3}
+  SlameShotVolume: 0
+  FlameSlashClip: {fileID: 8300000, guid: 9ab7ac9f6e729457d8a8dfa89151ee30, type: 3}
+  FlameSlashVolume: 0
+  LightBlinkClip: {fileID: 8300000, guid: 6e0f953c84c654df598106bc1cfa2275, type: 3}
+  LightBlinkVolume: 0
+  LightBlastClip: {fileID: 8300000, guid: 6e0f953c84c654df598106bc1cfa2275, type: 3}
+  LightBlastVolume: 0
+  CratePickupClip: {fileID: 8300000, guid: dd3461af8012c5844ae334bcc8b92971, type: 3}
+  CratePickupVolume: 0
+  HealClip: {fileID: 8300000, guid: c48a972d3d024c2408a3331750786a29, type: 3}
+  HealVolume: 0
+  ToggleEquippedClip: {fileID: 8300000, guid: 81652031b64c342cc8dbc59c138d77c5, type: 3}
+  ToggleEquippedVolume: 0
+  PlayerDamageClip: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
+  PlayerDamageVolume: 0
+  GameOverClip: {fileID: 8300000, guid: adcbbbae313cb40978e30faf82938987, type: 3}
+  GameOverVolume: 0
   Rb: {fileID: 0}
   Animator: {fileID: 0}
   Collider: {fileID: 0}

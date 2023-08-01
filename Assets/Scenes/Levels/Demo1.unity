@@ -37465,6 +37465,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 8879769926183105552, guid: 7bff4968418c42c488eace1b71d40637, type: 3}
+      propertyPath: StepVolume
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8879769926183105553, guid: 7bff4968418c42c488eace1b71d40637, type: 3}
       propertyPath: m_RootOrder
       value: 3

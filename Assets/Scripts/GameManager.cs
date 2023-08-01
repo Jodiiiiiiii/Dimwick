@@ -25,9 +25,6 @@ public class GameManager : MonoBehaviour
     // components
     private AudioSource _audioSource;
 
-    // audio
-    //[SerializeField] private AudioClip secureCollectibleAudio;
-
     // save data
     [System.Serializable]
     private class PlayerData
@@ -183,9 +180,12 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region AUDIO
-    public void PlaySound_PlayerDamage()
+    /// <summary>
+    /// volume between 0 and 1
+    /// </summary>
+    public void PlaySound(AudioClip audio, float volume)
     {
-        //audioSource.PlayOneShot(SOUND);
+        _audioSource.PlayOneShot(audio, volume);
     }
     #endregion
 }

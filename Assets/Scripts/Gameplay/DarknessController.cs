@@ -37,6 +37,14 @@ public class DarknessController : MonoBehaviour
     public float VictoryTransitionTime = 4f;
     public float AlphaIncreaseRate = 3f;
 
+    [Header("Audio")]
+    public AudioClip DarknessClip;
+    [Range(0f, 1f)] public float DarknessVolume;
+    public AudioClip DashClip;
+    [Range(0f, 1f)] public float DashVolume;
+    public AudioClip SpawnClip;
+    [Range(0f, 1f)] public float SpawnVolume;
+
     [HideInInspector] public Animator Anim;
     [HideInInspector] public Rigidbody2D Rb;
     [HideInInspector] private GameObject _player;
@@ -106,6 +114,8 @@ public class DarknessController : MonoBehaviour
                         _targetVelocity = playerDirection * DashMoveSpeed;
                         _goalSwapTimer = DashDuration;
                         _dashReady = false;
+
+                        GameManager.instance.PlaySound(DashClip, DashVolume);
                     }
                     else // default movemenet
                     {
@@ -130,10 +140,14 @@ public class DarknessController : MonoBehaviour
                     {
                         // replace later with random of attack options
                         Instantiate(SpawnProjectile, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+
+                        GameManager.instance.PlaySound(SpawnClip, SpawnVolume);
                     }
                     else if (rand < 2) // darkness attack
                     {
                         Anim.SetTrigger("darkWave");
+
+                        GameManager.instance.PlaySound(DarknessClip, DarknessVolume);
                     }
                     else if (rand < 3) // dash attack
                     {

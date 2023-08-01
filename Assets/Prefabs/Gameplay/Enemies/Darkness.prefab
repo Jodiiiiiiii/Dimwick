@@ -287,6 +287,12 @@ MonoBehaviour:
   VictoryTransitionWhite: {fileID: 2865764453778181854}
   VictoryTransitionTime: 5
   AlphaIncreaseRate: 0.3
+  DarknessClip: {fileID: 8300000, guid: dd1ff56af39ad0448b44be4e97c7c476, type: 3}
+  DarknessVolume: 0.4
+  DashClip: {fileID: 8300000, guid: a7d5d27320be11e4aaa356969dca3768, type: 3}
+  DashVolume: 0.4
+  SpawnClip: {fileID: 8300000, guid: af773121d8f44eb45a8e9e07fbde78d2, type: 3}
+  SpawnVolume: 0.4
   Anim: {fileID: 0}
   Rb: {fileID: 0}
 --- !u!1 &2865764453778181856

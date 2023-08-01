@@ -287,7 +287,8 @@ public class PlayerController : MonoBehaviour
                 _invulnerabilityTimer = InvulnerabilityTime;
                 FlashEffect.StartFlash();
 
-                GameManager.instance.PlaySound(PlayerDamageClip, PlayerDamageVolume);
+                if(_hp > 0) // prevents playing damage and game over clip at same time
+                    GameManager.instance.PlaySound(PlayerDamageClip, PlayerDamageVolume);
 
                 break;
         }

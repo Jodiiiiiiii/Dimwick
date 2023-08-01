@@ -581,6 +581,8 @@ public class PlayerController : MonoBehaviour
                     // apply weapon swap cooldown delay to cooldown timers
                     _primaryCooldownTimer = _primaryCooldown - WeaponSwapCooldownDelay;
                     _secondaryCooldownTimer = _secondaryCooldown - WeaponSwapCooldownDelay;
+
+                    GameManager.instance.PlaySound(ToggleEquippedClip, ToggleEquippedVolume);
                 }
                 #endregion
 

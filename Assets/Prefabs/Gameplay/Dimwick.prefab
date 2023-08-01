@@ -5725,8 +5725,8 @@ MonoBehaviour:
   CratePickupVolume: 1
   HealClip: {fileID: 8300000, guid: c48a972d3d024c2408a3331750786a29, type: 3}
   HealVolume: 0.5
-  ToggleEquippedClip: {fileID: 8300000, guid: 81652031b64c342cc8dbc59c138d77c5, type: 3}
-  ToggleEquippedVolume: 0
+  ToggleEquippedClip: {fileID: 8300000, guid: 6e8772b49f34d402a90016ed445d8a2f, type: 3}
+  ToggleEquippedVolume: 0.4
   PlayerDamageClip: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
   PlayerDamageVolume: 0
   GameOverClip: {fileID: 8300000, guid: adcbbbae313cb40978e30faf82938987, type: 3}

@@ -905,6 +905,8 @@ public class PlayerController : MonoBehaviour
     {
         _hp = Mathf.Clamp(_hp + HealthRecoverPerTorch, 0, MAX_HP);
         _flameIntensity = Mathf.Clamp(_flameIntensity + FlameRecoverPerTorch, 0, MAX_FLAME);
+
+        GameManager.instance.PlaySound(HealClip, HealVolume);
     }
 
     public void CollectRandomPrimary()

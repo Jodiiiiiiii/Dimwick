@@ -23,7 +23,11 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     // components
-    private AudioSource _audioSource;
+    [Header("Audio")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioSource _musicSource;
+    private AudioClip[] _musicTracks;
+    private float _musicVolume = 0.4f;
 
     // save data
     [System.Serializable]
@@ -69,8 +73,7 @@ public class GameManager : MonoBehaviour
                 _data.Difficulty = Difficulty.Demo;
             }
 
-            // components
-            _audioSource = GetComponent<AudioSource>();
+            _musicTracks = new AudioClip[0];
         }
         else
         {
@@ -91,6 +94,12 @@ public class GameManager : MonoBehaviour
 #endif
 
             Application.Quit();
+        }
+
+        // looping & randomized music tracks
+        if(!_musicSource.isPlaying && _musicTracks.Length != 0)
+        {
+            _musicSource.PlayOneShot(_musicTracks[Random.Range(0, _musicTracks.Length)], _musicVolume);
         }
     }
 
@@ -186,6 +195,16 @@ public class GameManager : MonoBehaviour
     public void PlaySound(AudioClip audio, float volume)
     {
         _audioSource.PlayOneShot(audio, volume);
+    }
+
+    public void SetMusicTracks(AudioClip[] musicTracks)
+    {
+        _musicTracks = musicTracks;
+    }
+
+    public void StopMusic()
+    {
+        _musicSource.Stop();
     }
     #endregion
 }

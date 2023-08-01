@@ -5727,8 +5727,8 @@ MonoBehaviour:
   HealVolume: 0.5
   ToggleEquippedClip: {fileID: 8300000, guid: 6e8772b49f34d402a90016ed445d8a2f, type: 3}
   ToggleEquippedVolume: 0.4
-  PlayerDamageClip: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
-  PlayerDamageVolume: 0
+  PlayerDamageClip: {fileID: 8300000, guid: 2cae0d38dba96bf4691053d7a2430553, type: 3}
+  PlayerDamageVolume: 1
   GameOverClip: {fileID: 8300000, guid: adcbbbae313cb40978e30faf82938987, type: 3}
   GameOverVolume: 0
   Rb: {fileID: 0}

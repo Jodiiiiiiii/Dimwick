@@ -286,7 +286,9 @@ public class PlayerController : MonoBehaviour
                 _isInvulnerable = true;
                 _invulnerabilityTimer = InvulnerabilityTime;
                 FlashEffect.StartFlash();
-      
+
+                GameManager.instance.PlaySound(PlayerDamageClip, PlayerDamageVolume);
+
                 break;
         }
     }

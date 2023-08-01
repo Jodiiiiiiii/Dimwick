@@ -154,6 +154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyContainer: {fileID: 0}
+  OpenClip: {fileID: 8300000, guid: 07e418d1aac815440859560b45cd0ede, type: 3}
+  OpenVolume: 1
   TransitionInteractable: {fileID: 0}
   Anim: {fileID: 0}
 --- !u!1 &8464374542611243799

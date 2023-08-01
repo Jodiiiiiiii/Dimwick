@@ -44,6 +44,10 @@ public class DarknessController : MonoBehaviour
     [Range(0f, 1f)] public float DashVolume;
     public AudioClip SpawnClip;
     [Range(0f, 1f)] public float SpawnVolume;
+    public AudioClip DamageClip;
+    [Range(0f, 1f)] public float DamageVolume;
+    [Tooltip("time that must pass before damage sound plays again")]
+    public float DamageSoundCooldown = 0.2f;
 
     [HideInInspector] public Animator Anim;
     [HideInInspector] public Rigidbody2D Rb;
@@ -63,6 +67,8 @@ public class DarknessController : MonoBehaviour
     private float _victoryTransitionTimer = 0f;
     // sleep state
     private bool _isSleeping = true;
+    // hit sound delay
+    private float _DamageSoundDelayTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -184,6 +190,8 @@ public class DarknessController : MonoBehaviour
                     _victoryTransitionTimer = VictoryTransitionTime;
                     _player.GetComponent<PlayerController>().SetInvincibility(true); // so player cannot die during victory
                 }
+
+                _DamageSoundDelayTimer -= Time.deltaTime;
             }
         }
     }
@@ -198,6 +206,12 @@ public class DarknessController : MonoBehaviour
                 _hp -= projectile.Damage;
                 if(collision.CompareTag("PlayerBullet")) // only destroy bullets, not flame slash
                     Destroy(collision.gameObject);
+
+                if (_DamageSoundDelayTimer < 0)
+                {
+                    GameManager.instance.PlaySound(DamageClip, DamageVolume);
+                    _DamageSoundDelayTimer = DamageSoundCooldown;
+                }
             }
             else
                 Debug.LogError("Invalid player projectile collison");

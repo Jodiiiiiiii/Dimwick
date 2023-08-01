@@ -293,6 +293,9 @@ MonoBehaviour:
   DashVolume: 0.4
   SpawnClip: {fileID: 8300000, guid: af773121d8f44eb45a8e9e07fbde78d2, type: 3}
   SpawnVolume: 0.4
+  DamageClip: {fileID: 8300000, guid: 2876e7fa4419a4a7096b8bb38641daa3, type: 3}
+  DamageVolume: 0.4
+  DamageSoundCooldown: 0.1
   Anim: {fileID: 0}
   Rb: {fileID: 0}
 --- !u!1 &2865764453778181856

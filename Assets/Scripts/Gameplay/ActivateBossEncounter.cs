@@ -12,9 +12,13 @@ public class ActivateBossEncounter : MonoBehaviour
 
     public AudioClip[] BossMusic;
 
+    private Collider2D _collider;
+
     // Start is called before the first frame update
     void Start()
     {
+        _collider = GetComponent<Collider2D>();
+
         Barricade.SetActive(false); // deactivate object by default
     }
 
@@ -29,6 +33,8 @@ public class ActivateBossEncounter : MonoBehaviour
             // boss music
             GameManager.instance.SetMusicTracks(BossMusic);
             GameManager.instance.StopMusic();
+
+            _collider.enabled = false; // prevent reactivating trigger for sounds/music reset
         }
     }
 }

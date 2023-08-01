@@ -5730,7 +5730,7 @@ MonoBehaviour:
   PlayerDamageClip: {fileID: 8300000, guid: 2cae0d38dba96bf4691053d7a2430553, type: 3}
   PlayerDamageVolume: 1
   GameOverClip: {fileID: 8300000, guid: adcbbbae313cb40978e30faf82938987, type: 3}
-  GameOverVolume: 0
+  GameOverVolume: 0.5
   Rb: {fileID: 0}
   Animator: {fileID: 0}
   Collider: {fileID: 0}

@@ -719,7 +719,11 @@ public class PlayerController : MonoBehaviour
 
         #region GAME OVER
         if (_hp <= 0)
+        {
+            GameManager.instance.PlaySound(GameOverClip, GameOverVolume);
+
             SceneManager.LoadScene("Game Over");
+        }
         #endregion
 
         #region DEBUG_CONTROLS

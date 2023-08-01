@@ -73,8 +73,8 @@ public class DarknessController : MonoBehaviour
 
         _hp = MaxHP;
 
-        _goalSwapTimer = GoalSwapPeriod;
-        _attackCooldownTimer = Random.Range(MinAttackCooldown, MaxAttackCooldown);
+        _goalSwapTimer = 0; // start moving immediately
+        _attackCooldownTimer = MinAttackCooldown; // start attacking soon (after min cooldown)
 
         BossMeter.SetActive(false); // inactive by default
     }
@@ -190,7 +190,7 @@ public class DarknessController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerBullet") || collision.CompareTag("FlameSlash")) // flame slash uses trigger so it doesnt move
+        if ((collision.CompareTag("PlayerBullet") || collision.CompareTag("FlameSlash")) && !_isSleeping) // flame slash uses trigger so it doesnt move
         {
             collision.gameObject.TryGetComponent<Projectile>(out Projectile projectile);
             if (projectile != null)

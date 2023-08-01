@@ -5721,7 +5721,7 @@ MonoBehaviour:
   LightBlinkVolume: 0.5
   LightBlastClip: {fileID: 8300000, guid: 5908ad2686a42a6439e55bd917f01d84, type: 3}
   LightBlastVolume: 0.5
-  CratePickupClip: {fileID: 8300000, guid: 81652031b64c342cc8dbc59c138d77c5, type: 3}
+  CratePickupClip: {fileID: 8300000, guid: ae521ae090f7a0f4ea2569a54ea5f298, type: 3}
   CratePickupVolume: 1
   HealClip: {fileID: 8300000, guid: c48a972d3d024c2408a3331750786a29, type: 3}
   HealVolume: 0.5

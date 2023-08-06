@@ -41,4 +41,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/BossLevel.unity
     guid: 27451f32b288b6d458c47cc8baf1fa2b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Hard1.unity
+    guid: b30f68611d564e341ac0b392379f9cff
+  - enabled: 1
+    path: Assets/Scenes/Levels/Hard2.unity
+    guid: d10e09c1e75732443aa3da295c266e3d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Hard3.unity
+    guid: 00597f31741468345b641f855ee81042
+  - enabled: 1
+    path: Assets/Scenes/Levels/HardBoss.unity
+    guid: 3aa7298f99d52c543809cef4d11c3e85
   m_configObjects: {}

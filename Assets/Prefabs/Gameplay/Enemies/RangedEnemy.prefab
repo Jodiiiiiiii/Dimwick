@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 60
-  WakeupRadius: 7
+  WakeupRadius: 8
   RaycastLayermask:
     serializedVersion: 2
     m_Bits: 320

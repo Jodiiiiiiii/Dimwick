@@ -141,21 +141,21 @@ public class DarknessController : MonoBehaviour
                 #region ATTACKING
                 if (_attackCooldownTimer < 0)
                 {
-                    float rand = Random.Range(0, 4);
-                    if (rand < 1) // spawn attack
+                    float rand = Random.Range(0, 5);
+                    if (rand < 2) // spawn attack (double weighted)
                     {
                         // replace later with random of attack options
                         Instantiate(SpawnProjectile, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
 
                         GameManager.instance.PlaySound(SpawnClip, SpawnVolume);
                     }
-                    else if (rand < 2) // darkness attack
+                    else if (rand < 3) // darkness attack
                     {
                         Anim.SetTrigger("darkWave");
 
                         GameManager.instance.PlaySound(DarknessClip, DarknessVolume);
                     }
-                    else if (rand < 3) // dash attack
+                    else if (rand < 4) // dash attack
                     {
                         _dashReady = true;
                     }

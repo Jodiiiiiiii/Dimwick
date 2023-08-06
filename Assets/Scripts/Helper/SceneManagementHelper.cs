@@ -21,7 +21,7 @@ public class SceneManagementHelper : MonoBehaviour
                 SceneManager.LoadScene("Demo1");
                 break;
             case Difficulty.Hard:
-                // currently no hard scene
+                SceneManager.LoadScene("Hard1");
                 break;
         }
     }

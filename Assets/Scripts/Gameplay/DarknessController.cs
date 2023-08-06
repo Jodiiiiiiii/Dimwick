@@ -104,7 +104,7 @@ public class DarknessController : MonoBehaviour
 
                 if (_victoryTransitionTimer < 0f)
                 {
-                    SceneManager.LoadScene("Start"); // REPLACE WITH VICTORY SCREEN
+                    SceneManager.LoadScene("Victory"); // REPLACE WITH VICTORY SCREEN
                 }
 
                 _victoryTransitionTimer -= Time.deltaTime;

@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d783f7a54b488c4f86398d0efbb3fdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TransitionDelay: 17.8
+  TransitionDelay: 17.7
   TransitionSceneName: Start
 --- !u!4 &217306014
 Transform:

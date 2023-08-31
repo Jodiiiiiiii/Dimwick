@@ -265,7 +265,7 @@ MonoBehaviour:
   DestroyOnCollision: 0
   HitstunTime: 0.3
   KnockbackSpeed: 14
-  Damage: 0
+  Damage: 8
   Lifespan: 1
   StopMotionAfter: -1
   FadePeriod: 1

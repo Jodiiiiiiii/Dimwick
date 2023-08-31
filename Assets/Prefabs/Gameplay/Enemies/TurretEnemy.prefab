@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25dcf07649c8ea44499069f55b018a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 80
+  MaxHP: 40
   WakeupRadius: 15
   RaycastLayermask:
     serializedVersion: 2

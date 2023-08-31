@@ -5652,15 +5652,15 @@ MonoBehaviour:
   MinFlashlightIntensity: 0.01
   MaxCandlelightIntensity: 1
   MinCandlelightIntensity: 0.01
-  MaxFlashlightRange: 10
+  MaxFlashlightRange: 12
   MinFlashlightRange: 5
-  MaxCandlelightRange: 6
-  MinCandlelightRange: 1
+  MaxCandlelightRange: 8
+  MinCandlelightRange: 2
   MaxFlameParticleEmissionRate: 20
   MinFlameParticleEmissionRate: 1
   MaxFlameLightIntensity: 3
   MinFlameLightIntensity: 0.5
-  FlameDecayRate: 2
+  FlameDecayRate: 0.8
   FlameRegenRate: 10
   ContactDamageHitstun: 0.15
   ContactDamageKnockbackSpeed: 10

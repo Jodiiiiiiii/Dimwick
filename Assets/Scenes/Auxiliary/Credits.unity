@@ -831,7 +831,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- Justin Foster
+  m_text: '- Jodi Foster
 
     - https://itch.io/profile/raou'
   m_isRightToLeft: 0
@@ -1463,7 +1463,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- Justin Foster'
+  m_text: '- JOdi Foster'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b84bac1ac4233d44a8c7c070ad5107e, type: 2}
   m_sharedMaterial: {fileID: 5581619492631582891, guid: 7b84bac1ac4233d44a8c7c070ad5107e, type: 2}
@@ -2365,7 +2365,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- Justin Foster'
+  m_text: '- Jodi Foster'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b84bac1ac4233d44a8c7c070ad5107e, type: 2}
   m_sharedMaterial: {fileID: 5581619492631582891, guid: 7b84bac1ac4233d44a8c7c070ad5107e, type: 2}

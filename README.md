@@ -4,4 +4,4 @@ Dimwick was a project for DIG3713 Game Content Production 1 at the University of
 
 A Studio Bronto creation
 
-> This project introduced me to the state machine framework, which permitted easier creation of a wider variety player and enemy mechanics. I also learned to use interpolation to smooth motion which is useful for polishing the feel of most games. Finally, learning to use the Unity lighting system allows for more involved visual effects tied to mechanics.
+> This project introduced me to the state machine framework, which permitted easier creation of a wider variety player and enemy mechanics. I also learned to use interpolation to smooth motion which is useful for polishing the feel of most games. Finally, learning to use the Unity lighting system allowed for more involved visual effects tied to mechanics.
